@@ -19,6 +19,7 @@ public class ButtleschipPanel extends JFrame{
         menu.add(Nuovapartita);
         menu.add(esci);
         contentPane.add(menuBar,BorderLayout.NORTH);
+        //ciao
 
     }
 
