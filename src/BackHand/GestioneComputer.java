@@ -43,6 +43,17 @@ import java.util.*;
         xy[0]=x;
         xy[1]=y;
         return xy;
+        }
+
+
+        tabGiocatore.setValueAt("X", 0, 0);
+
+
+        g.primaMossa(tabGiocatore);
+
+
+
+
     }
  /*   public void matrice(){
         for(int i=0; i<5; i++){
@@ -116,4 +127,6 @@ import java.util.*;
         }
         else return false;
     }
+
+
 }
