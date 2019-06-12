@@ -74,6 +74,7 @@ public class GestioneTabella {
         }while(true);
 
         stampa(tabella);
+        
 
         return tabella;
 
