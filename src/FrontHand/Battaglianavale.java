@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 //import FrontEnd.PannelloUtente;
-//import BackEnd.GestioneTabella;
+//import BackEnd.GestioneUtente;
+//import BackEnd.GestioneComputer;
 
 public class Battaglianavale extends JFrame{
 
@@ -36,8 +37,23 @@ public class Battaglianavale extends JFrame{
     private JLabel coordinateGiocatore;
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
+    private JFrame questaFinestra = this;
 
-    public void FinePartita(JFrame questaFinestra,boolean vittoria){
+    public static boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore){
+        if (!vittoriaCoputer){
+            if(vittoriaGiocatore){
+                Battaglianavale.finePartita(questaFinestra,true);
+                return true;
+            }
+        }else{
+            if(!vittoriaGiocatore){
+                Battaglianavale.finePartita(questaFinestra,false);
+                return false;
+            }
+        }
+    }
+
+    public static void finePartita(JFrame questaFinestra, boolean vittoria){
         if (vittoria){
             JOptionPane.showMessageDialog(questaFinestra,"Hai Vinto!");
         }else{
@@ -61,7 +77,7 @@ public class Battaglianavale extends JFrame{
         menu = new JMenu("File");
         menuBar.add(menu);
 
-        JFrame questaFinestra = this;
+
         Nuovapartita = new JMenuItem("Nuova Prtita");
         Nuovapartita.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +94,7 @@ public class Battaglianavale extends JFrame{
                 giocatoreX.setVisible(true);
                 giocatoreY.setVisible(true);
                 coordinateGiocatore.setVisible(true);
-                System.out.println("si funziona!");
+//                System.out.println("si funziona!");
 
             }
         });
@@ -144,17 +160,26 @@ public class Battaglianavale extends JFrame{
         bottoneFuoco.setBounds(200,50,20,60);
         pannelloGiocatore.add(bottoneFuoco);
         bottoneFuoco.setVisible(false);
-        pannelloGiocatore.setBounds(40,40,1000,1000);
+        bottoneFuoco.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                GestioneUtente.controlloCordinate(giocatoreCoordinataX,giocatoreCoordinataY);
+//                GestioneComputer.attaccoDalGiocatore(giocatoreCoordinataX,GestioneUtente.convertitore(giocatoreCoordinataY));
+//                Battaglianavale.logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
+//                GestioneComputer.attaccoDalComputer(gestioneComputer.getCoordinataX(),gestioneComputer.getCoordinataY());
+//                Battaglianavale.logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore());
+            }
+        });
 
 
 
-        //tabellaGiocatore = GestioneTablella.inizializzazioneTabella();
+        //tabellaGiocatore = GestioneUtente.getTable();
         //pannelloGiocatore.add(tabellaGiocatore);
 
         pannelloComputer = new JPanel();
         contentPane.add(pannelloComputer,BorderLayout.EAST);
 
-        //tablellaComputer = GestioneTablella.inizializzazioneTabella();
+        //tablellaComputer = new JTable();
         //pannelloGiocatore.add(tablellaComputer);
 
     }
