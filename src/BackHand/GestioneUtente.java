@@ -1,46 +1,69 @@
 package BackHand;
-import java.util.*;
-
 public class GestioneUtente {
      private String ListY="LIHGFEDCBA";
-    Scanner s=new Scanner(System.in);
-    public void CoordinateX( int PlayerX){
-        if(PlayerX>=10&&PlayerX<=0){
-            System.out.println("Errore nell'inserimento della coordinata");
-        }
-        else if(  PlayerX  ){
-
-        }
-    }
-    public void CoordinateY(char PlayerY){
-        for(int k=0; k<10; k++){
-            if( PlayerY==ListY[k]){
-                int j=k;
-            }
-            else{
-                System.out.println("Errore nell'inserimento della coordinata Y");
-            }
-
-        }}
-    public void Fire(JTable t) {
-        if (t[PlayerX][j] == ' ') {//t.setValuex
-            t[PlayerX][j] = 'O';
-        } else if (t[PlayerX][j] == 'X') {
-            t[PlayerX][j] = '\033[31;1mX';
-        } else if (t[PlayerX][j] == 'O')
-            System.out.pritln("Casella già colpita");
-
-        public static void main (String[]args){
-        }
+     private String [][]A;
+     private String B[][];
+    public GestioneUtente(String [][]p,String[][]l){
+           
 
     }
+            public boolean ControlloX(int X){
+                if(X>=10&&X<=0){
+                    return false;
+                }
+                else return true;
+            }
+            public boolean ControlloY(String Y){
+                  boolean YCorrect=ListY.equals(Y);
+                  if(YCorrect==true){
+                      return true;
+                  } else return false;
+            }
+            public int ConvertitoreY(String Y){
+                 int YConvert=ListY.indexOf(Y);
+                 return YConvert;
+                }
+            public boolean ControlloCoordinate(int x, String Y){
+                boolean CheckX=this.ControlloX(x);
+                boolean CheckY=this.ControlloY(Y);
+                if(CheckX==true){
+                    if (CheckY == true) {
+                        return true;
+                    }
+                    else return false;
+                }
+                else return false;
+        }
 
 
+            public String attaccoDalComputer(int x,int Y) {
+                String Hit="X";
+                String NoHit="O";
+                String Wrong="XO";
+                if(B[x][Y].equals('X')){
+                        if(A[x][Y].equals(' ')){
+                            A[x][Y].replace(' ','X');
+                            return Hit;
+                        }else return Wrong;
+                }else if(A[x][Y].equals(' ')){
+                    A[x][Y].replace(' ','O');
+                    return NoHit;
+                }else return Wrong;
+            }
+            public boolean controllaVittoriaGiocatore(){
+                int Tot=0;
+                for(int k=0; k<10; k++){
+                    for(int kk=0; k<10; kk++){
+                        if(A[k][kk].equals('X')){
+                            Tot++;
+                            }
+                        }
+                    }
+                if(Tot==5) {
+                    return true;
+                }
+                    else return false;
+                }
 
+            }
 
-
-
-
-
-
-}
