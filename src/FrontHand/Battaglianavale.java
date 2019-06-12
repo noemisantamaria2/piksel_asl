@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import FrontEnd.PannelloUtente;
 import BackEnd.GestioneTabella;
 
 public class Battaglianavale extends JFrame{
@@ -27,6 +28,7 @@ public class Battaglianavale extends JFrame{
     private JMenuItem Nuovapartita, esci;
     private JPanel contentPane, pannelloComputer, pannelloGiocatore;
     private JTable tablellaComputer, tabellaGiocatore;
+    private JLabel giocatore;
 
     public Battaglianavale () {
         setTitle("BattleShip");
@@ -47,6 +49,8 @@ public class Battaglianavale extends JFrame{
         Nuovapartita.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                PannelloUtente finestraUtente = new PannelloUtente();
+                finestraUtente.setVisible(true);
                 //pannelloComputer.setVisible(true);
                 //pannelloGiocatore.setVisible(true);
                 System.out.println("si funziona!");
@@ -69,6 +73,12 @@ public class Battaglianavale extends JFrame{
         pannelloGiocatore.setVisible(false);
         contentPane.add(pannelloGiocatore,BorderLayout.WEST);
 
+        giocatore = new Jlabel();
+        giocatore.setEnabled(false);
+        giocatore.setBackground(null);
+        giocatore.setText(PannelloUtente.getNuomeUtente());
+        pannelloGiocatore.add(giocatore);
+
         tabellaGiocatore = GestioneTablella.inizializzazioneTabella();
         pannelloGiocatore.add(tabellaGiocatore);
 
@@ -78,6 +88,7 @@ public class Battaglianavale extends JFrame{
 
         tablellaComputer = GestioneTablella.inizializzazioneTabella();
         pannelloGiocatore.add(tablellaComputer);
+
 
 
 
