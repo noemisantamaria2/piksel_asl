@@ -37,6 +37,15 @@ public class Battaglianavale extends JFrame{
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
 
+    public void FinePartita(JFrame questaFinestra,boolean vittoria){
+        if (vittoria){
+            JOptionPane.showMessageDialog(questaFinestra,"Hai Vinto!");
+        }else{
+            JOptionPane.showMessageDialog(questaFinestra,"Hai Perso!");
+        }
+
+    }
+
     public Battaglianavale () {
         setTitle("BattleShip");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
