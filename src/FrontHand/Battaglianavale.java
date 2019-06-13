@@ -33,23 +33,24 @@ public class Battaglianavale extends JFrame {
     private JPanel contentPane, pannelloComputer, pannelloGiocatore;
     private JTable tablellaComputer, tabellaGiocatore;
     private JLabel giocatoreX, giocatoreY;
+    private JLabel computerX, computerY;
     private JLabel giocatore;
     private JLabel computer;
     private JLabel coordinateGiocatore;
+    private JLabel coordinateComputer;
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
+    private JTextField computerCoordinataX, computerCoordinataY;
     private JFrame questaFinestra = this;
 
-    public static boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore) {
+    public static void logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore) {
         if (!vittoriaCoputer) {
             if (vittoriaGiocatore) {
                 Battaglianavale.finePartita(questaFinestra, true);
-                return true;
             }
         } else {
             if (!vittoriaGiocatore) {
                 Battaglianavale.finePartita(questaFinestra, false);
-                return false;
             }
         }
     }
@@ -96,6 +97,12 @@ public class Battaglianavale extends JFrame {
                 giocatoreX.setVisible(true);
                 giocatoreY.setVisible(true);
                 coordinateGiocatore.setVisible(true);
+                coordinateComputer.setVisible(true);
+                computer.setVisible(true);
+                computerX.setVisible(true);
+                computerCoordinataX.setVisible(true);
+                computerY.setVisible(true);
+                computerCoordinataY.setVisible(true);
 //              System.out.println("si funziona!");
 
             }
@@ -115,9 +122,18 @@ public class Battaglianavale extends JFrame {
                 giocatoreX.setVisible(false);
                 giocatoreY.setVisible(false);
                 coordinateGiocatore.setVisible(false);
+                coordinateComputer.setVisible(false);
+                computer.setVisible(false);
+                computerX.setVisible(false);
+                computerCoordinataX.setVisible(false);
+                computerY.setVisible(false);
+                computerCoordinataY.setVisible(false);
             }
         });
         menu.add(esci);
+
+        pannelloComputer = new JPanel();
+        contentPane.add(pannelloComputer,BorderLayout.EAST);
 
         pannelloGiocatore = new JPanel();
         contentPane.add(pannelloGiocatore,BorderLayout.WEST);
@@ -129,11 +145,6 @@ public class Battaglianavale extends JFrame {
         //giocatore.setText(nomeUtente);
         giocatore.setBounds(20,20, 50,20);
         pannelloGiocatore.add(giocatore, BorderLayout.NORTH);
-
-        computer = new JLabel("Computer");
-        pannelloComputer.add(computer);
-
-
 
         coordinateGiocatore = new JLabel("Coordinate");
         coordinateGiocatore.setVisible(false);
@@ -177,13 +188,40 @@ public class Battaglianavale extends JFrame {
             }
         });
 
+        computer = new JLabel("Computer");
+        pannelloComputer.add(computer);
+        computer.setVisible(false);
 
+        coordinateComputer = new JLabel("Coordinate");
+        coordinateComputer.setVisible(false);
+        coordinateComputer.setBounds(10,80,10,10);
+        pannelloComputer.add(coordinateComputer);
+
+        computerX = new JLabel("X");
+        computerX.setBounds(10,40,10,10);
+        pannelloComputer.add(computerX);
+        computerX.setVisible(false);
+
+        computerCoordinataX = new JTextField();
+        computerCoordinataX.setBounds(10,40,10,10);
+        pannelloComputer.add(computerCoordinataX);
+        computerCoordinataX.setVisible(false);
+        computerCoordinataX.setColumns(2);
+
+        computerY = new JLabel("Y");
+        computerY.setBounds(10,40,10,10);
+        pannelloComputer.add(computerY);
+        computerY.setVisible(false);
+
+        computerCoordinataY = new JTextField();
+        computerCoordinataY.setBounds(10,40,10,10);
+        pannelloComputer.add(computerCoordinataY);
+        computerCoordinataY.setVisible(false);
+        computerCoordinataY.setColumns(2);
 
         //tabellaGiocatore = GestioneUtente.getTable();
         //pannelloGiocatore.add(tabellaGiocatore);
 
-        pannelloComputer = new JPanel();
-        contentPane.add(pannelloComputer,BorderLayout.EAST);
 
         //tablellaComputer = new JTable();
         //pannelloGiocatore.add(tablellaComputer);
