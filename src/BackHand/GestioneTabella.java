@@ -74,7 +74,7 @@ public class GestioneTabella {
         }while(true);
 
         stampa(tabella);
-        
+
 
 
         return tabella;
@@ -189,13 +189,26 @@ public class GestioneTabella {
 
     }
 
+    public boolean controllaNaviAdiacenti(int riga, int colonna, String[][]tabella){
+
+
+
+
+        return true;
+
+    }
+
 
 
 
 
     public void stampa(String[][]t){ //metodo da togliere
 
+        System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
+
         for (int i = 0; i < 10; i++) {
+
+            System.out.print(i + " ");
 
             for (int j = 0; j < 10; j++) {
 
