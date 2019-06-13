@@ -10,9 +10,9 @@ import javax.swing.border.EmptyBorder;
 //import BackEnd.GestioneUtente;
 //import BackEnd.GestioneComputer;
 
-public class Battaglianavale extends JFrame{
+public class Battaglianavale extends JFrame {
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -34,24 +34,26 @@ public class Battaglianavale extends JFrame{
     private JTable tablellaComputer, tabellaGiocatore;
     private JLabel giocatoreX, giocatoreY;
     private JLabel giocatore;
+    private JLabel computer;
     private JLabel coordinateGiocatore;
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
     private JFrame questaFinestra = this;
 
-    public static boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore){
-        if (!vittoriaCoputer){
-            if(vittoriaGiocatore){
-                Battaglianavale.finePartita(questaFinestra,true);
+    public static boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore) {
+        if (!vittoriaCoputer) {
+            if (vittoriaGiocatore) {
+                Battaglianavale.finePartita(questaFinestra, true);
                 return true;
             }
-        }else{
-            if(!vittoriaGiocatore){
-                Battaglianavale.finePartita(questaFinestra,false);
+        } else {
+            if (!vittoriaGiocatore) {
+                Battaglianavale.finePartita(questaFinestra, false);
                 return false;
             }
         }
     }
+
 
     public static void finePartita(JFrame questaFinestra, boolean vittoria){
         if (vittoria){
@@ -94,7 +96,7 @@ public class Battaglianavale extends JFrame{
                 giocatoreX.setVisible(true);
                 giocatoreY.setVisible(true);
                 coordinateGiocatore.setVisible(true);
-//                System.out.println("si funziona!");
+//              System.out.println("si funziona!");
 
             }
         });
@@ -128,11 +130,15 @@ public class Battaglianavale extends JFrame{
         giocatore.setBounds(20,20, 50,20);
         pannelloGiocatore.add(giocatore, BorderLayout.NORTH);
 
-        coordinateGiocatore = new JLabel("Coordinate       ");
+        computer = new JLabel("Computer");
+        pannelloComputer.add(computer);
+
+
+
+        coordinateGiocatore = new JLabel("Coordinate");
         coordinateGiocatore.setVisible(false);
         coordinateGiocatore.setBounds(10,80,10,10);
         pannelloGiocatore.add(coordinateGiocatore);
-
 
         giocatoreX = new JLabel("X");
         giocatoreX.setBounds(10,40,10,10);
