@@ -1,5 +1,4 @@
-
-import FrontHand.Battaglianavale;
+import BackHand.GestioneComputer;
 import BackHand.GestioneUtente;
 import BackHand.GestioneUtente.*;
 import java.util.*;
@@ -8,7 +7,7 @@ public class MainClass {
 
     public static void main (String[]args){
         //toDo dobbiamo aprire la finestra
-        Scanner s=new Scanner(System.in);
+        /*Scanner s=new Scanner(System.in);
         int columns = 2;
         int x,y;
         String o;
@@ -30,7 +29,7 @@ public class MainClass {
         x=s.nextInt();
         System.out.println("Insert y: ");
         o=s.next();
-        GestioneUtente g=new GestioneUtente(newArray,ArrayA);
+        GestioneUtente g=new GestioneUtente(newArray);
         boolean l=g.ControlloX(x);
         System.out.println(" X: "+l);
         boolean t=g.ControlloY(o);
@@ -40,25 +39,39 @@ public class MainClass {
         boolean f=g.ControlloCoordinate(x,o);
         System.out.println(" Wow: "+f);
         y=s.nextInt();
-        g.A();
-       /* g.StampA();
+        g.RiempimentoMatriceNonVis();
+        g.StampA();
         System.out.println("-------------------------");
         g.StampB();
         System.out.println("-------------------------");
-*/
+
         String att=null;
         att=g.attaccoDalComputer(x,y);
-        System.out.println(" "+att);/*
+        System.out.println(" "+att);
         System.out.println("-------------------------");
         g.StampA();
         System.out.println("-------------------------");
-        g.StampB();*/
+        g.StampB();
         System.out.println("-------------------------");
         att=g.attaccoDalComputer(x,y);
         System.out.println(" "+att);
         System.out.println("-------------------------");
         boolean z= g.controllaVittoriaComputer();
-        System.out.println(" " +z);
+        System.out.println(" " +z);*/
+
+
+        GestioneComputer lo=new GestioneComputer();
+        lo.setCoordinataX();
+        System.out.println(lo.getCoordinataX());
+        lo.setCoordinataX();
+        System.out.println(lo.getCoordinataX());
+        lo.setCoordinataX();
+        System.out.println(lo.getCoordinataY());
+        System.out.println(lo.convertYInChar());
+
+
+
+
     }
 
 }

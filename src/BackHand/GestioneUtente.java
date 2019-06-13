@@ -38,7 +38,7 @@ public class GestioneUtente {
                 }
                 return -1;
     }
-            public boolean controlloCoordinate(int x, String Y){  //ok Controllo la correttezza
+            public boolean controlloCoordinate(int x, String Y){  //ok Controllo la correttezza di entrambe le coordinate
                 boolean CheckX=this.controlloX(x);
                 boolean CheckY=this.controlloY(Y);
                 if(CheckX==true){
