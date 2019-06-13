@@ -1,6 +1,7 @@
 
 import sun.misc.JarIndex;
-
+import javax.swing.GroupLayout;
+import static javax.swing.GroupLayout.Alignment.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,8 +41,9 @@ public class Battaglianavale extends JFrame {
     private JLabel coordinateComputer;
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
-    private JTextField computerCoordinataX, computerCoordinataY;
+    private JTextArea computerCoordinataX, computerCoordinataY;
     private JFrame questaFinestra = this;
+    private GroupLayout groupLayout;
 
     public static void logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore) {
         if (!vittoriaCoputer) {
@@ -70,7 +72,7 @@ public class Battaglianavale extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100,100,500,500);
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5,5,100,100));
+        contentPane.setBorder(new EmptyBorder(5,5,5,5));
         contentPane.setLayout(new BorderLayout(0,0));
         setContentPane(contentPane);
 
@@ -132,12 +134,11 @@ public class Battaglianavale extends JFrame {
         });
         menu.add(esci);
 
-        pannelloComputer = new JPanel();
-        contentPane.add(pannelloComputer,BorderLayout.EAST);
-
         pannelloGiocatore = new JPanel();
+        //pannelloGiocatore.setLayout( new GroupLayout());
         contentPane.add(pannelloGiocatore,BorderLayout.WEST);
-        contentPane.setBounds(200,200,4000,4000);
+        pannelloGiocatore.setBackground(Color.green);
+//        pannelloGiocatore.setVisible(false);
 
         giocatore = new JLabel();
         giocatore.setEnabled(false);
@@ -188,6 +189,11 @@ public class Battaglianavale extends JFrame {
             }
         });
 
+        pannelloComputer = new JPanel();
+        contentPane.add(pannelloComputer,BorderLayout.EAST);
+        pannelloComputer.setBackground(Color.CYAN);
+//        pannelloComputer.setVisible(false);
+
         computer = new JLabel("Computer");
         pannelloComputer.add(computer);
         computer.setVisible(false);
@@ -202,22 +208,24 @@ public class Battaglianavale extends JFrame {
         pannelloComputer.add(computerX);
         computerX.setVisible(false);
 
-        computerCoordinataX = new JTextField();
+        computerCoordinataX = new JTextArea();
         computerCoordinataX.setBounds(10,40,10,10);
         pannelloComputer.add(computerCoordinataX);
         computerCoordinataX.setVisible(false);
         computerCoordinataX.setColumns(2);
+        computerCoordinataX.setEnabled(false);
 
         computerY = new JLabel("Y");
         computerY.setBounds(10,40,10,10);
         pannelloComputer.add(computerY);
         computerY.setVisible(false);
 
-        computerCoordinataY = new JTextField();
+        computerCoordinataY = new JTextArea();
         computerCoordinataY.setBounds(10,40,10,10);
         pannelloComputer.add(computerCoordinataY);
         computerCoordinataY.setVisible(false);
         computerCoordinataY.setColumns(2);
+        computerCoordinataY.setEnabled(false);
 
         //tabellaGiocatore = GestioneUtente.getTable();
         //pannelloGiocatore.add(tabellaGiocatore);
@@ -225,6 +233,36 @@ public class Battaglianavale extends JFrame {
 
         //tablellaComputer = new JTable();
         //pannelloGiocatore.add(tablellaComputer);
+
+        groupLayout = new GroupLayout(pannelloGiocatore);
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
+        pannelloGiocatore.setLayout(groupLayout);
+
+        groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
+                .addComponent(giocatore)
+                .addGroup(groupLayout.createParallelGroup()
+                                .addComponent(coordinateGiocatore)
+                                .addComponent(giocatoreX)
+                                .addComponent(giocatoreCoordinataX)
+                                .addComponent(giocatoreY)
+                                .addComponent(giocatoreCoordinataY)
+                                .addComponent(bottoneFuoco)));
+
+        groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
+                .addGroup(groupLayout.createParallelGroup(BASELINE))
+                .addComponent(giocatore)
+                .addComponent(coordinateGiocatore)
+                .addComponent(giocatoreX)
+                .addComponent(giocatoreCoordinataX)
+                .addComponent(giocatoreY)
+                .addComponent(giocatoreCoordinataY)
+                .addComponent(bottoneFuoco));
+
+
+        pannelloGiocatore.setLayout(groupLayout);
+
+
 
     }
 
