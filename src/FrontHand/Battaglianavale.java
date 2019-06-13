@@ -87,24 +87,31 @@ public class Battaglianavale extends JFrame {
         Nuovapartita.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //PannelloUtente finestraUtente = new PannelloUtente();
-                //finestraUtente.setVisible(true);
                 nomeUtente=JOptionPane.showInputDialog(questaFinestra,"Inserisci Nome");
                 System.out.println(nomeUtente);
+
+                pannelloGiocatore.setVisible(true);
+                pannelloComputer.setVisible(true);
+
                 giocatore.setText(nomeUtente);
                 giocatore.setVisible(true);
-                bottoneFuoco.setVisible(true);
-                giocatoreCoordinataX.setVisible(true);
-                giocatoreCoordinataY.setVisible(true);
-                giocatoreX.setVisible(true);
-                giocatoreY.setVisible(true);
                 coordinateGiocatore.setVisible(true);
+                giocatoreX.setVisible(true);
+                giocatoreCoordinataX.setVisible(true);
+                giocatoreCoordinataX.setText("");
+                giocatoreY.setVisible(true);
+                giocatoreCoordinataY.setVisible(true);
+                giocatoreCoordinataY.setText("");
+                bottoneFuoco.setVisible(true);
+
                 coordinateComputer.setVisible(true);
                 computer.setVisible(true);
                 computerX.setVisible(true);
                 computerCoordinataX.setVisible(true);
+                computerCoordinataX.setText("");
                 computerY.setVisible(true);
                 computerCoordinataY.setVisible(true);
+                computerCoordinataY.setText("");
 //              System.out.println("si funziona!");
 
             }
@@ -181,6 +188,15 @@ public class Battaglianavale extends JFrame {
         bottoneFuoco.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                giocatoreCoordinataX.setText("");
+                giocatoreCoordinataY.setText("");
+                computerCoordinataX.setText("");
+                computerCoordinataY.setText("");
+
+                //test (prova)
+//                /*sconfitta giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,true,false);
+//                /*vittoria giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,false,true);
+
 //                GestioneUtente.controlloCordinate(giocatoreCoordinataX,giocatoreCoordinataY);
 //                GestioneComputer.attaccoDalGiocatore(giocatoreCoordinataX,GestioneUtente.convertitore(giocatoreCoordinataY));
 //                Battaglianavale.logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
