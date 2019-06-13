@@ -1,4 +1,6 @@
 
+import BackHand.GestioneUtente;
+import BackHand.GestioneComputer;
 import sun.misc.JarIndex;
 import javax.swing.GroupLayout;
 import static javax.swing.GroupLayout.Alignment.*;
@@ -7,7 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-//import FrontEnd.PannelloUtente;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 //import BackEnd.GestioneUtente;
 //import BackEnd.GestioneComputer;
 
@@ -33,6 +36,7 @@ public class Battaglianavale extends JFrame {
     private JMenuItem Nuovapartita, esci;
     private JPanel contentPane, pannelloComputer, pannelloGiocatore;
     private JTable tablellaComputer, tabellaGiocatore;
+    private ModelloTabella modelloTabellaGiocatore,modelloTabellaComputer;
     private JLabel giocatoreX, giocatoreY;
     private JLabel computerX, computerY;
     private JLabel giocatore;
@@ -114,6 +118,8 @@ public class Battaglianavale extends JFrame {
                 computerCoordinataY.setText("");
 //              System.out.println("si funziona!");
 
+
+
             }
         });
         menu.add(Nuovapartita);
@@ -122,8 +128,10 @@ public class Battaglianavale extends JFrame {
         esci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //pannelloComputer.setVisible(false);
-                //pannelloGiocatore.setVisible(false);
+                //ToDo appena merge ticket#7
+//                pannelloComputer.setVisible(false);
+                //ToDo appena merge ticket#7
+//                pannelloGiocatore.setVisible(false);
                 giocatore.setVisible(false);
                 bottoneFuoco.setVisible(false);
                 giocatoreCoordinataX.setVisible(false);
@@ -188,6 +196,8 @@ public class Battaglianavale extends JFrame {
         bottoneFuoco.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String contenuto = new String();
+
                 giocatoreCoordinataX.setText("");
                 giocatoreCoordinataY.setText("");
                 computerCoordinataX.setText("");
@@ -197,11 +207,24 @@ public class Battaglianavale extends JFrame {
 //                /*sconfitta giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,true,false);
 //                /*vittoria giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,false,true);
 
-//                GestioneUtente.controlloCordinate(giocatoreCoordinataX,giocatoreCoordinataY);
-//                GestioneComputer.attaccoDalGiocatore(giocatoreCoordinataX,GestioneUtente.convertitore(giocatoreCoordinataY));
-//                Battaglianavale.logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
-//                GestioneComputer.attaccoDalComputer(gestioneComputer.getCoordinataX(),gestioneComputer.getCoordinataY());
-//                Battaglianavale.logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore());
+                //ToDO appena implementato il package BackEnd
+//                GestioneUtente.controlloCordinate((giocatoreCoordinataX.getText()-1),giocatoreCoordinataY.getText());
+
+                //ToDO appena implementato il package BackEnd
+//                contenuto = GestioneComputer.attaccoDalGiocatore(Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
+//                modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
+
+                //ToDO appena implementato il package BackEnd
+//                logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
+
+                //ToDO appena implementato il package BackEnd
+//                contenuto = GestioneUtente.attaccoDalComputer(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+//                computerCoordinataX.setText(GestioneComputer.getCoordinataX());
+//                computerCoordinataY.setText(GestioneComputer.convertitoreYComputer);
+//                modelloTabellaGiocatore.addXeO(contenuto,GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+
+                //ToDO appena implementato il package BackEnd
+//               logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore());
             }
         });
 
@@ -236,51 +259,27 @@ public class Battaglianavale extends JFrame {
         pannelloComputer.add(computerY);
         computerY.setVisible(false);
 
-        computerCoordinataY = new JTextArea();
+
+        computerCoordinataY = new JTextField();
         computerCoordinataY.setBounds(10,40,10,10);
         pannelloComputer.add(computerCoordinataY);
         computerCoordinataY.setVisible(false);
         computerCoordinataY.setColumns(2);
         computerCoordinataY.setEnabled(false);
 
-        //tabellaGiocatore = GestioneUtente.getTable();
-        //pannelloGiocatore.add(tabellaGiocatore);
+
+        modelloTabellaGiocatore = new ModelloTabella();
+        //ToDo appena implementata la classe GestioneUtenete
+//        modelloTabellaGiocatore.addNaviGiocatore(GestioneUtente.getMatrice);
+        tabellaGiocatore = new JTable(modelloTabellaGiocatore);
+        tabellaGiocatore.setFillsViewportHeight(true);
+        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
 
 
-        //tablellaComputer = new JTable();
-        //pannelloGiocatore.add(tablellaComputer);
-
-        groupLayout = new GroupLayout(pannelloGiocatore);
-        groupLayout.setAutoCreateGaps(true);
-        groupLayout.setAutoCreateContainerGaps(true);
-        pannelloGiocatore.setLayout(groupLayout);
-
-        groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
-                .addComponent(giocatore)
-                .addComponent(coordinateGiocatore)
-                .addGroup(groupLayout.createParallelGroup()
-                                .addComponent(coordinateGiocatore)
-                                .addComponent(giocatoreX)
-                                .addComponent(giocatoreCoordinataX)
-                                .addComponent(giocatoreY)
-                                .addComponent(giocatoreCoordinataY)
-                                .addComponent(bottoneFuoco)));
-
-        groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-                .addGroup(groupLayout.createParallelGroup(BASELINE))
-                .addComponent(giocatore)
-                .addComponent(coordinateGiocatore)
-                .addComponent(coordinateGiocatore)
-                .addComponent(giocatoreX)
-                .addComponent(giocatoreCoordinataX)
-                .addComponent(giocatoreY)
-                .addComponent(giocatoreCoordinataY)
-                .addComponent(bottoneFuoco));
-
-
-        pannelloGiocatore.setLayout(groupLayout);
-
-
+        modelloTabellaComputer = new ModelloTabella();
+        tablellaComputer = new JTable(modelloTabellaComputer);
+        tabellaGiocatore.setFillsViewportHeight(true);
+        pannelloComputer.add(new JScrollPane(this.tabellaGiocatore));
 
     }
 
