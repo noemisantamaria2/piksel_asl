@@ -70,7 +70,7 @@ public class Battaglianavale extends JFrame {
     public Battaglianavale () {
         setTitle("BattleShip");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100,100,500,500);
+        setSize(1280,720);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         contentPane.setLayout(new BorderLayout(0,0));
@@ -241,6 +241,7 @@ public class Battaglianavale extends JFrame {
 
         groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
                 .addComponent(giocatore)
+                .addComponent(coordinateGiocatore)
                 .addGroup(groupLayout.createParallelGroup()
                                 .addComponent(coordinateGiocatore)
                                 .addComponent(giocatoreX)
@@ -252,6 +253,7 @@ public class Battaglianavale extends JFrame {
         groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
                 .addGroup(groupLayout.createParallelGroup(BASELINE))
                 .addComponent(giocatore)
+                .addComponent(coordinateGiocatore)
                 .addComponent(coordinateGiocatore)
                 .addComponent(giocatoreX)
                 .addComponent(giocatoreCoordinataX)
