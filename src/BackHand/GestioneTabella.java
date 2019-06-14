@@ -1,11 +1,6 @@
 package BackHand;
 
-import javax.swing.*;
-import java.util.Calendar;
-
 public class GestioneTabella {
-
-    //todo xDomani: guardare cosa dice ultimo todo
 
     public static void main (String [] args){
 
@@ -30,48 +25,47 @@ public class GestioneTabella {
 
         }
 
-
-        //tabella[6][5] = "X";//togliere
-        //tabella[7][7] = "X";//togliere
-        //tabella[5][7] = "X";//togliere
-        //tabella[1][7] = "X";//togliere
-        //tabella[2][3] = "X";//togliere
-        //tabella[9][5] = "X";//togliere
-        //tabella[1][2] = "X";//togliere
+        tabella[6][5] = "X";//togliere
+        tabella[7][7] = "X";//togliere
+        tabella[5][7] = "X";//togliere
+        tabella[1][7] = "X";//togliere
+        tabella[2][3] = "X";//togliere
+        tabella[9][5] = "X";//togliere
+        tabella[1][2] = "X";//togliere
         tabella[0][0] = "X";//togliere
         tabella[3][4] = "X";//togliere
         tabella[4][5] = "X";//togliere
         tabella[4][3] = "X";//togliere
-        //tabella[5][4] = "X";//togliere
+        tabella[5][4] = "X";//togliere
 
         stampa(tabella);//togliere
 
         //todo gestire il ciclo finche non trova una posizione che gli va bene
 
-        int nRiga = -1;
-        int nColonna = -1;
+        int riga = -1;
+        int colonna = -1;
         int direzione = -1;
 
         //do { momentaneo
 
-            nRiga = (int) (Math.random() * 10);
-            nColonna = (int) (Math.random() * 10);
+            riga = (int) (Math.random() * 10);
+            colonna = (int) (Math.random() * 10);
             direzione = (int) (Math.random() * 4);
 
 
-            nRiga = 9;//togliere
-            nColonna = 0;//togliere
-            direzione = 3;//togliere
+            riga = 9;//togliere
+            colonna = 5;//togliere
+            direzione = 0;//togliere
 
 
-            boolean condizioneNavePosizionabile = controllaPosizioneNave(nRiga, nColonna, 5, direzione, tabella);
+            boolean condizioneNavePosizionabile = controllaPosizioneNaveGenerale(new InfoCasella(riga, colonna, tabella, tabella[riga][colonna]), 5, direzione);
 
-            System.out.println("La condizione è " + condizioneNavePosizionabile + " per le coordinate " + nRiga + " " + nColonna + " con direzione " + direzione);//togliere
+            System.out.println("La condizione è " + condizioneNavePosizionabile + " per le coordinate " + riga + " " + colonna + " con direzione " + direzione);//togliere
 
             /*
             if (condizioneNavePosizionabile) {
 
-                posizionaNave(nRiga, nColonna, 5, direzione, tabella);
+                posizionaNave(riga, colonna, 5, direzione, tabella);
                 //break;//momentaneo
 
             }
@@ -85,17 +79,59 @@ public class GestioneTabella {
 
     }
 
-    public boolean controllaPosizioneNave(int riga, int colonna, int lunghezza, int direzione, String[][]tabella){
+    public boolean controllaPosizioneNaveGenerale(InfoCasella casellaSelezionata, int lunghezza, int direzione){
 
+        InfoCasella copiaCasellaSelezionata = new InfoCasella(casellaSelezionata.getRiga(), casellaSelezionata.getColonna(), casellaSelezionata.getTabella());
+
+
+
+
+        /*
+        boolean condizionePrimaCasellaPosizionabile = true;
+        boolean condizioneCasellaCodaPosizionabile = true;
+
+        for (int i = 0; i < 4 && condizionePrimaCasellaPosizionabile; i++) {
+
+            for (int j = 0; j < lunghezza; j++) {
+
+                if(j == 0){
+
+
+
+                }
+
+            }
+
+        }
+        */
+
+
+
+
+
+
+
+
+
+        /*
         boolean condizioneNavePosizionabile = true;
 
         for (int i = 0; (i < lunghezza) && condizioneNavePosizionabile; i++) {
 
-            String valorePosizione = "null";//modificare in ""
+            String valoreCasellaCheComponeLaNave = "null";//modificare in ""
 
             try{
 
-                valorePosizione = getCasellaInRelazioneAPosizione(riga, colonna, direzione, i, tabella);
+                if(i == 0){
+
+                    valoreCasellaCheComponeLaNave = getCasellaInRelazioneAPosizione(casellaCasualeSelezionata, direzione, 0, true).getValore();
+
+                } else {
+
+                    valoreCasellaCheComponeLaNave = getCasellaInRelazioneAPosizione(casellaCasualeSelezionata, direzione, 1, true).getValore();
+
+                }
+
 
             }catch(Exception e){
 
@@ -104,32 +140,35 @@ public class GestioneTabella {
 
             }
 
-            if(valorePosizione.equals("X")){
+            if(valoreCasellaCheComponeLaNave.equals("X")){
 
                 //condizioneNavePosizionabile = false;//momentaneo
                 //break;//momentaneo
 
             }
 
-            System.out.print((i + 1) + ") " + getValoreStringaVuota(valorePosizione) + " : ");//togliere
+            System.out.print((i + 1) + ") " + getValoreStringaVuota(valoreCasellaCheComponeLaNave) + " : ");//togliere
 
             if(i == 0){
 
                 //System.out.print("Si sta lavorando sulla casella iniziale + ");//togliere
 
-                condizioneNavePosizionabile = controllaCaselleAdiacenti(riga, colonna, tabella, 0, true);
+                //condizioneNavePosizionabile =
+                //controllaCaselleAdiacenti(casellaCasualeSelezionata, 0, true);
 
             } else {
 
                 //System.out.print("Non si sta lavorando sulla casella iniziale");//togliere
 
-                //todo aggiornare la riga e la colonna con una quella aggiornata
-
-
-
-                controllaCaselleAdiacenti(riga, colonna, tabella, direzione, false);
+                //condizioneNavePosizionabile =
+                //controllaCaselleAdiacenti(casellaCasualeSelezionata, direzione, false);//in progress
 
             }
+
+            //considerando la prima posizione della nave, se la condizione arrivata fino a qui è true, allora la prima casella va bene
+
+
+
 
             //System.out.print("La condizione della nave posizionabile è " + condizioneNavePosizionabile);//togliere
 
@@ -138,11 +177,15 @@ public class GestioneTabella {
 
         }
 
-        return condizioneNavePosizionabile;
+        */
+
+        return true;//
 
     }
 
-    public boolean controllaCaselleAdiacenti(int riga, int colonna, String[][]tabella, int direzione, boolean selezionePrimaCasella){
+    public boolean controllaCaselleAdiacenti(InfoCasella casellaSelezionata, int direzione, boolean selezionePrimaCasella){
+
+        //todo creare nuovo oggetto per metodi
 
         boolean condizioneCasellaPosizionabile = true;
         int puntoCardinaleDaNonUtilizzare = getPuntoCardinaleOpposto(direzione);
@@ -151,11 +194,11 @@ public class GestioneTabella {
 
             if(selezionePrimaCasella || i != puntoCardinaleDaNonUtilizzare){
 
-                String valoreCasellaSelezionata = "null";
+                String valoreCasellaAdiacente = "null";
 
                 try{
 
-                    valoreCasellaSelezionata = getCasellaInRelazioneAPosizione(riga, colonna, i, 1, tabella);
+                    valoreCasellaAdiacente = getCasellaInRelazioneAPosizione(casellaSelezionata, i, 1, false).getValore();
 
                 }catch(Exception e){
 
@@ -164,14 +207,14 @@ public class GestioneTabella {
                 }
 
 
-                if(valoreCasellaSelezionata.equals("X")){
+                if(valoreCasellaAdiacente.equals("X")){
 
                     //condizioneCasellaPosizionabile = false;//momentaneo
                     //break;//momentaneo
 
                 }
 
-                System.out.print(getValoreStringaVuota(valoreCasellaSelezionata) + ", ");//togliere
+                System.out.print(getValoreStringaVuota(valoreCasellaAdiacente) + ", ");//togliere
 
             }
 
@@ -181,32 +224,52 @@ public class GestioneTabella {
 
     }
 
-    public String getCasellaInRelazioneAPosizione(int riga, int colonna, int direzione, int lunghezza, String[][]tabella){
+
+    //ritorna le coordinate della casella in coda
+    public InfoCasella getCasellaInRelazioneAPosizione(InfoCasella casellaSelezionata, int direzione, int lunghezza, boolean modificaCoordinate){
+
+        String valoreCasellaSelezionata = "";
+        String[][]tabella = casellaSelezionata.getTabella();
+        int riga =          casellaSelezionata.getRiga();
+        int colonna =       casellaSelezionata.getColonna();
 
         switch (direzione){
 
             case 0:
 
-                return tabella[riga - lunghezza][colonna];
+                riga = riga - lunghezza;
+                break;
 
             case 1:
 
-                return tabella[riga][colonna + lunghezza];
+                colonna = colonna + lunghezza;
+                break;
 
             case 2:
 
-                return tabella[riga + lunghezza][colonna];
+                riga = riga + lunghezza;
+                break;
 
             case 3:
 
-                return tabella[riga][colonna - lunghezza];
+                colonna = colonna - lunghezza;
 
             default:
 
-                System.out.println("Errore");//togliere
-                return "errore";
+                //System.out.println("Errore");//togliere
 
         }
+
+        if(modificaCoordinate){
+
+            casellaSelezionata.setRiga(riga);
+            casellaSelezionata.setColonna(colonna);
+
+        }
+
+        casellaSelezionata.setValore(tabella[riga][colonna]);
+
+        return casellaSelezionata;
 
     }
 
@@ -291,12 +354,6 @@ public class GestioneTabella {
 
     public String getValoreStringaVuota(String valore){//metodo da togliere
 
-        if(valore == null){
-
-
-
-        }
-
         if(valore.isEmpty()){
 
             return "/";
@@ -337,7 +394,49 @@ public class GestioneTabella {
 
     }
 
+}
 
+/*
+c1 = true;
+ccoda = true;
 
+for(int i = 0; i < 4 && c1 == true; i++){
+
+    for(int j = 0; j < lunghezza && c1 == true && ccoda == true; j++ ){
+
+        if(j==0){
+
+            se dopo tutte le condizioni NON funziona{
+
+                c1 = false
+                break;
+
+            }
+
+        } else if (j > 0 && metodo == true){
+
+            se dopo tutte le condizioni NON funziona{
+
+                ccoda = false
+
+            }
+
+        } else {
+
+            break;
+
+        }
+
+        if(ccoda == false && c1 == true && giro <= 4){
+
+            ricomincia giro
+            giro++;
+            => i = 0 e direzione = prossima();
+
+        }
+
+    }
 
 }
+
+*/
