@@ -67,6 +67,7 @@ public class MainClass {
         System.out.println(lo.getCoordinataX());
         lo.setCoordinataX();
         System.out.println(lo.getCoordinataY());
+        lo.stopProcesso();
         System.out.println(lo.convertYInChar());
 
 

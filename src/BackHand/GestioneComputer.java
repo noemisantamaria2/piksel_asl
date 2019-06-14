@@ -2,9 +2,9 @@ package BackHand;
 import java.util.*;
     public class GestioneComputer {
     Random rand= new Random();
-    private int CoordinataX, CoordinataY=rand.nextInt(10);
-    private String [][]MatriceLogica;
-    private String [][]MatriceVista;
+    private int CoordinataX, CoordinataY;
+    private String [][]MatriceLogica;   //Matrice invisibile
+    private String [][]MatriceVista;  //Matrice navi
     public GestioneComputer(){
 
     }
@@ -25,7 +25,23 @@ import java.util.*;
     public int getCoordinataY(){
         return CoordinataY;
     }
-    public String attaccoDalGiocatore(int x,int Y) { //ok riceve le coordinate e controlla le due matrici
+    public void stopProcesso(){     //ok
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+        }
+    }
+        public void riempimentoMatriceNonVis(){ //Metodo per riempire la Matrice non vista dall'utente
+            for(int i = 0; i < 10; i++){
+                for(int j = 0; j < 10; j++){
+                    MatriceLogica[i][j]=" ";
+
+                }
+            }
+        }
+
+        public String attaccoDalGiocatore(int x,int Y) { //ok riceve le coordinate e controlla le due matrici
         String Hit="X";
         String NoHit="O";
         String Wrong="XO";
