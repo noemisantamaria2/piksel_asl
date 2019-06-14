@@ -9,13 +9,13 @@ public class GestioneUtente {
 
 
     }
-            public boolean ControlloX(int X){          //ok
+            public boolean controlloX(int X){          //ok
                 if(X<10&&X>-1){
                     return true;
                 }
                 else return false;
             }
-            public boolean ControlloY(String Y){         //ok
+            public boolean controlloY(String Y){         //ok
                   int YCorrect=ListY.indexOf(Y);
                 if(YCorrect<10&&YCorrect>-1) {
                     return true;
@@ -27,7 +27,7 @@ public class GestioneUtente {
                     }else return false;
                 }
             }
-            public int ConvertitoreY(String Y){         //ok
+            public int convertitoreY(String Y){         //ok
                  int YConvert=ListY.indexOf(Y);
                 if(YConvert<10&&YConvert>-1){
                     return YConvert;
@@ -40,9 +40,9 @@ public class GestioneUtente {
                 }
                 return -1;
     }
-            public boolean ControlloCoordinate(int x, String Y){  //ok
-                boolean CheckX=this.ControlloX(x);
-                boolean CheckY=this.ControlloY(Y);
+            public boolean controlloCoordinate(int x, String Y){  //ok
+                boolean CheckX=this.controlloX(x);
+                boolean CheckY=this.controlloY(Y);
                 if(CheckX==true){
                     if (CheckY == true) {
                         return true;
@@ -68,11 +68,10 @@ public class GestioneUtente {
             }
     }*/
 
-            public void RiempimentoMatriceNonVis(){ //Metodo per riempire la Matrice non vista dall'utente
+            public void riempimentoMatriceNonVis(){ //Metodo per riempire la Matrice non vista dall'utente
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 10; j++){
                         MatriceA[i][j]=" ";
-
                     }
                 }
             }
@@ -110,7 +109,7 @@ public class GestioneUtente {
                     else return false;
                 }
     public String getMatrice(){
-        return MatriceA[10][10];
+        return MatriceB[10][10];
     }
 
 
