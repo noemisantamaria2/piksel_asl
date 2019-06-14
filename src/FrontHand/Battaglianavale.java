@@ -34,7 +34,7 @@ public class Battaglianavale extends JFrame {
     private JMenu menu;
     private JMenuItem Nuovapartita, esci;
     private JPanel contentPane, pannelloComputer, pannelloGiocatore;
-    private JTable tablellaComputer, tabellaGiocatore;
+    private JTable tabellaComputer, tabellaGiocatore;
     private ModelloTabella modelloTabellaGiocatore,modelloTabellaComputer;
     private JLabel giocatoreX, giocatoreY;
     private JLabel computerX, computerY;
@@ -115,6 +115,15 @@ public class Battaglianavale extends JFrame {
                 computerCoordinataY.setVisible(true);
                 computerCoordinataY.setText("");
 //              System.out.println("si funziona!");
+
+
+
+                tabellaGiocatore.setVisible(true);
+                modelloTabellaGiocatore.nuovatabella();
+//                modelloTabellaGiocatore.addNaviGiocatore();
+
+                tabellaComputer.setVisible(true);
+                modelloTabellaComputer.nuovatabella();
 
 
 
@@ -264,14 +273,21 @@ public class Battaglianavale extends JFrame {
         //ToDo appena implementata la classe GestioneUtenete
 //        modelloTabellaGiocatore.addNaviGiocatore(GestioneUtente.getMatrice);
         tabellaGiocatore = new JTable(modelloTabellaGiocatore);
-        tabellaGiocatore.setFillsViewportHeight(true);
-        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
+//        tabellaGiocatore.setFillsViewportHeight(true);
+        tabellaGiocatore.setVisible(false);
+        tabellaGiocatore.setSize(100,100);
+//        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
+        pannelloGiocatore.add(tabellaGiocatore);
 
 
         modelloTabellaComputer = new ModelloTabella();
-        tablellaComputer = new JTable(modelloTabellaComputer);
-        tabellaGiocatore.setFillsViewportHeight(true);
-        pannelloComputer.add(new JScrollPane(this.tabellaGiocatore));
+        tabellaComputer = new JTable(modelloTabellaComputer);
+//        tabellaComputer.setFillsViewportHeight(true);
+        tabellaComputer.setVisible(false);
+        tabellaComputer.setSize(100,100);
+//        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
+//        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
+        pannelloComputer.add(tabellaComputer);
 
     }
 

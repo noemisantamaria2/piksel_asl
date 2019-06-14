@@ -29,6 +29,14 @@ public class ModelloTabella extends AbstractTableModel {
         }
     }
 
+    public void nuovatabella(){
+        for (int i=0;i<matrice.length;i++) {
+            for (int j = 0; j < matrice[0].length; j++) {
+                this.setValueAt("",i,j);
+            }
+        }
+    }
+
     public boolean addXeO(String contenuto, int righa, int colonna) {
         if((contenuto.equalsIgnoreCase("X"))||(contenuto.equalsIgnoreCase("O"))){
             this.setValueAt(contenuto,righa,colonna);
