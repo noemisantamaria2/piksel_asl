@@ -1,4 +1,4 @@
-
+package FrontHand;
 import BackHand.GestioneUtente;
 import BackHand.GestioneComputer;
 import sun.misc.JarIndex;
@@ -87,7 +87,7 @@ public class Battaglianavale extends JFrame {
         menuBar.add(menu);
 
 
-        Nuovapartita = new JMenuItem("Nuova Prtita");
+        Nuovapartita = new JMenuItem("Nuova Partita");
         Nuovapartita.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,9 +123,11 @@ public class Battaglianavale extends JFrame {
                 tabellaGiocatore.setVisible(true);
                 modelloTabellaGiocatore.nuovatabella();
 //                modelloTabellaGiocatore.addNaviGiocatore();
+//                GestioneUtente.riempimentoMatriceNonVis();
 
                 tabellaComputer.setVisible(true);
                 modelloTabellaComputer.nuovatabella();
+//                GestioneComputer.riempimentoMatriceNonVis();
 
 
 
@@ -160,47 +162,47 @@ public class Battaglianavale extends JFrame {
 
         pannelloGiocatore = new JPanel();
         //pannelloGiocatore.setLayout( new GroupLayout());
-        contentPane.add(pannelloGiocatore,BorderLayout.WEST);
+        //contentPane.add(pannelloGiocatore,BorderLayout.WEST);
         pannelloGiocatore.setBackground(Color.green);
-//        pannelloGiocatore.setVisible(false);
+        pannelloGiocatore.setVisible(false);
 
         giocatore = new JLabel();
         giocatore.setEnabled(false);
         //giocatore.setBackground(null);
         //giocatore.setText(nomeUtente);
         giocatore.setBounds(20,20, 50,20);
-        pannelloGiocatore.add(giocatore, BorderLayout.NORTH);
+        //pannelloGiocatore.add(giocatore, BorderLayout.NORTH);
 
         coordinateGiocatore = new JLabel("Coordinate");
         coordinateGiocatore.setVisible(false);
         coordinateGiocatore.setBounds(10,80,10,10);
-        pannelloGiocatore.add(coordinateGiocatore);
+        //pannelloGiocatore.add(coordinateGiocatore);
 
         giocatoreX = new JLabel("X");
         giocatoreX.setBounds(10,40,10,10);
-        pannelloGiocatore.add(giocatoreX);
+        //pannelloGiocatore.add(giocatoreX);
         giocatoreX.setVisible(false);
 
         giocatoreCoordinataX = new JTextField();
         giocatoreCoordinataX.setBounds(10,40,10,10);
-        pannelloGiocatore.add(giocatoreCoordinataX);
+        //pannelloGiocatore.add(giocatoreCoordinataX);
         giocatoreCoordinataX.setVisible(false);
         giocatoreCoordinataX.setColumns(2);
 
         giocatoreY = new JLabel("Y");
         giocatoreY.setBounds(10,40,10,10);
-        pannelloGiocatore.add(giocatoreY);
+        //pannelloGiocatore.add(giocatoreY);
         giocatoreY.setVisible(false);
 
         giocatoreCoordinataY = new JTextField();
         giocatoreCoordinataY.setBounds(10,40,10,10);
-        pannelloGiocatore.add(giocatoreCoordinataY);
+        //pannelloGiocatore.add(giocatoreCoordinataY);
         giocatoreCoordinataY.setVisible(false);
         giocatoreCoordinataY.setColumns(2);
 
         bottoneFuoco = new JButton("Fire");
         bottoneFuoco.setBounds(200,50,20,60);
-        pannelloGiocatore.add(bottoneFuoco);
+        //pannelloGiocatore.add(bottoneFuoco);
         bottoneFuoco.setVisible(false);
         bottoneFuoco.addActionListener(new ActionListener() {
             @Override
@@ -240,7 +242,7 @@ public class Battaglianavale extends JFrame {
         pannelloComputer = new JPanel();
         contentPane.add(pannelloComputer,BorderLayout.EAST);
         pannelloComputer.setBackground(Color.CYAN);
-//        pannelloComputer.setVisible(false);
+        pannelloComputer.setVisible(false);
 
         computer = new JLabel("Computer");
         pannelloComputer.add(computer);
@@ -268,8 +270,7 @@ public class Battaglianavale extends JFrame {
         pannelloComputer.add(computerY);
         computerY.setVisible(false);
 
-
-        computerCoordinataY = new JTextField();
+        computerCoordinataY = new JTextArea();
         computerCoordinataY.setBounds(10,40,10,10);
         pannelloComputer.add(computerCoordinataY);
         computerCoordinataY.setVisible(false);
@@ -283,19 +284,83 @@ public class Battaglianavale extends JFrame {
         tabellaGiocatore = new JTable(modelloTabellaGiocatore);
 //        tabellaGiocatore.setFillsViewportHeight(true);
         tabellaGiocatore.setVisible(false);
-        tabellaGiocatore.setSize(100,100);
-//        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
+//        tabellaGiocatore.setSize(100,100);
+//        JScrollPane pannelloTabellaGiocatore = new JScrollPane(this.tabellaComputer);
+//        pannelloGiocatore.add(pannelloTabellaGiocatore);
+        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
         pannelloGiocatore.add(tabellaGiocatore);
 
 
         modelloTabellaComputer = new ModelloTabella();
         tabellaComputer = new JTable(modelloTabellaComputer);
-//        tabellaComputer.setFillsViewportHeight(true);
+        tabellaComputer.setFillsViewportHeight(true);
         tabellaComputer.setVisible(false);
-        tabellaComputer.setSize(100,100);
-//        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
-//        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
-        pannelloComputer.add(tabellaComputer);
+//        JScrollPane pannelloTabellaComputer = new JScrollPane(this.tabellaComputer);
+//        pannelloTabellaComputer.setBackground(null);
+//        pannelloComputer.add(pannelloTabellaComputer);
+        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
+//        pannelloComputer.add(tabellaComputer);
+
+        groupLayout = new GroupLayout(pannelloGiocatore);
+        //pannelloGiocatore.setLayout(groupLayout);
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
+       // pannelloGiocatore.setLayout(groupLayout);
+
+        GroupLayout.SequentialGroup seqGroup = groupLayout.createSequentialGroup();
+        seqGroup.addComponent(coordinateGiocatore);
+        seqGroup.addComponent(giocatoreX);
+        seqGroup.addComponent(giocatoreCoordinataX);
+        seqGroup.addComponent(giocatoreY);
+        seqGroup.addComponent(giocatoreCoordinataY);
+        seqGroup.addComponent(bottoneFuoco);
+
+        GroupLayout.SequentialGroup seqGroupB = groupLayout.createSequentialGroup();
+        seqGroupB.addComponent(giocatore);
+        seqGroupB.addGroup(seqGroup);
+        seqGroupB.addComponent(tabellaGiocatore);
+
+
+        groupLayout.setHorizontalGroup(seqGroupB);
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup()
+                .addComponent(giocatore)
+                .addGroup(seqGroup)
+                .addComponent(tabellaGiocatore)
+        );
+
+        pannelloGiocatore.setLayout(groupLayout);
+
+
+
+
+//        groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
+//                    .addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+//                        .addComponent(coordinateGiocatore)
+//                        .addComponent(giocatoreX)
+//                        .addComponent(giocatoreCoordinataX)
+//                        .addComponent(giocatoreY)
+//                        .addComponent(giocatoreCoordinataY)
+//                        .addComponent(bottoneFuoco)
+//                    .addComponent(tabellaGiocatore)));
+
+
+
+//        groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
+//                .addGroup(groupLayout.createParallelGroup(BASELINE))
+//                .addComponent(coordinateGiocatore)
+//                .addComponent(giocatoreX)
+//                .addComponent(giocatoreCoordinataX)
+//                .addComponent(giocatoreY)
+//                .addComponent(giocatoreCoordinataY)
+//                .addComponent(bottoneFuoco)
+//                .addComponent(tabellaGiocatore)
+//
+//                        );
+
+
+
+
+
 
     }
 

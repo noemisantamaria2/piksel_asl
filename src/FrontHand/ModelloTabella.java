@@ -6,6 +6,16 @@ public class ModelloTabella extends AbstractTableModel {
 
     private int righeColonne=10;
     private String [][] matrice = new String[righeColonne][righeColonne];
+    private String [] headersColumn,headersRow;
+
+    public ModelloTabella(){
+        headersColumn= new String[]{"1","2","3","4","5","6","7","8","9","10"};
+        headersRow= new String[]{"L","I","H","G","F","E","D","C","B","A"};
+    }
+
+    public String getColumnName (int colonna){ return headersColumn[colonna];}
+
+//    public String getRowName (int righe){ return headersRow[righe];}
 
     @Override
     public int getRowCount() {
