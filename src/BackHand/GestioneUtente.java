@@ -2,20 +2,18 @@ package BackHand;
 public class GestioneUtente {
      private String ListY="LIHGFEDCBA";
      private String listY="lihgfedcba";
-     private String [][]MatriceB;      //Matrice contenenti navi
-     private String [][]MatriceA;      //Matrice che gestisce gli attacchi
+     private String [][]MatriceVista;      //Matrice contenente navi
+     private String [][]MatriceLogica;      //Matrice che gestisce gli attacchi
     public GestioneUtente(String [][]p){
-    MatriceB=p;
-
-
+    MatriceVista=p;
     }
-            public boolean controlloX(int X){          //ok
+            public boolean controlloX(int X){          //ok Controllo coordinata x
                 if(X<10&&X>-1){
                     return true;
                 }
                 else return false;
             }
-            public boolean controlloY(String Y){         //ok
+            public boolean controlloY(String Y){         //ok Controllo coordinata y
                   int YCorrect=ListY.indexOf(Y);
                 if(YCorrect<10&&YCorrect>-1) {
                     return true;
@@ -27,7 +25,7 @@ public class GestioneUtente {
                     }else return false;
                 }
             }
-            public int convertitoreY(String Y){         //ok
+            public int convertitoreY(String Y){         //ok Converte la lettera in numero
                  int YConvert=ListY.indexOf(Y);
                 if(YConvert<10&&YConvert>-1){
                     return YConvert;
@@ -40,7 +38,7 @@ public class GestioneUtente {
                 }
                 return -1;
     }
-            public boolean controlloCoordinate(int x, String Y){  //ok
+            public boolean controlloCoordinate(int x, String Y){  //ok Controllo la correttezza
                 boolean CheckX=this.controlloX(x);
                 boolean CheckY=this.controlloY(Y);
                 if(CheckX==true){
@@ -71,7 +69,8 @@ public class GestioneUtente {
             public void riempimentoMatriceNonVis(){ //Metodo per riempire la Matrice non vista dall'utente
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 10; j++){
-                        MatriceA[i][j]=" ";
+                        MatriceLogica[i][j]=" ";
+
                     }
                 }
             }
@@ -83,13 +82,13 @@ public class GestioneUtente {
                 String SegnoVuoto=" ";
                 String SegnoX="X";
                // String SegnoO="O";
-                if(MatriceB[x][Y].equals(SegnoX)){
-                        if(MatriceA[x][Y].equals(SegnoVuoto)){
-                            MatriceA[x][Y]="X";
+                if(MatriceVista[x][Y].equals(SegnoX)){
+                        if(MatriceLogica[x][Y].equals(SegnoVuoto)){
+                            MatriceLogica[x][Y]="X";
                             return Hit;
                         }else return Wrong;
-                }else if(MatriceA[x][Y].equals(SegnoVuoto)){
-                    MatriceA[x][Y]="O";
+                }else if(MatriceLogica[x][Y].equals(SegnoVuoto)){
+                    MatriceLogica[x][Y]="O";
                     return NoHit;
                 }else return Wrong;
             }
@@ -98,7 +97,7 @@ public class GestioneUtente {
                 int Tot=0;
                 for(int i=0; i<10; i++){
                     for(int j=0; j<10; j++){
-                        if(MatriceA[i][j].equals(SimboloX)){
+                        if(MatriceLogica[i][j].equals(SimboloX)){
                             Tot++;
                             }
                         }
@@ -109,7 +108,7 @@ public class GestioneUtente {
                     else return false;
                 }
     public String getMatrice(){
-        return MatriceB[10][10];
+        return MatriceVista[10][10];
     }
 
 
