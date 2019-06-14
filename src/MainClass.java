@@ -1,11 +1,9 @@
-<<<<<<< master
-import FrontHand.Battaglianavale;
 
-=======
+import FrontHand.Battaglianavale;
 import BackHand.GestioneUtente;
 import BackHand.GestioneUtente.*;
 import java.util.*;
->>>>>>> Ticket #5: Aggiornamento dei metodi e prova
+
 public class MainClass {
 
     public static void main (String[]args){
