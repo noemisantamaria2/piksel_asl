@@ -61,18 +61,16 @@ public class MainClass {
 
 
         GestioneComputer lo=new GestioneComputer();
-        lo.setCoordinataX();
-        System.out.println(lo.getCoordinataX());
-        lo.setCoordinataX();
-        System.out.println(lo.getCoordinataX());
-        lo.setCoordinataX();
-        System.out.println(lo.getCoordinataY());
-        lo.stopProcesso();
-        System.out.println(lo.convertYInChar());
-
-
-
-
+/*
+        lo.riempimentoMatriceNonVis();
+        int []f= new int[2];
+        for(int k=0; k<25; k++) {
+            f = lo.mioAttacco();
+            System.out.println(lo.getCoordinataX());
+            System.out.println(lo.getCoordinataY());
+            System.out.println("----------------"+k);
+            lo.stopProcesso();
+        }*/
     }
 
 }

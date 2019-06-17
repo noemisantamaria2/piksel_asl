@@ -2,10 +2,10 @@ package BackHand;
 public class GestioneUtente {
      private String ListY="LIHGFEDCBA";
      private String listY="lihgfedcba";
-     private String [][]MatriceVista;      //Matrice contenente navi
-     private String [][]MatriceLogica;      //Matrice che gestisce gli attacchi
+     private String [][]MatriceNavi;      //Matrice contenente navi
+     private String [][]MatriceGestione;      //Matrice che gestisce gli attacchi
     public GestioneUtente(String [][]p){
-    MatriceVista=p;
+    MatriceNavi=p;
     }
             public boolean controlloX(int X){          //ok Controllo coordinata x
                 if(X<10&&X>-1){
@@ -69,7 +69,7 @@ public class GestioneUtente {
             public void riempimentoMatriceNonVis(){ //Metodo per riempire la Matrice non vista dall'utente
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 10; j++){
-                        MatriceLogica[i][j]=" ";
+                        MatriceGestione[i][j]=" ";
 
                     }
                 }
@@ -82,13 +82,13 @@ public class GestioneUtente {
                 String SegnoVuoto=" ";
                 String SegnoX="X";
                // String SegnoO="O";
-                if(MatriceVista[x][Y].equals(SegnoX)){
-                        if(MatriceLogica[x][Y].equals(SegnoVuoto)){
-                            MatriceLogica[x][Y]="X";
+                if(MatriceNavi[x][Y].equals(SegnoX)){
+                        if(MatriceGestione[x][Y].equals(SegnoVuoto)){
+                            MatriceGestione[x][Y]="X";
                             return Hit;
                         }else return Wrong;
-                }else if(MatriceLogica[x][Y].equals(SegnoVuoto)){
-                    MatriceLogica[x][Y]="O";
+                }else if(MatriceGestione[x][Y].equals(SegnoVuoto)){
+                    MatriceGestione[x][Y]="O";
                     return NoHit;
                 }else return Wrong;
             }
@@ -97,7 +97,7 @@ public class GestioneUtente {
                 int Tot=0;
                 for(int i=0; i<10; i++){
                     for(int j=0; j<10; j++){
-                        if(MatriceLogica[i][j].equals(SimboloX)){
+                        if(MatriceGestione[i][j].equals(SimboloX)){
                             Tot++;
                             }
                         }
@@ -107,8 +107,8 @@ public class GestioneUtente {
                 }
                     else return false;
                 }
-    public String getMatrice(){
-        return MatriceVista[10][10];
+    public String[][] getMatrice(){
+        return MatriceNavi;
     }
 
 
