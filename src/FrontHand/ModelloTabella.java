@@ -1,19 +1,32 @@
 package FrontHand;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 public class ModelloTabella extends AbstractTableModel {
 
-    private int righeColonne=10;
+    private int righeColonne=11;
     private String [][] matrice = new String[righeColonne][righeColonne];
     private String [] headersColumn,headersRow;
 
     public ModelloTabella(){
-        headersColumn= new String[]{"1","2","3","4","5","6","7","8","9","10"};
-        headersRow= new String[]{"L","I","H","G","F","E","D","C","B","A"};
+        headersColumn= new String[]{"","1","2","3","4","5","6","7","8","9","10"};
+        headersRow= new String[]{"","L","I","H","G","F","E","D","C","B","A"};
+        this.getColumnName();
+        this.getRowName();
     }
 
-    public String getColumnName (int colonna){ return headersColumn[colonna];}
+    public void getColumnName () {
+        for (int i=0;i<righeColonne;i++){
+            setValueAt(headersColumn[i],0,i);
+        }
+    }
+
+    public void getRowName () {
+        for (int i=0;i<righeColonne;i++){
+            setValueAt(headersRow[i],i,0);
+        }
+    }
 
 //    public String getRowName (int righe){ return headersRow[righe];}
 
@@ -30,8 +43,8 @@ public class ModelloTabella extends AbstractTableModel {
     public boolean isCellEditable(int righa, int colonna) { return false; }
 
     public void addNaviGiocatore(String[][] matrice){
-        for (int i=0;i<matrice.length;i++){
-            for (int j=0;j<matrice[0].length;j++){
+        for (int i=1;i<matrice.length;i++){
+            for (int j=1;j<matrice[0].length;j++){
                 if(matrice[i][j].equalsIgnoreCase("X")){
                     this.setValueAt(matrice[i][j],i,j);
                 }
@@ -40,8 +53,8 @@ public class ModelloTabella extends AbstractTableModel {
     }
 
     public void nuovatabella(){
-        for (int i=0;i<matrice.length;i++) {
-            for (int j = 0; j < matrice[0].length; j++) {
+        for (int i=1;i<matrice.length;i++) {
+            for (int j = 1; j < matrice[0].length; j++) {
                 this.setValueAt("",i,j);
             }
         }

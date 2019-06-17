@@ -286,9 +286,9 @@ public class Battaglianavale extends JFrame {
         tabellaGiocatore.setVisible(false);
 //        tabellaGiocatore.setSize(100,100);
 //        JScrollPane pannelloTabellaGiocatore = new JScrollPane(this.tabellaComputer);
-//        pannelloGiocatore.add(pannelloTabellaGiocatore);
         pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
-        pannelloGiocatore.add(tabellaGiocatore);
+//        pannelloGiocatore.add(tabellaGiocatore);
+
 
 
         modelloTabellaComputer = new ModelloTabella();
@@ -298,8 +298,41 @@ public class Battaglianavale extends JFrame {
 //        JScrollPane pannelloTabellaComputer = new JScrollPane(this.tabellaComputer);
 //        pannelloTabellaComputer.setBackground(null);
 //        pannelloComputer.add(pannelloTabellaComputer);
-        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
-//        pannelloComputer.add(tabellaComputer);
+//        tabellaComputer.setSize(100,100);
+//        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
+        pannelloComputer.add(tabellaComputer);
+
+        groupLayout = new GroupLayout(pannelloGiocatore);
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
+        pannelloGiocatore.setLayout(groupLayout);
+
+        groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
+                .addComponent(giocatore)
+                .addComponent(coordinateGiocatore)
+                .addGroup(groupLayout.createParallelGroup()
+                                .addComponent(coordinateGiocatore)
+                                .addComponent(giocatoreX)
+                                .addComponent(giocatoreCoordinataX)
+                                .addComponent(giocatoreY)
+                                .addComponent(giocatoreCoordinataY)
+                                .addComponent(bottoneFuoco)));
+
+        groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
+                .addGroup(groupLayout.createParallelGroup(BASELINE))
+                .addComponent(giocatore)
+                .addComponent(coordinateGiocatore)
+                .addComponent(coordinateGiocatore)
+                .addComponent(giocatoreX)
+                .addComponent(giocatoreCoordinataX)
+                .addComponent(giocatoreY)
+                .addComponent(giocatoreCoordinataY)
+                .addComponent(bottoneFuoco));
+
+
+        pannelloGiocatore.setLayout(groupLayout);
+
+
 
     }
 
