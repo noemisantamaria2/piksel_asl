@@ -301,68 +301,6 @@ public class Battaglianavale extends JFrame {
         pannelloComputer.add(new JScrollPane(this.tabellaComputer));
 //        pannelloComputer.add(tabellaComputer);
 
-        groupLayout = new GroupLayout(pannelloGiocatore);
-        //pannelloGiocatore.setLayout(groupLayout);
-        groupLayout.setAutoCreateGaps(true);
-        groupLayout.setAutoCreateContainerGaps(true);
-       // pannelloGiocatore.setLayout(groupLayout);
-
-        GroupLayout.SequentialGroup seqGroup = groupLayout.createSequentialGroup();
-        seqGroup.addComponent(coordinateGiocatore);
-        seqGroup.addComponent(giocatoreX);
-        seqGroup.addComponent(giocatoreCoordinataX);
-        seqGroup.addComponent(giocatoreY);
-        seqGroup.addComponent(giocatoreCoordinataY);
-        seqGroup.addComponent(bottoneFuoco);
-
-        GroupLayout.SequentialGroup seqGroupB = groupLayout.createSequentialGroup();
-        seqGroupB.addComponent(giocatore);
-        seqGroupB.addGroup(seqGroup);
-        seqGroupB.addComponent(tabellaGiocatore);
-
-
-        groupLayout.setHorizontalGroup(seqGroupB);
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup()
-                .addComponent(giocatore)
-                .addGroup(seqGroup)
-                .addComponent(tabellaGiocatore)
-        );
-
-        pannelloGiocatore.setLayout(groupLayout);
-
-
-
-
-//        groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
-//                    .addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                        .addComponent(coordinateGiocatore)
-//                        .addComponent(giocatoreX)
-//                        .addComponent(giocatoreCoordinataX)
-//                        .addComponent(giocatoreY)
-//                        .addComponent(giocatoreCoordinataY)
-//                        .addComponent(bottoneFuoco)
-//                    .addComponent(tabellaGiocatore)));
-
-
-
-//        groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-//                .addGroup(groupLayout.createParallelGroup(BASELINE))
-//                .addComponent(coordinateGiocatore)
-//                .addComponent(giocatoreX)
-//                .addComponent(giocatoreCoordinataX)
-//                .addComponent(giocatoreY)
-//                .addComponent(giocatoreCoordinataY)
-//                .addComponent(bottoneFuoco)
-//                .addComponent(tabellaGiocatore)
-//
-//                        );
-
-
-
-
-
-
     }
-
 
 }
