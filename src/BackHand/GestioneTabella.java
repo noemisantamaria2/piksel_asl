@@ -1,8 +1,10 @@
 package BackHand;
 
+import javax.sound.sampled.Line;
+
 public class GestioneTabella {
 
-    public static void main (String [] args){
+    public static void main(String[] args) {
 
         GestioneTabella g = new GestioneTabella();
 
@@ -11,9 +13,9 @@ public class GestioneTabella {
     }
 
 
-    public String[][]getMatrice(){
+    public String[][] getMatrice() {
 
-        String[][]tabella = new String[10][10];
+        String[][] tabella = new String[10][10];
 
         for (int i = 0; i < 10; i++) {
 
@@ -25,215 +27,160 @@ public class GestioneTabella {
 
         }
 
-        tabella[6][5] = "X";//togliere
-        tabella[7][7] = "X";//togliere
-        tabella[5][7] = "X";//togliere
-        tabella[1][7] = "X";//togliere
-        tabella[2][3] = "X";//togliere
-        tabella[9][5] = "X";//togliere
-        tabella[1][2] = "X";//togliere
-        tabella[0][0] = "X";//togliere
-        tabella[3][4] = "X";//togliere
-        tabella[4][5] = "X";//togliere
-        tabella[4][3] = "X";//togliere
-        tabella[5][4] = "X";//togliere
+        int[] lunghezze = {5, 4, 3, 3, 2};
 
         stampa(tabella);//togliere
 
-        //todo gestire il ciclo finche non trova una posizione che gli va bene
+        for (int i = 0; i < lunghezze.length; i++) {
 
-        int riga = -1;
-        int colonna = -1;
-        int direzione = -1;
+            Nave nave = ricercaPosizionePerNave(tabella, lunghezze[i]);
 
-        //do { momentaneo
+            int riga = nave.getRiga();
+            int colonna = nave.getColonna();
+            int direzione = nave.getDirezione();
 
-            riga = (int) (Math.random() * 10);
-            colonna = (int) (Math.random() * 10);
-            direzione = (int) (Math.random() * 4);
+            posizionaNave(riga, colonna, tabella, direzione, lunghezze[i], "X");
 
+            stampa(tabella);
 
-            riga = 9;//togliere
-            colonna = 5;//togliere
-            direzione = 0;//togliere
-
-
-            boolean condizioneNavePosizionabile = controllaPosizioneNaveGenerale(new InfoCasella(riga, colonna, tabella, tabella[riga][colonna]), 5, direzione);
-
-            System.out.println("La condizione è " + condizioneNavePosizionabile + " per le coordinate " + riga + " " + colonna + " con direzione " + direzione);//togliere
-
-            /*
-            if (condizioneNavePosizionabile) {
-
-                posizionaNave(riga, colonna, 5, direzione, tabella);
-                //break;//momentaneo
-
-            }
-            */
-
-        //}while(true);//momentaneo
-
-        //stampa(tabella);//togliere
+        }
 
         return tabella;
 
     }
 
-    public boolean controllaPosizioneNaveGenerale(InfoCasella casellaSelezionata, int lunghezza, int direzione){
-
-        InfoCasella copiaCasellaSelezionata = new InfoCasella(casellaSelezionata.getRiga(), casellaSelezionata.getColonna(), casellaSelezionata.getTabella());
+    public Nave ricercaPosizionePerNave(String[][] tabella, int lunghezza) {
 
 
+        boolean condizionePrimaCasellaCorretta = true;
+        boolean navePosizionabile = false;
 
+        int riga = -1;
+        int colonna = -1;
+        int direzione = -1;
 
-        /*
-        boolean condizionePrimaCasellaPosizionabile = true;
-        boolean condizioneCasellaCodaPosizionabile = true;
+        do {
 
-        for (int i = 0; i < 4 && condizionePrimaCasellaPosizionabile; i++) {
+            navePosizionabile = false;
+            condizionePrimaCasellaCorretta = true;
 
-            for (int j = 0; j < lunghezza; j++) {
+            riga = (int) (Math.random() * 10);
+            colonna = (int) (Math.random() * 10);
 
-                if(j == 0){
+            condizionePrimaCasellaCorretta = controllaCasellaNave(riga, colonna, tabella, 0, 0, true);
 
+            System.out.println();
 
+            direzione = (int) (Math.random() * 4);
+
+            for (int i = 0; i < 4 && condizionePrimaCasellaCorretta && !navePosizionabile; i++) {
+
+                System.out.println("Direzione " + direzione);
+
+                for (int j = 1; j < lunghezza; j++) {
+
+                    navePosizionabile = controllaCasellaNave(riga, colonna, tabella, direzione, j, false);
+
+                    if (!navePosizionabile) {
+
+                        break;
+
+                    }
+
+                    System.out.println();
 
                 }
 
-            }
+                if (!navePosizionabile) {
 
-        }
-        */
-
-
-
-
-
-
-
-
-
-        /*
-        boolean condizioneNavePosizionabile = true;
-
-        for (int i = 0; (i < lunghezza) && condizioneNavePosizionabile; i++) {
-
-            String valoreCasellaCheComponeLaNave = "null";//modificare in ""
-
-            try{
-
-                if(i == 0){
-
-                    valoreCasellaCheComponeLaNave = getCasellaInRelazioneAPosizione(casellaCasualeSelezionata, direzione, 0, true).getValore();
-
-                } else {
-
-                    valoreCasellaCheComponeLaNave = getCasellaInRelazioneAPosizione(casellaCasualeSelezionata, direzione, 1, true).getValore();
+                    direzione = prossimaDirezione(direzione);
 
                 }
 
 
-            }catch(Exception e){
+                System.out.println();
+                System.out.println("condizione casella coda " + navePosizionabile);
 
-                //condizioneNavePosizionabile = false;//momentaneo
-                //break;//momentaneo
-
-            }
-
-            if(valoreCasellaCheComponeLaNave.equals("X")){
-
-                //condizioneNavePosizionabile = false;//momentaneo
-                //break;//momentaneo
+                System.out.println();
 
             }
 
-            System.out.print((i + 1) + ") " + getValoreStringaVuota(valoreCasellaCheComponeLaNave) + " : ");//togliere
-
-            if(i == 0){
-
-                //System.out.print("Si sta lavorando sulla casella iniziale + ");//togliere
-
-                //condizioneNavePosizionabile =
-                //controllaCaselleAdiacenti(casellaCasualeSelezionata, 0, true);
-
-            } else {
-
-                //System.out.print("Non si sta lavorando sulla casella iniziale");//togliere
-
-                //condizioneNavePosizionabile =
-                //controllaCaselleAdiacenti(casellaCasualeSelezionata, direzione, false);//in progress
-
-            }
-
-            //considerando la prima posizione della nave, se la condizione arrivata fino a qui è true, allora la prima casella va bene
+            System.out.println("condizione prima casella " + condizionePrimaCasellaCorretta);
 
 
+        } while (!navePosizionabile);
 
 
-            //System.out.print("La condizione della nave posizionabile è " + condizioneNavePosizionabile);//togliere
+        Nave nave = new Nave(riga, colonna, direzione, lunghezza);
 
-            System.out.println();//togliere
-
-
-        }
-
-        */
-
-        return true;//
+        return nave;
 
     }
 
-    public boolean controllaCaselleAdiacenti(InfoCasella casellaSelezionata, int direzione, boolean selezionePrimaCasella){
+    public boolean controllaCasellaNave(int riga, int colonna, String[][] tabella, int direzione, int distanzaDallaPrima, boolean condizionePrimaCasella) {
 
-        //todo creare nuovo oggetto per metodi
+        boolean condizione = true;
 
-        boolean condizioneCasellaPosizionabile = true;
-        int puntoCardinaleDaNonUtilizzare = getPuntoCardinaleOpposto(direzione);
+        InfoCasella casellaNave = null;
 
-        for (int i = 0; i < 4; i++) {
+        if (condizionePrimaCasella) {
 
-            if(selezionePrimaCasella || i != puntoCardinaleDaNonUtilizzare){
+            casellaNave = getCasellaNaveControllataInXeNull(riga, colonna, tabella, 0, 0);
 
-                String valoreCasellaAdiacente = "null";
+        } else {
 
-                try{
+            casellaNave = getCasellaNaveControllataInNull(riga, colonna, tabella, direzione, distanzaDallaPrima);
 
-                    valoreCasellaAdiacente = getCasellaInRelazioneAPosizione(casellaSelezionata, i, 1, false).getValore();
+        }
 
-                }catch(Exception e){
+        if (casellaNave == null) {
 
-                    //System.out.println(" + è stato generato errore");//togliere
+            condizione = false;
+
+        } else {
+
+            int rigaCasellaNave = casellaNave.getRiga();
+            int colonnaCasellaNave = casellaNave.getColonna();
+            String valoreCasellaNave = casellaNave.getValore();
+            int direzioneOpposta = getPuntoCardinaleOpposto(direzione);
+
+            System.out.print((distanzaDallaPrima + 1) + ") " + rigaCasellaNave + "" + colonnaCasellaNave + getValoreStringaVuota(valoreCasellaNave) + ": ");
+
+            for (int i = 0; i < 4; i++) {
+
+                if (!condizionePrimaCasella && i != direzioneOpposta || condizionePrimaCasella) {
+
+                    InfoCasella casellaAdiacente = getCasellaNaveControllataInX(rigaCasellaNave, colonnaCasellaNave, tabella, i, 1);
+
+                    if (casellaAdiacente == null) {
+
+                        condizione = false;
+                        break;
+
+                    } else {
+
+                        int rigaCasellaAdiacente = casellaAdiacente.getRiga();
+                        int colonnaCasellaAdiacente = casellaAdiacente.getColonna();
+                        String valoreCasellaAdiacente = casellaAdiacente.getValore();
+
+                        System.out.print(rigaCasellaAdiacente + "" + colonnaCasellaAdiacente + "" + getValoreStringaVuota(valoreCasellaAdiacente) + ", ");//togliere
+
+                    }
 
                 }
-
-
-                if(valoreCasellaAdiacente.equals("X")){
-
-                    //condizioneCasellaPosizionabile = false;//momentaneo
-                    //break;//momentaneo
-
-                }
-
-                System.out.print(getValoreStringaVuota(valoreCasellaAdiacente) + ", ");//togliere
 
             }
 
         }
 
-        return condizioneCasellaPosizionabile;
+        return condizione;
 
     }
 
+    public InfoCasella getCasellaAdiacente(String[][] tabella, int riga, int colonna, int direzione, int lunghezza) {
 
-    //ritorna le coordinate della casella in coda
-    public InfoCasella getCasellaInRelazioneAPosizione(InfoCasella casellaSelezionata, int direzione, int lunghezza, boolean modificaCoordinate){
 
-        String valoreCasellaSelezionata = "";
-        String[][]tabella = casellaSelezionata.getTabella();
-        int riga =          casellaSelezionata.getRiga();
-        int colonna =       casellaSelezionata.getColonna();
-
-        switch (direzione){
+        switch (direzione) {
 
             case 0:
 
@@ -256,119 +203,15 @@ public class GestioneTabella {
 
             default:
 
-                //System.out.println("Errore");//togliere
-
         }
 
-        if(modificaCoordinate){
-
-            casellaSelezionata.setRiga(riga);
-            casellaSelezionata.setColonna(colonna);
-
-        }
-
-        casellaSelezionata.setValore(tabella[riga][colonna]);
-
-        return casellaSelezionata;
+        return (new InfoCasella(riga, colonna, tabella, tabella[riga][colonna]));
 
     }
 
+    public int getPuntoCardinaleOpposto(int puntoCardinale) {
 
-    public void posizionaNave(int riga, int colonna, int lunghezza, int direzione, String[][]tabella){
-
-        for (int i = 0; i < lunghezza; i++) {
-
-            setCasellaSuccessiva(riga, colonna, direzione, i, tabella, "X");
-
-        }
-
-    }
-
-    public void setCasellaSuccessiva(int riga, int colonna, int direzione, int i, String[][]tabella, String simbolo){
-
-        switch (direzione){
-
-            case 0:
-
-                tabella[riga - i][colonna] = simbolo;
-                break;
-
-            case 1:
-
-                tabella[riga][colonna + i] = simbolo;
-                break;
-
-            case 2:
-
-                tabella[riga + i][colonna] = simbolo;
-                break;
-
-            case 3:
-
-                tabella[riga][colonna - i] = simbolo;
-                break;
-
-            default:
-
-                System.out.println("Errore");//togliere
-
-        }
-
-    }
-
-
-    public void stampa(String[][]t){ //metodo da togliere
-
-        System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
-
-        for (int i = 0; i < 10; i++) {
-
-            System.out.print(i + "|");
-
-            for (int j = 0; j < 10; j++) {
-
-                String valore = t[i][j];
-
-                if(valore.isEmpty()){
-
-                    System.out.print(" ");
-
-                } else {
-
-                    System.out.print(valore);
-
-                }
-
-
-                System.out.print("|");
-
-            }
-
-            System.out.println();
-
-        }
-
-        System.out.println();
-
-    }
-
-    public String getValoreStringaVuota(String valore){//metodo da togliere
-
-        if(valore.isEmpty()){
-
-            return "/";
-
-        } else {
-
-            return valore;
-
-        }
-
-    }
-
-    public int getPuntoCardinaleOpposto(int puntoCardinale){
-
-        switch(puntoCardinale){
+        switch (puntoCardinale) {
 
             case 0:
 
@@ -394,49 +237,215 @@ public class GestioneTabella {
 
     }
 
-}
+    public void stampa(String[][] t) { //metodo da togliere
 
-/*
-c1 = true;
-ccoda = true;
+        System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
 
-for(int i = 0; i < 4 && c1 == true; i++){
+        for (int i = 0; i < 10; i++) {
 
-    for(int j = 0; j < lunghezza && c1 == true && ccoda == true; j++ ){
+            System.out.print(i + "|");
 
-        if(j==0){
+            for (int j = 0; j < 10; j++) {
 
-            se dopo tutte le condizioni NON funziona{
+                String valore = t[i][j];
 
-                c1 = false
-                break;
+                if (valore.isEmpty()) {
+
+                    System.out.print(" ");
+
+                } else {
+
+                    System.out.print(valore);
+
+                }
+
+
+                System.out.print("|");
 
             }
 
-        } else if (j > 0 && metodo == true){
-
-            se dopo tutte le condizioni NON funziona{
-
-                ccoda = false
-
-            }
-
-        } else {
-
-            break;
+            System.out.println();
 
         }
 
-        if(ccoda == false && c1 == true && giro <= 4){
+        System.out.println();
 
-            ricomincia giro
-            giro++;
-            => i = 0 e direzione = prossima();
+    }
+
+    public String getValoreStringaVuota(String valore) {//metodo da togliere
+
+        if (valore.isEmpty()) {
+
+            return "/";
+
+        } else {
+
+            return valore;
+
+        }
+
+    }
+
+    public InfoCasella getCasellaNaveControllataInXeNull(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+
+        boolean condizione = true;
+
+        InfoCasella casella = null;
+        String valoreCasellaCoda = "null";
+
+        try {
+
+            casella = getCasellaAdiacente(tabella, riga, colonna, direzione, lunghezza);
+
+        } catch (Exception e) {
+
+            condizione = false;
+
+        }
+
+        if (condizione) {
+
+            valoreCasellaCoda = casella.getValore();
+
+            if (valoreCasellaCoda.equals("X")) {
+
+                condizione = false;
+
+            }
+
+
+        }
+
+        if (condizione) {
+
+            return casella;
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+    public InfoCasella getCasellaNaveControllataInX(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+
+        boolean condizione = true;
+        InfoCasella casella = null;
+        String valoreCasellaCoda = "null";
+
+        try {
+
+            casella = getCasellaAdiacente(tabella, riga, colonna, direzione, lunghezza);
+            valoreCasellaCoda = casella.getValore();
+
+        } catch (Exception e) {
+
+        }
+
+        if (valoreCasellaCoda.equals("X")) {
+
+            return null;
+
+        } else {
+
+            if (casella == null) {
+
+                return new InfoCasella(-1, -1, tabella, "null");
+
+            } else {
+
+                return casella;
+
+            }
+
+
+        }
+
+    }
+
+    public InfoCasella getCasellaNaveControllataInNull(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+
+        boolean condizione = true;
+
+        InfoCasella casella = null;
+
+        try {
+
+            casella = getCasellaAdiacente(tabella, riga, colonna, direzione, lunghezza);
+
+        } catch (Exception e) {
+
+            condizione = false;
+
+        }
+
+
+        if (condizione) {
+
+            return casella;
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+    public int prossimaDirezione(int direzione) {
+
+        if (direzione >= 0 && direzione <= 2) {
+
+            direzione++;
+
+        } else {
+
+            direzione = 0;
+
+        }
+
+        return direzione;
+
+    }
+
+    public void posizionaNave(int riga, int colonna, String[][] tabella, int direzione, int lunghezza, String simbolo) {
+
+        for (int i = 0; i < lunghezza; i++) {
+
+            setCasellaSuccessiva(riga, colonna, tabella, direzione, lunghezza, simbolo, i);
+
+        }
+
+    }
+
+    public void setCasellaSuccessiva(int riga, int colonna, String[][] tabella, int direzione, int lunghezza, String simbolo, int i) {
+
+        switch (direzione) {
+
+            case 0:
+
+                tabella[riga - i][colonna] = simbolo;
+                break;
+
+            case 1:
+
+                tabella[riga][colonna + i] = simbolo;
+                break;
+
+            case 2:
+
+                tabella[riga + i][colonna] = simbolo;
+                break;
+
+            case 3:
+
+                tabella[riga][colonna - i] = simbolo;
+
+            default:
 
         }
 
     }
 
 }
-
-*/
