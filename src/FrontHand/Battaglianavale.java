@@ -1,4 +1,4 @@
-package FrontHand;
+/*package FrontHand;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,4 +86,4 @@ public class Battaglianavale extends JFrame{
     }
 
 
-}
+}*/
