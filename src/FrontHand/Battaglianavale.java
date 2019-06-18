@@ -329,7 +329,7 @@ public class Battaglianavale extends JFrame {
         giocatoreCoordinataX.setVisible(false);
         giocatoreCoordinataX.setColumns(2);
 
-        giocatoreY = new JLabel("     Y   ");
+        giocatoreY = new JLabel("     Y  ");
         giocatoreY.setBounds(10,40,10,10);
         //componentiPannelloGiocatore.add(giocatoreY);
         giocatoreY.setVisible(false);
@@ -437,6 +437,9 @@ public class Battaglianavale extends JFrame {
         tabellaGiocatore.setRowHeight(70);
 
 
+        JLabel allineamtentoTab2 = (JLabel) tabellaGiocatore.getDefaultRenderer(Object.class);
+        allineamtentoTab2.setHorizontalAlignment(SwingConstants.CENTER);
+
 
         modelloTabellaComputer = new ModelloTabella();
         tabellaComputer = new JTable(modelloTabellaComputer);
@@ -451,6 +454,11 @@ public class Battaglianavale extends JFrame {
         costruisciMatriceColori(matriceColoritabellaComputer);
         tabellaComputer.setDefaultRenderer(Object.class, new CustomTableCellRenderer(matriceColoritabellaComputer));
         tabellaComputer.setRowHeight(70);
+
+
+        JLabel allineamtentoTab = (JLabel) tabellaComputer.getDefaultRenderer(Object.class);
+        allineamtentoTab.setHorizontalAlignment(SwingConstants.CENTER);
+
 
 
         GridBagConstraints gbcGiocatore = new GridBagConstraints();

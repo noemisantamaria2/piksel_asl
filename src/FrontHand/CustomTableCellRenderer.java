@@ -20,23 +20,23 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
 
         if (matriceColori[row][column].equalsIgnoreCase("GRAY")){
             cell.setBackground(Color.LIGHT_GRAY);
-            System.out.println("GRAY");
+//            System.out.println("GRAY");
         }
         else if (matriceColori[row][column].equalsIgnoreCase("WHITE")){
             cell.setBackground(Color.WHITE);
-            System.out.println("WHITE");
+//            System.out.println("WHITE");
         }
         else if (matriceColori[row][column].equalsIgnoreCase("BLACK")){
             cell.setBackground(Color.BLACK);
-            System.out.println("BLACK");
+//            System.out.println("BLACK");
         }
         else if (matriceColori[row][column].equalsIgnoreCase("RED")){
             cell.setBackground(Color.RED);
-            System.out.println("RED");
+//            System.out.println("RED");
         }
         else if (matriceColori[row][column].equalsIgnoreCase("CYAN")){
             cell.setBackground(Color.CYAN);
-            System.out.println("CYAN");
+//            System.out.println("CYAN");
         }
 
 //        contgiri++;
