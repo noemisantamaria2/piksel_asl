@@ -1,13 +1,13 @@
 package BackHand;
 
-public class InfoCasella {
+public class Casella {
 
     private int riga;
     private int colonna;
     private String[][]tabella;
     private String valore;
 
-    public InfoCasella(int riga, int colonna, String[][] tabella, String valore) {
+    public Casella(int riga, int colonna, String[][] tabella, String valore) {
 
         this.riga = riga;
         this.colonna = colonna;
@@ -16,7 +16,7 @@ public class InfoCasella {
 
     }
 
-    public InfoCasella(int riga, int colonna, String[][] tabella) {
+    public Casella(int riga, int colonna, String[][] tabella) {
 
         this.riga = riga;
         this.colonna = colonna;

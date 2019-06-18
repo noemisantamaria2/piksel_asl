@@ -15,8 +15,14 @@ public class Nave {
     }
 
     public Nave(int lunghezza) {
+        this.riga = -1;
+        this.colonna = -1;
+        this.direzione = -1;
         this.lunghezza = lunghezza;
     }
+
+
+
 
 
     public int getRiga() {
