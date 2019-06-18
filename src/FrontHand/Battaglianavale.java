@@ -164,9 +164,10 @@ public class Battaglianavale extends JFrame {
         }
     }
 
-    public String convertiContenutoInColori (String contenuto){
-        if (contenuto)
-    }
+//    public String convertiContenutoInColori (String contenuto){
+//        if (contenuto)
+//            ret
+//    }
 
     public Battaglianavale () {
         setTitle("BattleShip");
@@ -271,7 +272,7 @@ public class Battaglianavale extends JFrame {
         pannelloGiocatore.setVisible(false);
 
         pannelloComputer = new JPanel();
-        pannelloGiocatore.setLayout(new BorderLayout());
+        pannelloComputer.setLayout(new BorderLayout());
         contentPane.add(pannelloComputer,BorderLayout.EAST);
         pannelloComputer.setBackground(Color.CYAN);
         pannelloComputer.setVisible(false);
@@ -280,28 +281,28 @@ public class Battaglianavale extends JFrame {
         pannelloGiocatore.add(componentiPannelloGiocatore, BorderLayout.NORTH);
         //componentiPannelloGiocatore.setBackground(Color.blue);
         componentiPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(80,-200,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(200,-200,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         componentiPannelloGiocatore.setVisible(false);
 
         tabellaPannelloGiocatore = new JPanel();
         pannelloGiocatore.add(tabellaPannelloGiocatore, BorderLayout.CENTER);
         //tebellaPannelloGiocatore.setBackground(Color.yellow);
         tabellaPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(200,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(80,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         tabellaPannelloGiocatore.setVisible(false);
 
         componentiPannelloComputer = new JPanel(new GridBagLayout());
         pannelloComputer.add(componentiPannelloComputer, BorderLayout.NORTH);
-        componentiPannelloComputer.setBackground(Color.blue);
+        //componentiPannelloComputer.setBackground(Color.blue);
         componentiPannelloComputer.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(80,0,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(210,0,1,-190),BorderFactory.createEmptyBorder(0,0,0,0)));
         componentiPannelloComputer.setVisible(false);
 
         tabellaPannelloComputer = new JPanel();
         pannelloComputer.add(tabellaPannelloComputer, BorderLayout.CENTER);
-        tabellaPannelloComputer.setBackground(Color.yellow);
+        //tabellaPannelloComputer.setBackground(Color.yellow);
         tabellaPannelloComputer.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(200,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(80,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         tabellaPannelloComputer.setVisible(false);
 
         giocatore = new JLabel();
@@ -389,30 +390,30 @@ public class Battaglianavale extends JFrame {
         //pannelloComputer.add(computer);
         computer.setVisible(false);
 
-        coordinateComputer = new JLabel("Coordinate");
+        coordinateComputer = new JLabel("Coordinate        ");
         coordinateComputer.setVisible(false);
-        coordinateComputer.setBounds(10,80,10,10);
+        //coordinateComputer.setBounds(10,80,10,10);
         //pannelloComputer.add(coordinateComputer);
 
-        computerX = new JLabel("X");
-        computerX.setBounds(10,40,10,10);
+        computerX = new JLabel("X   ");
+        //computerX.setBounds(10,40,10,10);
         //pannelloComputer.add(computerX);
         computerX.setVisible(false);
 
         computerCoordinataX = new JTextArea();
-        computerCoordinataX.setBounds(10,40,10,10);
+        //computerCoordinataX.setBounds(10,40,10,10);
         //pannelloComputer.add(computerCoordinataX);
         computerCoordinataX.setVisible(false);
         computerCoordinataX.setColumns(2);
         computerCoordinataX.setEnabled(false);
 
-        computerY = new JLabel("Y");
-        computerY.setBounds(10,40,10,10);
+        computerY = new JLabel("     Y   ");
+        //computerY.setBounds(10,40,10,10);
         //pannelloComputer.add(computerY);
         computerY.setVisible(false);
 
         computerCoordinataY = new JTextArea();
-        computerCoordinataY.setBounds(10,40,10,10);
+        //computerCoordinataY.setBounds(10,40,10,10);
         //pannelloComputer.add(computerCoordinataY);
         computerCoordinataY.setVisible(false);
         computerCoordinataY.setColumns(2);
@@ -445,7 +446,7 @@ public class Battaglianavale extends JFrame {
 //        pannelloComputer.add(pannelloTabellaComputer);
 //        tabellaComputer.setSize(100,100);
 //        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
-        tabellaPannelloComputer.add(tabellaComputer,BorderLayout.CENTER);
+        tabellaPannelloComputer.add(tabellaComputer, CENTER);
         costruisciMatriceColori(matriceColoritabellaComputer);
         tabellaComputer.setDefaultRenderer(Object.class, new CustomTableCellRenderer(matriceColoritabellaComputer));
 
@@ -539,5 +540,4 @@ public class Battaglianavale extends JFrame {
 
 
     }
-
 }
