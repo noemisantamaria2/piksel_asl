@@ -164,6 +164,10 @@ public class Battaglianavale extends JFrame {
         }
     }
 
+    public String convertiContenutoInColori (String contenuto){
+        if (contenuto)
+    }
+
     public Battaglianavale () {
         setTitle("BattleShip");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -250,6 +254,9 @@ public class Battaglianavale extends JFrame {
                 pannelloGiocatore.setVisible(false);
                 pannelloComputer.setVisible(false);
                 tabellaPannelloGiocatore.setVisible(false);
+
+//                ToDo controlla x in tabellaGiocatore
+
                 componentiPannelloGiocatore.setVisible(false);
                 componentiPannelloComputer.setVisible(false);
                 tabellaPannelloComputer.setVisible(false);
@@ -356,6 +363,9 @@ public class Battaglianavale extends JFrame {
 //                contenuto = GestioneComputer.attaccoDalGiocatore(Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
 //                modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
 
+//                inserisciColoreInMatrice(matriceColoriTabellaGiocatore,convertiContenutoInColori(contenuto),Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
+
+
                 //ToDO appena implementato il package BackEnd
 //                logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
 
@@ -364,6 +374,9 @@ public class Battaglianavale extends JFrame {
 //                computerCoordinataX.setText(GestioneComputer.getCoordinataX());
 //                computerCoordinataY.setText(GestioneComputer.convertitoreYComputer);
 //                modelloTabellaGiocatore.addXeO(contenuto,GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+
+//                inserisciColoreInMatrice(matriceColoritabellaComputer,convertiContenutoInColori(contenuto),GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+
 
                 //ToDO appena implementato il package BackEnd
 //               logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore());
