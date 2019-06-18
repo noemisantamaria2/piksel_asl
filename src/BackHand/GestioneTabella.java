@@ -1,17 +1,83 @@
 package BackHand;
 
+import javafx.stage.StageStyle;
+
 public class GestioneTabella {
 
-    public static void main(String[] args) {
+    protected String [][]MatriceNavi;      //Matrice contenente navi
+    protected String [][]MatriceGestione;      //Matrice che gestisce gli attacchi
 
-        GestioneTabella g = new GestioneTabella();
 
-        g.getMatrice();
+
+    public GestioneTabella(){
+
+        MatriceNavi = inzializzaMatrice();
+        MatriceGestione = getMatriceVuota();
+
+    }
+
+    public String attacco(int x,int Y) { //ok riceve le coordinate e controlla le due matrici
+        String Hit="X";
+        String NoHit="O";
+        String Wrong="XO";
+        String SegnoVuoto=" ";
+        String SegnoX="X";
+        // String SegnoO="O";
+        if(MatriceNavi[x][Y].equals(SegnoX)){
+            if(MatriceGestione[x][Y].equals(SegnoVuoto)){
+                MatriceGestione[x][Y]="X";
+                return Hit;
+            }else return Wrong;
+        }else if(MatriceGestione[x][Y].equals(SegnoVuoto)){
+            MatriceGestione[x][Y]="O";
+            return NoHit;
+        }else return Wrong;
+    }
+
+    public boolean controllaVittoria(){                //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
+        String SimboloX="X";
+        int Tot=0;
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                if(MatriceGestione[i][j].equals(SimboloX)){
+                    Tot++;
+                }
+            }
+        }
+        if(Tot==17) {
+            return true;
+        }
+        else return false;
+    }
+
+    public static void main(String[] args) {//togliere
+
+
+        GestioneUtente g = new GestioneUtente();
+
+        System.out.println(g.controlloCoordinate(1, "E"));
+
+
+
 
     }
 
 
-    public String[][] getMatrice() {
+    public String[][]getMatrice(){
+
+        return MatriceNavi;
+
+    }
+
+
+    public String[][]getMatriceGestione(){
+
+        return MatriceGestione;
+
+    }
+
+
+    public String[][]getMatriceVuota(){
 
         String[][] tabella = new String[10][10];
 
@@ -19,13 +85,26 @@ public class GestioneTabella {
 
             for (int j = 0; j < 10; j++) {
 
-                tabella[i][j] = "";
+                tabella[i][j] = " ";
 
             }
 
         }
 
+        return tabella;
+
+    }
+
+
+
+
+
+    public String[][] inzializzaMatrice() {
+
+        String[][] tabella = getMatriceVuota();
+
         int[] lunghezze = {5, 4, 3, 3, 2};
+
 
         for (int i = 0; i < lunghezze.length; i++) {
 
@@ -36,8 +115,6 @@ public class GestioneTabella {
             int direzione = nave.getDirezione();
 
             posizionaNave(riga, colonna, tabella, direzione, lunghezze[i]);
-
-            stampa(tabella);
 
         }
 
@@ -240,7 +317,6 @@ public class GestioneTabella {
 
         }
 
-        System.out.println();
 
     }
 

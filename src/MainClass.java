@@ -1,4 +1,4 @@
-import BackHand.GestioneComputer;
+/*import BackHand.GestioneComputer;
 import BackHand.GestioneUtente;
 import BackHand.GestioneUtente.*;
 import java.util.*;
@@ -7,7 +7,7 @@ public class MainClass {
 
     public static void main (String[]args){
         //toDo dobbiamo aprire la finestra
-        /*Scanner s=new Scanner(System.in);
+        Scanner s=new Scanner(System.in);
         int columns = 2;
         int x,y;
         String o;
@@ -57,11 +57,11 @@ public class MainClass {
         System.out.println(" "+att);
         System.out.println("-------------------------");
         boolean z= g.controllaVittoriaComputer();
-        System.out.println(" " +z);*/
+        System.out.println(" " +z);
 
 
         GestioneComputer lo=new GestioneComputer();
-/*
+
         lo.riempimentoMatriceNonVis();
         int []f= new int[2];
         for(int k=0; k<25; k++) {
@@ -70,7 +70,9 @@ public class MainClass {
             System.out.println(lo.getCoordinataY());
             System.out.println("----------------"+k);
             lo.stopProcesso();
-        }*/
+        }
     }
 
 }
+*/
+
