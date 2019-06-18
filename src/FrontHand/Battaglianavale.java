@@ -45,6 +45,8 @@ public class Battaglianavale extends JFrame {
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
     private JTextArea computerCoordinataX, computerCoordinataY;
+    private String [][] matriceColoriTabellaGiocatore = new String [11][11];
+    private String [][] matriceColoritabellaComputer = new String [11][11];
 
     private JFrame questaFinestra = this;
     //private GroupLayout groupLayout;
@@ -70,6 +72,96 @@ public class Battaglianavale extends JFrame {
             JOptionPane.showMessageDialog(questaFinestra,"Hai Perso!");
         }
 
+    }
+
+    public void printMatriceColoriGiocatore(){
+        for (int i=0;i<matriceColoriTabellaGiocatore.length;i++){
+            for (int j=0;j<matriceColoriTabellaGiocatore[0].length;j++){
+                System.out.print(matriceColoriTabellaGiocatore[i][j] + " | ");
+            }
+            System.out.println();
+        }
+
+    }
+
+
+    public void printMatriceColoriComputer(){
+        for (int i=0;i<matriceColoritabellaComputer.length;i++){
+            for (int j=0;j<matriceColoritabellaComputer[0].length;j++){
+                System.out.print(matriceColoritabellaComputer[i][j] + " | ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public void printMatriceColori(String [][] matriceColori){
+        for (int i=0;i<matriceColori.length;i++){
+            for (int j=0;j<matriceColori[0].length;j++){
+                System.out.print(matriceColori[i][j] + " | ");
+            }
+            System.out.println();
+        }
+
+    }
+
+
+    public void costruisciMatriceColori(String [][] matriceColori){
+        for (int i=0;i<matriceColori.length;i++){
+            for (int j=0;j<matriceColori[0].length;j++){
+                if (i==0 || j==0){
+                    matriceColori[i][j] = "GRAY";
+                }
+                else{
+                    matriceColori[i][j] = "WHITE";
+                }
+            }
+        }
+    }
+
+    public void costruisciMatriceColoriGiocatore(){
+        for (int i=0;i<matriceColoriTabellaGiocatore.length;i++){
+            for (int j=0;j<matriceColoriTabellaGiocatore[0].length;j++){
+                if (i==0 || j==0){
+                    matriceColoriTabellaGiocatore[i][j] = "GRAY";
+                }
+                else{
+                    matriceColoriTabellaGiocatore[i][j] = "WHITE";
+                }
+            }
+        }
+    }
+
+    public void costruisciMatriceColoriComputer(){
+        for (int i=0;i<matriceColoritabellaComputer.length;i++){
+            for (int j=0;j<matriceColoritabellaComputer[0].length;j++){
+                if (i==0 || j==0){
+                    matriceColoritabellaComputer[i][j] = "GRAY";
+                }
+                else{
+                    matriceColoritabellaComputer[i][j] = "WHITE";
+                }
+            }
+        }
+    }
+
+    public boolean inserisciColoreInMatrice (String [][] matriceColori, String colore, int riga, int colonna) {
+        if (!colore.equalsIgnoreCase("RED")){
+            if (matriceColori[riga][colonna].equalsIgnoreCase("WHITE")) {
+                matriceColori[riga][colonna] = colore;
+                return true;
+            }else {
+                return false;
+            }
+        }
+        else {
+            if (matriceColori[riga][colonna].equalsIgnoreCase("BLACK")) {
+                matriceColori[riga][colonna] = colore;
+                return true;
+            }else {
+                return false;
+            }
+        }
     }
 
     public Battaglianavale () {
@@ -325,6 +417,9 @@ public class Battaglianavale extends JFrame {
 //        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
         tabellaPannelloGiocatore.add(tabellaGiocatore, CENTER);
         //tebellaPannelloGiocatore.setSize(500,500);
+        costruisciMatriceColori(matriceColoriTabellaGiocatore);
+        tabellaGiocatore.setDefaultRenderer(Object.class, new CustomTableCellRenderer(matriceColoriTabellaGiocatore));
+
 
 
 
@@ -338,6 +433,8 @@ public class Battaglianavale extends JFrame {
 //        tabellaComputer.setSize(100,100);
 //        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
         tabellaPannelloComputer.add(tabellaComputer,BorderLayout.CENTER);
+        costruisciMatriceColori(matriceColoritabellaComputer);
+        tabellaComputer.setDefaultRenderer(Object.class, new CustomTableCellRenderer(matriceColoritabellaComputer));
 
 
 
