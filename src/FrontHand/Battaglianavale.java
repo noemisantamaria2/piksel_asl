@@ -3,6 +3,7 @@ import BackHand.GestioneUtente;
 import BackHand.GestioneComputer;
 import sun.misc.JarIndex;
 import javax.swing.GroupLayout;
+
 import static javax.swing.GroupLayout.Alignment.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -281,28 +282,28 @@ public class Battaglianavale extends JFrame {
         pannelloGiocatore.add(componentiPannelloGiocatore, BorderLayout.NORTH);
         //componentiPannelloGiocatore.setBackground(Color.blue);
         componentiPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(200,-200,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(80,-200,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         componentiPannelloGiocatore.setVisible(false);
 
         tabellaPannelloGiocatore = new JPanel();
         pannelloGiocatore.add(tabellaPannelloGiocatore, BorderLayout.CENTER);
         //tebellaPannelloGiocatore.setBackground(Color.yellow);
         tabellaPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(80,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(40,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         tabellaPannelloGiocatore.setVisible(false);
 
         componentiPannelloComputer = new JPanel(new GridBagLayout());
         pannelloComputer.add(componentiPannelloComputer, BorderLayout.NORTH);
         //componentiPannelloComputer.setBackground(Color.blue);
         componentiPannelloComputer.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(210,0,1,-190),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(90,0,1,-190),BorderFactory.createEmptyBorder(0,0,0,0)));
         componentiPannelloComputer.setVisible(false);
 
         tabellaPannelloComputer = new JPanel();
         pannelloComputer.add(tabellaPannelloComputer, BorderLayout.CENTER);
         //tabellaPannelloComputer.setBackground(Color.yellow);
         tabellaPannelloComputer.setBorder(BorderFactory.createCompoundBorder
-                (BorderFactory.createEmptyBorder(80,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+                (BorderFactory.createEmptyBorder(40,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         tabellaPannelloComputer.setVisible(false);
 
         giocatore = new JLabel();
@@ -433,7 +434,7 @@ public class Battaglianavale extends JFrame {
         //tebellaPannelloGiocatore.setSize(500,500);
         costruisciMatriceColori(matriceColoriTabellaGiocatore);
         tabellaGiocatore.setDefaultRenderer(Object.class, new CustomTableCellRenderer(matriceColoriTabellaGiocatore));
-
+        tabellaGiocatore.setRowHeight(70);
 
 
 
@@ -449,7 +450,7 @@ public class Battaglianavale extends JFrame {
         tabellaPannelloComputer.add(tabellaComputer, CENTER);
         costruisciMatriceColori(matriceColoritabellaComputer);
         tabellaComputer.setDefaultRenderer(Object.class, new CustomTableCellRenderer(matriceColoritabellaComputer));
-
+        tabellaComputer.setRowHeight(70);
 
 
         GridBagConstraints gbcGiocatore = new GridBagConstraints();

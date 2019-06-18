@@ -1,4 +1,5 @@
 package FrontHand;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -73,6 +74,7 @@ public class ModelloTabella extends AbstractTableModel {
         this.matrice[righa][colonna]=contenuto;
         fireTableCellUpdated(righa, colonna);
     }
+
 
     public String getValueAt(int righa, int colonna) {
         return matrice[righa][colonna];
