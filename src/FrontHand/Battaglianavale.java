@@ -29,12 +29,11 @@ public class Battaglianavale extends JFrame {
             }
         });
     }
-
     private String nomeUtente;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem Nuovapartita, esci;
-    private JPanel contentPane, pannelloComputer, pannelloGiocatore, componentiPannelloGiocatore, tebellaPannelloGiocatore;
+    private JPanel contentPane, pannelloComputer, pannelloGiocatore, componentiPannelloGiocatore, tabellaPannelloGiocatore, componentiPannelloComputer, tabellaPannelloComputer;
     private JTable tabellaComputer, tabellaGiocatore;
     private ModelloTabella modelloTabellaGiocatore,modelloTabellaComputer;
     private JLabel giocatoreX, giocatoreY;
@@ -97,7 +96,7 @@ public class Battaglianavale extends JFrame {
                 System.out.println(nomeUtente);
 
                 pannelloGiocatore.setVisible(true);
-                tebellaPannelloGiocatore.setVisible(true);
+                tabellaPannelloGiocatore.setVisible(true);
                 pannelloComputer.setVisible(true);
                 coordinateComputer.setVisible(true);
                 giocatore.setText(nomeUtente);
@@ -117,6 +116,8 @@ public class Battaglianavale extends JFrame {
                 computerY.setVisible(true);
                 computerCoordinataY.setVisible(true);
                 componentiPannelloGiocatore.setVisible(true);
+                componentiPannelloComputer.setVisible(true);
+                tabellaPannelloComputer.setVisible(true);
                 computerCoordinataY.setText("");
 //              System.out.println("si funziona!");
                 tabellaGiocatore.setVisible(true);
@@ -155,8 +156,11 @@ public class Battaglianavale extends JFrame {
                 computerY.setVisible(false);
                 computerCoordinataY.setVisible(false);
                 pannelloGiocatore.setVisible(false);
-                tebellaPannelloGiocatore.setVisible(false);
+                pannelloComputer.setVisible(false);
+                tabellaPannelloGiocatore.setVisible(false);
                 componentiPannelloGiocatore.setVisible(false);
+                componentiPannelloComputer.setVisible(false);
+                tabellaPannelloComputer.setVisible(false);
             }
         });
         menu.add(esci);
@@ -164,25 +168,42 @@ public class Battaglianavale extends JFrame {
         pannelloGiocatore = new JPanel();
         pannelloGiocatore.setLayout(new BorderLayout());
         contentPane.add(pannelloGiocatore,BorderLayout.WEST);
-        pannelloGiocatore.setBackground(Color.green);
+        //pannelloGiocatore.setBackground(Color.green);
         pannelloGiocatore.setVisible(false);
 
+        pannelloComputer = new JPanel();
+        pannelloGiocatore.setLayout(new BorderLayout());
+        contentPane.add(pannelloComputer,BorderLayout.EAST);
+        pannelloComputer.setBackground(Color.CYAN);
+        pannelloComputer.setVisible(false);
 
         componentiPannelloGiocatore = new JPanel(new GridBagLayout());
-        componentiPannelloGiocatore.setSize(500,500);
         pannelloGiocatore.add(componentiPannelloGiocatore, BorderLayout.NORTH);
-        pannelloGiocatore.setBackground(Color.blue);
+        //componentiPannelloGiocatore.setBackground(Color.blue);
         componentiPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
                 (BorderFactory.createEmptyBorder(80,-200,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         componentiPannelloGiocatore.setVisible(false);
 
-        tebellaPannelloGiocatore = new JPanel();
-        tebellaPannelloGiocatore.setSize(500,500);
-        pannelloGiocatore.add(tebellaPannelloGiocatore, BorderLayout.CENTER);
-        tebellaPannelloGiocatore.setBackground(Color.yellow);
-        tebellaPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
+        tabellaPannelloGiocatore = new JPanel();
+        pannelloGiocatore.add(tabellaPannelloGiocatore, BorderLayout.CENTER);
+        //tebellaPannelloGiocatore.setBackground(Color.yellow);
+        tabellaPannelloGiocatore.setBorder(BorderFactory.createCompoundBorder
                 (BorderFactory.createEmptyBorder(200,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
-        tebellaPannelloGiocatore.setVisible(false);
+        tabellaPannelloGiocatore.setVisible(false);
+
+        componentiPannelloComputer = new JPanel(new GridBagLayout());
+        pannelloComputer.add(componentiPannelloComputer, BorderLayout.NORTH);
+        componentiPannelloComputer.setBackground(Color.blue);
+        componentiPannelloComputer.setBorder(BorderFactory.createCompoundBorder
+                (BorderFactory.createEmptyBorder(80,0,1,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+        componentiPannelloComputer.setVisible(false);
+
+        tabellaPannelloComputer = new JPanel();
+        pannelloComputer.add(tabellaPannelloComputer, BorderLayout.CENTER);
+        tabellaPannelloComputer.setBackground(Color.yellow);
+        tabellaPannelloComputer.setBorder(BorderFactory.createCompoundBorder
+                (BorderFactory.createEmptyBorder(200,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+        tabellaPannelloComputer.setVisible(false);
 
         giocatore = new JLabel();
         giocatore.setEnabled(false);
@@ -191,12 +212,12 @@ public class Battaglianavale extends JFrame {
         giocatore.setBounds(20,20, 50,20);
         //componentiPannelloGiocatore.add(giocatore, BorderLayout.NORTH);
 
-        coordinateGiocatore = new JLabel("Coordinate");
+        coordinateGiocatore = new JLabel("Coordinate        ");
         coordinateGiocatore.setVisible(false);
         coordinateGiocatore.setBounds(10,80,10,10);
         //componentiPannelloGiocatore.add(coordinateGiocatore);
 
-        giocatoreX = new JLabel("X");
+        giocatoreX = new JLabel("X  ");
         giocatoreX.setBounds(10,40,10,10);
         //componentiPannelloGiocatore.add(giocatoreX);
         giocatoreX.setVisible(false);
@@ -207,7 +228,7 @@ public class Battaglianavale extends JFrame {
         giocatoreCoordinataX.setVisible(false);
         giocatoreCoordinataX.setColumns(2);
 
-        giocatoreY = new JLabel("Y");
+        giocatoreY = new JLabel("     Y   ");
         giocatoreY.setBounds(10,40,10,10);
         //componentiPannelloGiocatore.add(giocatoreY);
         giocatoreY.setVisible(false);
@@ -257,40 +278,37 @@ public class Battaglianavale extends JFrame {
             }
         });
 
-        pannelloComputer = new JPanel();
-        contentPane.add(pannelloComputer,BorderLayout.EAST);
-        pannelloComputer.setBackground(Color.CYAN);
-        pannelloComputer.setVisible(false);
+
 
         computer = new JLabel("Computer");
-        pannelloComputer.add(computer);
+        //pannelloComputer.add(computer);
         computer.setVisible(false);
 
         coordinateComputer = new JLabel("Coordinate");
         coordinateComputer.setVisible(false);
         coordinateComputer.setBounds(10,80,10,10);
-        pannelloComputer.add(coordinateComputer);
+        //pannelloComputer.add(coordinateComputer);
 
         computerX = new JLabel("X");
         computerX.setBounds(10,40,10,10);
-        pannelloComputer.add(computerX);
+        //pannelloComputer.add(computerX);
         computerX.setVisible(false);
 
         computerCoordinataX = new JTextArea();
         computerCoordinataX.setBounds(10,40,10,10);
-        pannelloComputer.add(computerCoordinataX);
+        //pannelloComputer.add(computerCoordinataX);
         computerCoordinataX.setVisible(false);
         computerCoordinataX.setColumns(2);
         computerCoordinataX.setEnabled(false);
 
         computerY = new JLabel("Y");
         computerY.setBounds(10,40,10,10);
-        pannelloComputer.add(computerY);
+        //pannelloComputer.add(computerY);
         computerY.setVisible(false);
 
         computerCoordinataY = new JTextArea();
         computerCoordinataY.setBounds(10,40,10,10);
-        pannelloComputer.add(computerCoordinataY);
+        //pannelloComputer.add(computerCoordinataY);
         computerCoordinataY.setVisible(false);
         computerCoordinataY.setColumns(2);
         computerCoordinataY.setEnabled(false);
@@ -305,7 +323,8 @@ public class Battaglianavale extends JFrame {
 //        tabellaGiocatore.setSize(100,100);
 //        JScrollPane pannelloTabellaGiocatore = new JScrollPane(this.tabellaComputer);
 //        pannelloGiocatore.add(new JScrollPane(this.tabellaGiocatore));
-        tebellaPannelloGiocatore.add(tabellaGiocatore, CENTER);
+        tabellaPannelloGiocatore.add(tabellaGiocatore, CENTER);
+        //tebellaPannelloGiocatore.setSize(500,500);
 
 
 
@@ -318,60 +337,95 @@ public class Battaglianavale extends JFrame {
 //        pannelloComputer.add(pannelloTabellaComputer);
 //        tabellaComputer.setSize(100,100);
 //        pannelloComputer.add(new JScrollPane(this.tabellaComputer));
-        pannelloComputer.add(tabellaComputer,BorderLayout.CENTER);
+        tabellaPannelloComputer.add(tabellaComputer,BorderLayout.CENTER);
 
 
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbcGiocatore = new GridBagConstraints();
+        GridBagConstraints gbcComputer = new GridBagConstraints();
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbcGiocatore.gridx = 0;
+        gbcGiocatore.gridy = 0;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatore, gbc);
+        componentiPannelloGiocatore.add(giocatore, gbcGiocatore);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridheight = 10;
-        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatore, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        //gbc.gridwidth = 5;
-        //gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(coordinateGiocatore, gbc);
+        gbcGiocatore.gridx = 0;
+        gbcGiocatore.gridy = 2;
+        //gbcGiocatore.gridwidth = 5;
+        //gbcGiocatore.fill = GridBagConstraints.BOTH;
+        componentiPannelloGiocatore.add(coordinateGiocatore, gbcGiocatore);
 
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbcGiocatore.gridx = 1;
+        gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreX, gbc);
+        componentiPannelloGiocatore.add(giocatoreX, gbcGiocatore);
 
-        gbc.gridx = 2;
-        gbc.gridy = 2;
+        gbcGiocatore.gridx = 2;
+        gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreCoordinataX, gbc);
+        componentiPannelloGiocatore.add(giocatoreCoordinataX, gbcGiocatore);
 
-        gbc.gridx = 3;
-        gbc.gridy = 2;
+        gbcGiocatore.gridx = 3;
+        gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreY, gbc);
+        componentiPannelloGiocatore.add(giocatoreY, gbcGiocatore);
 
-        gbc.gridx = 4;
-        gbc.gridy = 2;
+        gbcGiocatore.gridx = 4;
+        gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreCoordinataY, gbc);
+        componentiPannelloGiocatore.add(giocatoreCoordinataY, gbcGiocatore);
 
-        gbc.gridx = 5;
-        gbc.gridy = 2;
+        gbcGiocatore.gridx = 5;
+        gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(bottoneFuoco, gbc);
+        componentiPannelloGiocatore.add(bottoneFuoco, gbcGiocatore);
 
+
+        ///////////////////////////////////////////////////////////////
+
+
+        gbcComputer.gridx = 0;
+        gbcComputer.gridy = 0;
+//        gbc.gridwidth = 5;
+//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloComputer.add(computer, gbcComputer);
+
+        gbcComputer.gridx = 0;
+        gbcComputer.gridy = 2;
+//        gbc.gridwidth = 5;
+//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloComputer.add(coordinateComputer, gbcComputer);
+
+        gbcComputer.gridx = 1;
+        gbcComputer.gridy = 2;
+//        gbc.gridwidth = 5;
+//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloComputer.add(computerX, gbcComputer);
+
+        gbcComputer.gridx = 2;
+        gbcComputer.gridy = 2;
+//        gbc.gridwidth = 5;
+//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloComputer.add(computerCoordinataX, gbcComputer);
+
+        gbcComputer.gridx = 3;
+        gbcComputer.gridy = 2;
+//        gbc.gridwidth = 5;
+//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloComputer.add(computerY, gbcComputer);
+
+        gbcComputer.gridx = 4;
+        gbcComputer.gridy = 2;
+//        gbc.gridwidth = 5;
+//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloComputer.add(computerCoordinataY, gbcComputer);
 
 
     }
