@@ -62,6 +62,7 @@ public class ModelloTabella extends AbstractTableModel {
     }
 
     public boolean addXeO(String contenuto, int righa, int colonna) {
+        //ToDo inserire nuove lettere
         if((contenuto.equalsIgnoreCase("X"))||(contenuto.equalsIgnoreCase("O"))){
             this.setValueAt(contenuto,righa,colonna);
             return true;

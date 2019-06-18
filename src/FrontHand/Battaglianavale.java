@@ -365,7 +365,6 @@ public class Battaglianavale extends JFrame {
 //                contenuto = GestioneComputer.attaccoDalGiocatore(Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
 //                modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
 
-//                inserisciColoreInMatrice(matriceColoriTabellaGiocatore,convertiContenutoInColori(contenuto),Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
 
 
                 //ToDO appena implementato il package BackEnd
@@ -377,7 +376,6 @@ public class Battaglianavale extends JFrame {
 //                computerCoordinataY.setText(GestioneComputer.convertitoreYComputer);
 //                modelloTabellaGiocatore.addXeO(contenuto,GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
 
-//                inserisciColoreInMatrice(matriceColoritabellaComputer,convertiContenutoInColori(contenuto),GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
 
 
                 //ToDO appena implementato il package BackEnd
@@ -391,7 +389,7 @@ public class Battaglianavale extends JFrame {
         //pannelloComputer.add(computer);
         computer.setVisible(false);
 
-        coordinateComputer = new JLabel("Coordinate        ");
+        coordinateComputer = new JLabel("Coordinate");
         coordinateComputer.setVisible(false);
         //coordinateComputer.setBounds(10,80,10,10);
         //pannelloComputer.add(coordinateComputer);

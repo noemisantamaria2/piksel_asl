@@ -43,7 +43,6 @@ public class ProvaTabella extends JFrame{
 //        tabella.setBorder(new EmptyBorder(250,500,250,500));
 
 
-
         this.costruisciMatriceColori();
         if(!this.inserisciColoreInMatrice("RED",1,1)){
             JOptionPane.showMessageDialog(finestra,JOptionPane.WARNING_MESSAGE);
@@ -130,9 +129,12 @@ public class ProvaTabella extends JFrame{
 //                tabella = new JTable(modello);
                 personalizzato = new CustomTableCellRenderer(matriceColori);
                 prov.printMatriceColori();
+//                tabella.setDefaultRenderer(tabella.getClass(),new CustomTableCellRenderer(matriceColori));
                 tabella.setDefaultRenderer(Object.class, personalizzato);
                 System.out.println("#############");
                 prov.printMatriceColori();
+                tabella.repaint();
+//                contentPane.;
 
 
 
@@ -320,23 +322,23 @@ public class ProvaTabella extends JFrame{
 
         if (matriceColori[row][column].equalsIgnoreCase("GRAY")){
             cell.setBackground(Color.LIGHT_GRAY);
-//            System.out.println("GRAY");
+//            System.out.println("GRAY"+" | "+ matriceColori[row][column]);
         }
         else if (matriceColori[row][column].equalsIgnoreCase("WHITE")){
             cell.setBackground(Color.WHITE);
-//            System.out.println("WHITE");
+//            System.out.println("WHITE"+" | "+ matriceColori[row][column]);
         }
         else if (matriceColori[row][column].equalsIgnoreCase("BLACK")){
             cell.setBackground(Color.BLACK);
-//            System.out.println("BLACK");
+//            System.out.println("BLACK"+" | "+ matriceColori[row][column]);
         }
         else if (matriceColori[row][column].equalsIgnoreCase("RED")){
             cell.setBackground(Color.RED);
-//            System.out.println("RED");
+//            System.out.println("RED"+" | "+ matriceColori[row][column]);
         }
         else if (matriceColori[row][column].equalsIgnoreCase("CYAN")){
             cell.setBackground(Color.CYAN);
-//            System.out.println("CYAN");
+//            System.out.println("CYAN"+" | "+ matriceColori[row][column]);
         }
 
 //        contgiri++;
