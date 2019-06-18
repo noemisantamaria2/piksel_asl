@@ -18,7 +18,7 @@ import java.util.*;
         String YChar=ListY.substring(CoordinataY,CoordinataY+1);
         return YChar;
     }
-    public int[] mioAttacco(){
+    public void mioAttacco(){
 
         String X="X";
         String Vuoto=" ";
@@ -42,10 +42,7 @@ import java.util.*;
             }
         }while(MatriceDiAttacco[x][y]!="X");
 
-        int[] xy= new int[2];
-        xy[0]=x;
-        xy[1]=y;
-        return xy;
+        
         }
 
     public void setCoordinataX(){
