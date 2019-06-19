@@ -7,12 +7,6 @@ public class GestioneTabella {
     protected String [][]MatriceNavi;      //Matrice contenente navi
     protected String [][]MatriceGestione;      //Matrice che gestisce gli attacchi
 
-    public static void main(String[] args) {
-
-        GestioneTabella g = new GestioneTabella();
-
-
-    }
 
     public GestioneTabella(){
         /*

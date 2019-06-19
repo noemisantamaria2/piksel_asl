@@ -9,6 +9,7 @@ import java.util.*;
 
     public GestioneComputer(){
 
+        super();
         MatriceDiAttacco = getMatriceVuota(11);
 
     }
@@ -20,6 +21,12 @@ import java.util.*;
     }
 */
 
+    public static void main(String[] args) {
+
+        GestioneComputer g = new GestioneComputer();
+        
+
+    }
 
 
     public void mioAttacco(){
@@ -58,6 +65,9 @@ import java.util.*;
 
         /*
         do {
+
+
+
 
             x=this.getCoordinataX();
             y=this.getCoordinataY();

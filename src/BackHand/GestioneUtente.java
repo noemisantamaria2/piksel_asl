@@ -89,17 +89,9 @@ public class GestioneUtente extends GestioneTabella{
         if(matriceVuota){
 
 
-            //int x = this.getCoordinataX();
-
-
-
-
-
-
-
             int x = -1;
             int y = -1;
-            /*
+
             do {
 
                 setCoordinataX();
@@ -117,15 +109,17 @@ public class GestioneUtente extends GestioneTabella{
                         MatriceGestione[x][y]="O";
                     }else{
 
+                        setCoordinataY();
+                        setCoordinataX();
 
 
                     }
                 }
 
-            }while(MatriceDiAttacco[x][y]!="X");
+            }while(MatriceGestione[x][y]!="X");
 
-             */
 
+            System.out.println(x + " " + y);
 
 
 
