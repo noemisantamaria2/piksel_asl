@@ -5,7 +5,9 @@ public class GestioneUtente extends GestioneTabella{
      private String ListY="LIHGFEDCBA";
      private String listY="lihgfedcba";
 
-     public GestioneUtente(){  }
+     public GestioneUtente(){
+         super();
+     }
 
             public boolean controlloX(int X){          //ok Controllo coordinata x
                 if(X<10&&X>-1){

@@ -1,4 +1,5 @@
 package FrontHand;
+import BackHand.GestioneTabella;
 import BackHand.GestioneUtente;
 import BackHand.GestioneComputer;
 import sun.misc.JarIndex;
@@ -12,8 +13,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-//import BackEnd.GestioneUtente;
-//import BackEnd.GestioneComputer;
+
 
 public class Battaglianavale extends JFrame {
 
@@ -48,6 +48,8 @@ public class Battaglianavale extends JFrame {
     private JTextArea computerCoordinataX, computerCoordinataY;
     private String [][] matriceColoriTabellaGiocatore = new String [11][11];
     private String [][] matriceColoritabellaComputer = new String [11][11];
+
+//    private GestioneTabella gestioneTabella = new GestioneTabella();
 
     private JFrame questaFinestra = this;
     //private GroupLayout groupLayout;
@@ -220,8 +222,9 @@ public class Battaglianavale extends JFrame {
 //              System.out.println("si funziona!");
                 tabellaGiocatore.setVisible(true);
                 modelloTabellaGiocatore.nuovatabella();
-//                modelloTabellaGiocatore.addNaviGiocatore();
-//                GestioneUtente.riempimentoMatriceNonVis();
+
+                modelloTabellaGiocatore.addNaviGiocatore(new GestioneUtente().getMatrice());
+
                 tabellaComputer.setVisible(true);
                 modelloTabellaComputer.nuovatabella();
 //                GestioneComputer.riempimentoMatriceNonVis();

@@ -10,7 +10,6 @@ public class GestioneTabella {
 
 
     public GestioneTabella(){
-
         MatriceNavi = inzializzaMatrice();
         MatriceGestione = getMatriceVuota();
 
