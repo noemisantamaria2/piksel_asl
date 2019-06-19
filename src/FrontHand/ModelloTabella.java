@@ -1,6 +1,6 @@
 package FrontHand;
 import javax.swing.table.DefaultTableCellRenderer;
-
+//import BackHand.Nave;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
@@ -47,7 +47,7 @@ public class ModelloTabella extends AbstractTableModel {
         for (int i=1;i<matrice.length;i++){
             for (int j=1;j<matrice[0].length;j++){
                 if(matrice[i][j].equalsIgnoreCase("X")){
-                    this.setValueAt(matrice[i][j],i,j);
+                    this.setValueAt("N",i,j);
                 }
             }
         }
@@ -70,6 +70,11 @@ public class ModelloTabella extends AbstractTableModel {
             return false;
         }
     }
+
+//    public void affondata (){
+//        Nave nave = new Nave();
+//        nave.get
+//    }
 
     public void setValueAt(String contenuto, int righa, int colonna){
         this.matrice[righa][colonna]=contenuto;
