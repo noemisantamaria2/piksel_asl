@@ -12,7 +12,7 @@ public class ModelloTabella extends AbstractTableModel {
 
     public ModelloTabella(){
         headersColumn= new String[]{"","1","2","3","4","5","6","7","8","9","10"};
-        headersRow= new String[]{"","L","I","H","G","F","E","D","C","B","A"};
+        headersRow= new String[]{"","A","B","C","D","E","F","G","H","I","L"};
         this.getColumnName();
         this.getRowName();
     }
@@ -62,9 +62,13 @@ public class ModelloTabella extends AbstractTableModel {
     }
 
     public boolean addXeO(String contenuto, int righa, int colonna) {
-        //ToDo inserire nuove lettere
         if((contenuto.equalsIgnoreCase("X"))||(contenuto.equalsIgnoreCase("O"))){
-            this.setValueAt(contenuto,righa,colonna);
+            if (matrice[righa][colonna].equalsIgnoreCase("N") && contenuto.equalsIgnoreCase("X")){
+                this.setValueAt(contenuto,righa,colonna);
+            }
+            else{
+                this.setValueAt(contenuto,righa,colonna);
+            }
             return true;
         }else{
             return false;
@@ -72,6 +76,7 @@ public class ModelloTabella extends AbstractTableModel {
     }
 
 //    public void affondata (){
+        //ToDo inserire Y al posto della X
 //        Nave nave = new Nave();
 //        nave.get
 //    }

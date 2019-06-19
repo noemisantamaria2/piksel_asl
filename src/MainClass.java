@@ -76,3 +76,22 @@ public class MainClass {
 }
 */
 
+import FrontHand.Battaglianavale;
+
+import java.awt.*;
+
+public class MainClass {
+    public static void main (String args[]) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Battaglianavale frame = new Battaglianavale();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}
