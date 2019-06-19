@@ -9,7 +9,7 @@ import java.util.*;
 
     public GestioneComputer(){
 
-        MatriceDiAttacco = getMatriceVuota();
+        MatriceDiAttacco = getMatriceVuota(11);
 
     }
 /*

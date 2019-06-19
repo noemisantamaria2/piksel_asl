@@ -11,12 +11,6 @@ public class GestioneTabella {
 
         GestioneTabella g = new GestioneTabella();
 
-        g.stampa(g.getMatrice());
-
-
-
-
-
 
     }
 
@@ -27,8 +21,8 @@ public class GestioneTabella {
 
          */
 
-        MatriceNavi = getMatriceVuota();
-        MatriceGestione = getMatriceVuota();
+        MatriceNavi = getMatriceVuota(11);
+        MatriceGestione = getMatriceVuota(11);
 
 
 
@@ -85,15 +79,52 @@ public class GestioneTabella {
     }
 
 
-    public String[][]getMatriceVuota(){
+    public String[][]getMatriceVuota(int lunghezza){
 
-        String[][] tabella = new String[10][10];
+        String[][] tabella = new String[lunghezza][lunghezza];
 
-        for (int i = 0; i < 10; i++) {
+        if(lunghezza == 10){
 
-            for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < lunghezza; i++) {
 
-                tabella[i][j] = " ";
+                for (int j = 0; j < lunghezza; j++) {
+
+                    tabella[i][j] = " ";
+
+                }
+
+            }
+
+
+        } else if(lunghezza == 11){
+
+            for (int i = 0; i < lunghezza; i++) {
+
+                if(i == 0){
+
+                    for (int j = 0; j < 11; j++) {
+
+                        tabella[i][j] = null;
+
+                    }
+
+                } else if(i > 0){
+
+                    for (int j = 0; j < lunghezza; j++) {
+
+                        if(j == 0){
+
+                            tabella[i][j] = null;
+
+                        } else {
+
+                            tabella[i][j] = " ";
+
+                        }
+
+                    }
+
+                }
 
             }
 
@@ -103,13 +134,9 @@ public class GestioneTabella {
 
     }
 
+    public String[][] inizializzaMatrice() {
 
-
-
-
-    public String[][] inzializzaMatrice() {
-
-        String[][] tabella = getMatriceVuota();
+        String[][] tabella = getMatriceVuota(10);
 
         int[] lunghezze = {5, 4, 3, 3, 2};
 
@@ -126,7 +153,19 @@ public class GestioneTabella {
 
         }
 
-        return tabella;
+        String[][] tabellaNuova = getMatriceVuota(11);
+
+        for (int i = 0; i < tabella.length; i++) {
+
+            for (int j = 0; j < tabella[i].length; j++) {
+
+                tabellaNuova[i + 1][j + 1] = tabella[i][j];
+
+            }
+
+        }
+
+        return tabellaNuova;
 
     }
 
@@ -294,28 +333,50 @@ public class GestioneTabella {
 
     }
 
-    public void stampa(String[][] t) { //metodo da togliere
-
-        System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
-
-        for (int i = 0; i < 10; i++) {
-
-            System.out.print(i + "|");
-
-            for (int j = 0; j < 10; j++) {
-
-                String valore = t[i][j];
-
-                System.out.print(getValoreStringaVuota(valore));
+    public void stampa(String[][] tabella) { //metodo da togliere
 
 
-                System.out.print("|");
+        for (int i = 0; i < tabella.length; i++) {
+
+            if(i == 0){
+
+                System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
+
+            } else {
+
+                for (int j = 0; j < tabella[i].length; j++) {
+
+                    if(j == 0){
+
+                        System.out.print(i - 1);
+
+                    } else {
+
+                        System.out.print(tabella[i][j]);
+
+                    }
+
+                    System.out.print("|");
+
+                }
+
+                System.out.println();
 
             }
 
-            System.out.println();
+
+
+
+
+
+
+
 
         }
+
+
+
+
 
 
     }
