@@ -50,6 +50,8 @@ public class Battaglianavale extends JFrame {
     private String [][] matriceColoritabellaComputer = new String [11][11];
 
 //    private GestioneTabella gestioneTabella = new GestioneTabella();
+    private GestioneComputer gestioneComputer = new GestioneComputer();
+    private GestioneUtente gestioneUtente = new GestioneUtente();
 
     private JFrame questaFinestra = this;
     //private GroupLayout groupLayout;
@@ -194,7 +196,6 @@ public class Battaglianavale extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 nomeUtente=JOptionPane.showInputDialog(questaFinestra,"Inserisci Nome");
                 System.out.println(nomeUtente);
-
                 pannelloGiocatore.setVisible(true);
                 tabellaPannelloGiocatore.setVisible(true);
                 pannelloComputer.setVisible(true);
@@ -219,10 +220,8 @@ public class Battaglianavale extends JFrame {
                 componentiPannelloComputer.setVisible(true);
                 tabellaPannelloComputer.setVisible(true);
                 computerCoordinataY.setText("");
-//              System.out.println("si funziona!");
                 tabellaGiocatore.setVisible(true);
                 modelloTabellaGiocatore.nuovatabella();
-
                 modelloTabellaGiocatore.addNaviGiocatore(new GestioneUtente().getMatrice());
 
                 tabellaComputer.setVisible(true);
@@ -239,10 +238,7 @@ public class Battaglianavale extends JFrame {
         esci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ToDo appena merge ticket#7
-//                pannelloComputer.setVisible(false);
-                //ToDo appena merge ticket#7
-//                pannelloGiocatore.setVisible(false);
+
                 giocatore.setVisible(false);
                 bottoneFuoco.setVisible(false);
                 giocatoreCoordinataX.setVisible(false);
@@ -259,8 +255,6 @@ public class Battaglianavale extends JFrame {
                 pannelloGiocatore.setVisible(false);
                 pannelloComputer.setVisible(false);
                 tabellaPannelloGiocatore.setVisible(false);
-
-//                ToDo controlla x in tabellaGiocatore
 
                 componentiPannelloGiocatore.setVisible(false);
                 componentiPannelloComputer.setVisible(false);
@@ -314,6 +308,7 @@ public class Battaglianavale extends JFrame {
         giocatore.setBackground(null);
         giocatore.setText(nomeUtente);
         giocatore.setBounds(20,20, 50,20);
+        giocatore.setVisible(false);
         //componentiPannelloGiocatore.add(giocatore, BorderLayout.NORTH);
 
         coordinateGiocatore = new JLabel("Coordinate        ");
@@ -352,21 +347,22 @@ public class Battaglianavale extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String contenuto = new String();
 
-                giocatoreCoordinataX.setText("");
-                giocatoreCoordinataY.setText("");
-                computerCoordinataX.setText("");
-                computerCoordinataY.setText("");
-
                 //test (prova)
 //                /*sconfitta giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,true,false);
 //                /*vittoria giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,false,true);
 
-                //ToDO appena implementato il package BackEnd
-//                GestioneUtente.controlloCordinate((giocatoreCoordinataX.getText()-1),giocatoreCoordinataY.getText());
+
+                if(!new GestioneUtente().controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText()),giocatoreCoordinataY.getText())){
+                    JOptionPane.showMessageDialog(questaFinestra,"Le Coordinate non sono corrette","ERRORE",JOptionPane.ERROR_MESSAGE);
+                } else {
+                    contenuto = new GestioneComputer().attacco(Integer.parseInt(giocatoreCoordinataX.getText()),new GestioneUtente().convertitoreY(giocatoreCoordinataY.getText()));
+
+                }
+
 
                 //ToDO appena implementato il package BackEnd
-//                contenuto = GestioneComputer.attaccoDalGiocatore(Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
-//                modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
+//                contenuto = GestioneComputer.attaccoDalGiocatore(Integer.parseInt(giocatoreCoordinataX.getText()),GestioneUtente.convertitore(giocatoreCoordinataY));
+//                modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText()),GestioneUtente.convertitore(giocatoreCoordinataY));
 
 
 
