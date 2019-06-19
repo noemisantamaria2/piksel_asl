@@ -21,10 +21,11 @@ public class GestioneTabella {
 
          */
 
-        MatriceNavi = getMatriceVuota(11);
+        MatriceNavi = inizializzaMatrice();
         MatriceGestione = getMatriceVuota(11);
 
-
+        stampa(MatriceGestione);
+        stampa(MatriceNavi);
 
     }
 
@@ -33,8 +34,8 @@ public class GestioneTabella {
     public boolean controllaVittoria(){                //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
         String SimboloX="X";
         int Tot=0;
-        for(int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
+        for(int i=0; i<11; i++){
+            for(int j=0; j<11; j++){
                 if(MatriceGestione[i][j].equals(SimboloX)){
                     Tot++;
                 }

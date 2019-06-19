@@ -83,9 +83,6 @@ public class GestioneUtente extends GestioneTabella{
 
         }
 
-
-
-
         System.out.println(matriceVuota);
 
 
@@ -100,29 +97,35 @@ public class GestioneUtente extends GestioneTabella{
 
 
 
-
-
-
+            int x = -1;
+            int y = -1;
             /*
             do {
+
+                setCoordinataX();
+                setCoordinataY();
 
                 x=this.getCoordinataX();
                 y=this.getCoordinataY();
 
-                if(MatriceDiAttacco[x][y].equals(Vuoto))
+                if(MatriceGestione[x][y].equals(" "))
                 {
-                    MatriceDiAttacco[x][y]="X";
+                    MatriceGestione[x][y]="X";
                 }
                 else{
-                    if(MatriceDiAttacco[x][y].equals(X)){
-                        MatriceDiAttacco[x][y]="O";
+                    if(MatriceGestione[x][y].equals("X")){
+                        MatriceGestione[x][y]="O";
                     }else{
+
+
 
                     }
                 }
+
             }while(MatriceDiAttacco[x][y]!="X");
 
-            */
+             */
+
 
 
 
