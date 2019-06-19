@@ -7,15 +7,15 @@ public class GestioneUtente extends GestioneTabella{
     Random rand= new Random();
     private int CoordinataX, CoordinataY;
 
-     private String ListY="LIHGFEDCBA";
-     private String listY="lihgfedcba";
+     private String ListY="ABCDEFGHIL";
+     private String listY="abcdefghil";
 
      public GestioneUtente(){
          super();
      }
 
             public boolean controlloX(int X){          //ok Controllo coordinata x
-                if(X<10&&X>-1){
+                if(X<11&&X>0){
                     return true;
                 }
                 else return false;
@@ -35,12 +35,12 @@ public class GestioneUtente extends GestioneTabella{
             public int convertitoreY(String Y){         //ok Converte la lettera in numero
                  int YConvert=ListY.indexOf(Y);
                 if(YConvert<10&&YConvert>-1){
-                    return YConvert;
+                    return YConvert+1;
                 }
                 else{
                     int yconvert=listY.indexOf(Y);
                     if(yconvert<10&&yconvert>-1){
-                        return yconvert;
+                        return yconvert+1;
                     }
                 }
                 return -1;
@@ -160,14 +160,20 @@ public class GestioneUtente extends GestioneTabella{
     }
 
     public void setCoordinataX(){
-        CoordinataX=rand.nextInt(10);
+        CoordinataX=this.randomWithRange();
+    }
+
+    public int randomWithRange()
+    {
+        int max=11, min=1;
+        int range = (max - min) + 1;
+        return (int)(Math.random() * range) + min;
     }
 
 
-
-
     public void setCoordinataY(){
-        CoordinataY=rand.nextInt(10);
+
+        CoordinataY=this.randomWithRange();
     }
     public int getCoordinataX(){
         return CoordinataX;
@@ -177,7 +183,7 @@ public class GestioneUtente extends GestioneTabella{
     }
 
     public String convertYInChar() {
-        String ListY = "LIHGFEDCBA";
+        String ListY = "ZABCDEFGHIL";
         String YChar = ListY.substring(CoordinataY, CoordinataY + 1);
         return YChar;
     }
