@@ -1,6 +1,11 @@
 package BackHand;
+
+import java.util.Random;
+
 public class GestioneUtente extends GestioneTabella{
 
+    Random rand= new Random();
+    private int CoordinataX, CoordinataY;
 
      private String ListY="LIHGFEDCBA";
      private String listY="lihgfedcba";
@@ -51,6 +56,131 @@ public class GestioneUtente extends GestioneTabella{
                 }
                 else return false;
         }
+
+    public String attaccoDalComputer() { //ritorna uno "X" o uno "O"
+
+        MatriceNavi[1][1] = "X";
+
+        stampa(getMatrice());
+        stampa(getMatriceGestione());
+
+
+        boolean matriceVuota = true;
+
+        for (int i = 0; i < 10; i++) {
+
+            for (int j = 0; j < 10; j++) {
+
+                String casellaSelezionata = MatriceNavi[i][j];
+
+                if(casellaSelezionata.equals("X")){
+
+                    matriceVuota = false;
+
+                }
+
+            }
+
+        }
+
+
+
+
+        System.out.println(matriceVuota);
+
+
+        if(matriceVuota){
+
+
+            //int x = this.getCoordinataX();
+
+
+
+
+
+
+
+
+
+
+            /*
+            do {
+
+                x=this.getCoordinataX();
+                y=this.getCoordinataY();
+
+                if(MatriceDiAttacco[x][y].equals(Vuoto))
+                {
+                    MatriceDiAttacco[x][y]="X";
+                }
+                else{
+                    if(MatriceDiAttacco[x][y].equals(X)){
+                        MatriceDiAttacco[x][y]="O";
+                    }else{
+
+                    }
+                }
+            }while(MatriceDiAttacco[x][y]!="X");
+
+            */
+
+
+
+
+
+
+
+        } else {
+
+            //attacco mirato
+
+        }
+
+
+
+
+
+
+        return " ";
+
+    }
+
+
+    public String aggiornaPosizione(int x, int y){
+
+
+
+
+
+
+
+
+         return " ";
+
+    }
+
+    public void setCoordinataX(){
+        CoordinataX=rand.nextInt(10);
+    }
+
+
+
+
+    public void setCoordinataY(){
+        CoordinataY=rand.nextInt(10);
+    }
+    public int getCoordinataX(){
+        return CoordinataX;
+    }
+    public int getCoordinataY(){
+        return CoordinataY;
+    }
+
+    public String convertYInChar() {
+        String ListY = "LIHGFEDCBA";
+        String YChar = ListY.substring(CoordinataY, CoordinataY + 1);
+        return YChar;
+    }
 
 }
 

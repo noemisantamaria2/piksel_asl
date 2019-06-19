@@ -7,12 +7,49 @@ public class GestioneTabella {
     protected String [][]MatriceNavi;      //Matrice contenente navi
     protected String [][]MatriceGestione;      //Matrice che gestisce gli attacchi
 
+    public static void main(String[] args) {
 
+        GestioneTabella g = new GestioneTabella();
+
+        g.stampa(g.getMatrice());
+
+
+
+
+
+
+    }
 
     public GestioneTabella(){
+        /*
         MatriceNavi = inzializzaMatrice();
         MatriceGestione = getMatriceVuota();
 
+         */
+
+        MatriceNavi = getMatriceVuota();
+        MatriceGestione = getMatriceVuota();
+
+
+
+    }
+
+
+
+    public boolean controllaVittoria(){                //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
+        String SimboloX="X";
+        int Tot=0;
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                if(MatriceGestione[i][j].equals(SimboloX)){
+                    Tot++;
+                }
+            }
+        }
+        if(Tot==17) {
+            return true;
+        }
+        else return false;
     }
 
     public String attacco(int x,int Y) { //ok riceve le coordinate e controlla le due matrici
@@ -31,34 +68,6 @@ public class GestioneTabella {
             MatriceGestione[x][Y]="O";
             return NoHit;
         }else return Wrong;
-    }
-
-    public boolean controllaVittoria(){                //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
-        String SimboloX="X";
-        int Tot=0;
-        for(int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
-                if(MatriceGestione[i][j].equals(SimboloX)){
-                    Tot++;
-                }
-            }
-        }
-        if(Tot==17) {
-            return true;
-        }
-        else return false;
-    }
-
-    public static void main(String[] args) {//togliere
-
-
-        GestioneUtente g = new GestioneUtente();
-
-        System.out.println(g.controlloCoordinate(1, "E"));
-
-
-
-
     }
 
 
@@ -297,15 +306,7 @@ public class GestioneTabella {
 
                 String valore = t[i][j];
 
-                if (valore.isEmpty()) {
-
-                    System.out.print(" ");
-
-                } else {
-
-                    System.out.print(valore);
-
-                }
+                System.out.print(getValoreStringaVuota(valore));
 
 
                 System.out.print("|");
@@ -321,9 +322,9 @@ public class GestioneTabella {
 
     public String getValoreStringaVuota(String valore) {//metodo da togliere
 
-        if (valore.isEmpty()) {
+        if (valore == " ") {
 
-            return "/";
+            return " ";
 
         } else {
 
