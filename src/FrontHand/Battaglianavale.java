@@ -358,8 +358,8 @@ public class Battaglianavale extends JFrame {
                 if(!gestioneUtente.controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText()),giocatoreCoordinataY.getText())){
                     JOptionPane.showMessageDialog(questaFinestra,"Le Coordinate non sono corrette","ERRORE",JOptionPane.ERROR_MESSAGE);
                 } else {
-                    contenuto = gestioneComputer.attacco(Integer.parseInt(giocatoreCoordinataX.getText()),gestioneUtente.convertitoreY(giocatoreCoordinataY.getText()));
-                    modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText()),gestioneUtente.convertitoreY(giocatoreCoordinataY.getText()));
+                    contenuto = gestioneComputer.attacco(gestioneUtente.convertitoreY(giocatoreCoordinataY.getText()),Integer.parseInt(giocatoreCoordinataX.getText()));
+                    modelloTabellaComputer.addXeO(contenuto,gestioneUtente.convertitoreY(giocatoreCoordinataY.getText()),Integer.parseInt(giocatoreCoordinataX.getText()));
 
                 }
 
