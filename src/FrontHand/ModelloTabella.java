@@ -11,8 +11,8 @@ public class ModelloTabella extends AbstractTableModel {
     private String [] headersColumn,headersRow;
 
     public ModelloTabella(){
-        headersColumn= new String[]{"","1","2","3","4","5","6","7","8","9","10"};
-        headersRow= new String[]{"","A","B","C","D","E","F","G","H","I","L"};
+        headersRow= new String[]{"","1","2","3","4","5","6","7","8","9","10"};
+        headersColumn= new String[]{"","A","B","C","D","E","F","G","H","I","L"};
         this.getColumnName();
         this.getRowName();
     }
