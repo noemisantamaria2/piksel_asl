@@ -1,5 +1,6 @@
 package BackHand;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GestioneUtente extends GestioneTabella{
@@ -9,10 +10,23 @@ public class GestioneUtente extends GestioneTabella{
 
      private String ListY="ABCDEFGHIL";
      private String listY="abcdefghil";
+     private Nave naveUtilzzata;
 
      public GestioneUtente(){
+
          super();
+         naveUtilzzata = null;
+
      }
+
+    public static void main(String[] args) {
+
+         GestioneUtente g = new GestioneUtente();
+
+         g.attaccoDalComputer();
+
+
+    }
 
             public boolean controlloX(int X){          //ok Controllo coordinata x
                 if(X<11&&X>0){
@@ -45,37 +59,43 @@ public class GestioneUtente extends GestioneTabella{
                 }
                 return -1;
     }
-            public boolean controlloCoordinate(int x, String Y){  //ok Controllo la correttezza di entrambe le coordinate
-                boolean CheckX=this.controlloX(x);
-                boolean CheckY=this.controlloY(Y);
-                if(CheckX==true){
-                    if (CheckY == true) {
-                        return true;
-                    }
-                    else return false;
-                }
-                else return false;
+    public boolean controlloCoordinate(int x, String Y){  //ok Controllo la correttezza di entrambe le coordinate
+
+        boolean CheckX=this.controlloX(x);
+        boolean CheckY=this.controlloY(Y);
+        if(CheckX==true){
+            if (CheckY == true) {
+                return true;
+            }
+            else return false;
         }
-
-    public String attaccoDalComputer() { //ritorna uno "X" o uno "O"
-
-        MatriceNavi[1][1] = "X";
-
-        stampa(getMatrice());
-        stampa(getMatriceGestione());
+        else return false;
+    }
 
 
-        boolean matriceVuota = true;
 
-        for (int i = 0; i < 10; i++) {
 
-            for (int j = 0; j < 10; j++) {
+    public void attaccoDalComputer(){
 
-                String casellaSelezionata = MatriceNavi[i][j];
 
-                if(casellaSelezionata.equals("X")){
+         stampa(MatriceGestione);
 
-                    matriceVuota = false;
+
+        boolean tabellaVuota = true;
+
+        for (int i = 0; i < 11; i++) {
+
+            for (int j = 0; j < 11; j++) {
+
+                String valore = MatriceGestione[i][j];
+
+                if(valore != null){
+
+                    if(valore.equals("X")){
+
+                        tabellaVuota = false;
+
+                    }
 
                 }
 
@@ -83,43 +103,63 @@ public class GestioneUtente extends GestioneTabella{
 
         }
 
-        System.out.println(matriceVuota);
+        System.out.println("La tabella è vuota? " + tabellaVuota);
 
+        if(tabellaVuota){
 
-        if(matriceVuota){
+            if(naveUtilzzata == null){
 
+                //casuale
 
-            int x = -1;
-            int y = -1;
+                do{
 
-            do {
+                    setCoordinataX();
+                    setCoordinataY();
 
-                setCoordinataX();
-                setCoordinataY();
+                    String valoreCasuale = MatriceGestione[CoordinataX][CoordinataY];
 
-                x=this.getCoordinataX();
-                y=this.getCoordinataY();
+                    if(valoreCasuale != null){
 
-                if(MatriceGestione[x][y].equals(" "))
-                {
-                    MatriceGestione[x][y]="X";
-                }
-                else{
-                    if(MatriceGestione[x][y].equals("X")){
-                        MatriceGestione[x][y]="O";
-                    }else{
+                        if(valoreCasuale == " "){
 
-                        setCoordinataY();
-                        setCoordinataX();
+                            break;
+
+                        }
+
+                    }
+
+                }while(true);
+
+                System.out.println(CoordinataX);
+                System.out.println(CoordinataY);
+
+                //finish
+
+            } else {
+
+                //controlla nave
+
+                ArrayList<Casella> caselle = naveUtilzzata.getCaselle();
+
+                boolean naveTrovata = true;
+
+                for (int i = 0; i < naveUtilzzata.getLunghezza(); i++) {
+
+                    int rigaNave = naveUtilzzata.getRiga();
+                    int colonnaNave = naveUtilzzata.getColonna();
+
+                    if(MatriceGestione[rigaNave][colonnaNave] != "X"){
+
 
 
                     }
+
+
+
+
+
                 }
 
-            }while(MatriceGestione[x][y]!="X");
-
-
-            System.out.println(x + " " + y);
 
 
 
@@ -127,9 +167,20 @@ public class GestioneUtente extends GestioneTabella{
 
 
 
-        } else {
 
-            //attacco mirato
+
+            }
+
+
+
+
+
+
+
+
+
+
+
 
         }
 
@@ -138,23 +189,8 @@ public class GestioneUtente extends GestioneTabella{
 
 
 
-        return " ";
-
     }
 
-
-    public String aggiornaPosizione(int x, int y){
-
-
-
-
-
-
-
-
-         return " ";
-
-    }
 
     public void setCoordinataX(){
         CoordinataX=this.randomWithRange();
@@ -162,7 +198,7 @@ public class GestioneUtente extends GestioneTabella{
 
     public int randomWithRange()
     {
-        int max=11, min=1;
+        int max=10, min=1;
         int range = (max - min) + 1;
         return (int)(Math.random() * range) + min;
     }

@@ -2,30 +2,25 @@ package BackHand;
 
 import javafx.stage.StageStyle;
 
+import java.util.ArrayList;
+
 public class GestioneTabella {
 
     protected String [][]MatriceNavi;      //Matrice contenente navi
     protected String [][]MatriceGestione;      //Matrice che gestisce gli attacchi
+    protected ArrayList<Nave> navi;
+
 
 
     public GestioneTabella(){
-        /*
-        MatriceNavi = inzializzaMatrice();
-        MatriceGestione = getMatriceVuota();
 
-         */
-
-        MatriceNavi = inizializzaMatrice();
+        navi = new ArrayList<>();
+        MatriceNavi = getMatriceVuota(11);
         MatriceGestione = getMatriceVuota(11);
-
-        stampa(MatriceGestione);
-        stampa(MatriceNavi);
 
     }
 
-
-
-    public boolean controllaVittoria(){                //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
+    public boolean controllaVittoria(){ //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
         String SimboloX="X";
         int Tot=0;
         for(int i=0; i<11; i++){
@@ -144,7 +139,13 @@ public class GestioneTabella {
             int colonna = nave.getColonna();
             int direzione = nave.getDirezione();
 
-            posizionaNave(riga, colonna, tabella, direzione, lunghezze[i]);
+            ArrayList<Casella> caselle = posizionaNave(riga, colonna, tabella, direzione, lunghezze[i]);
+
+            nave.setCaselle(caselle);
+
+
+
+            navi.add(nave);
 
         }
 
@@ -513,13 +514,18 @@ public class GestioneTabella {
 
     }
 
-    public void posizionaNave(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+    public ArrayList<Casella> posizionaNave(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+
+        ArrayList<Casella> caselle = new ArrayList<Casella>();
 
         for (int i = 0; i < lunghezza; i++) {
 
             setCasellaSuccessiva(riga, colonna, tabella, direzione, lunghezza, i);
+            caselle.add(new Casella(riga, colonna, tabella, " "));
 
         }
+
+        return caselle;
 
     }
 
