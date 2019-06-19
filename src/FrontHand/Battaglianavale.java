@@ -50,8 +50,8 @@ public class Battaglianavale extends JFrame {
     private String [][] matriceColoritabellaComputer = new String [11][11];
 
 //    private GestioneTabella gestioneTabella = new GestioneTabella();
-    private GestioneComputer gestioneComputer = new GestioneComputer();
-    private GestioneUtente gestioneUtente = new GestioneUtente();
+    private GestioneComputer gestioneComputer;
+    private GestioneUtente gestioneUtente;
 
     private JFrame questaFinestra = this;
     //private GroupLayout groupLayout;
@@ -222,7 +222,10 @@ public class Battaglianavale extends JFrame {
                 computerCoordinataY.setText("");
                 tabellaGiocatore.setVisible(true);
                 modelloTabellaGiocatore.nuovatabella();
-                modelloTabellaGiocatore.addNaviGiocatore(new GestioneUtente().getMatrice());
+
+                gestioneUtente = new GestioneUtente();
+                gestioneComputer = new GestioneComputer();
+                modelloTabellaGiocatore.addNaviGiocatore(gestioneUtente.getMatrice());
 
                 tabellaComputer.setVisible(true);
                 modelloTabellaComputer.nuovatabella();
@@ -352,10 +355,11 @@ public class Battaglianavale extends JFrame {
 //                /*vittoria giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,false,true);
 
 
-                if(!new GestioneUtente().controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText()),giocatoreCoordinataY.getText())){
+                if(!gestioneUtente.controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText()),giocatoreCoordinataY.getText())){
                     JOptionPane.showMessageDialog(questaFinestra,"Le Coordinate non sono corrette","ERRORE",JOptionPane.ERROR_MESSAGE);
                 } else {
-                    contenuto = new GestioneComputer().attacco(Integer.parseInt(giocatoreCoordinataX.getText()),new GestioneUtente().convertitoreY(giocatoreCoordinataY.getText()));
+                    contenuto = gestioneComputer.attacco(Integer.parseInt(giocatoreCoordinataX.getText()),gestioneUtente.convertitoreY(giocatoreCoordinataY.getText()));
+                    modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText()),gestioneUtente.convertitoreY(giocatoreCoordinataY.getText()));
 
                 }
 
