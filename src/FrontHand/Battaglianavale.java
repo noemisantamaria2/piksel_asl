@@ -482,25 +482,25 @@ public class Battaglianavale extends JFrame {
         gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreX, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreY, gbcGiocatore);
 
         gbcGiocatore.gridx = 2;
         gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreCoordinataX, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreCoordinataY, gbcGiocatore);
 
         gbcGiocatore.gridx = 3;
         gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreY, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreX, gbcGiocatore);
 
         gbcGiocatore.gridx = 4;
         gbcGiocatore.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreCoordinataY, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreCoordinataX, gbcGiocatore);
 
         gbcGiocatore.gridx = 5;
         gbcGiocatore.gridy = 2;
@@ -528,25 +528,25 @@ public class Battaglianavale extends JFrame {
         gbcComputer.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerX, gbcComputer);
+        componentiPannelloComputer.add(computerY, gbcComputer);
 
         gbcComputer.gridx = 2;
         gbcComputer.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerCoordinataX, gbcComputer);
+        componentiPannelloComputer.add(computerCoordinataY, gbcComputer);
 
         gbcComputer.gridx = 3;
         gbcComputer.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerY, gbcComputer);
+        componentiPannelloComputer.add(computerX, gbcComputer);
 
         gbcComputer.gridx = 4;
         gbcComputer.gridy = 2;
 //        gbc.gridwidth = 5;
 //        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerCoordinataY, gbcComputer);
+        componentiPannelloComputer.add(computerCoordinataX, gbcComputer);
 
 
     }
