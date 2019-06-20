@@ -371,7 +371,10 @@ public class Battaglianavale extends JFrame {
                         else{
                             giocatoreCoordinataX.setText("");
                             giocatoreCoordinataY.setText("");
-                            modelloTabellaComputer.affondata(gestioneComputer.naveTrovata());
+
+                            if (modelloTabellaComputer.affondata(gestioneComputer.naveTrovata())) {
+                                JOptionPane.showMessageDialog(questaFinestra, "Nave Affondata", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
+                            }
                             logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
 
 //                            gestioneComputer.stopProcesso();
@@ -383,8 +386,11 @@ public class Battaglianavale extends JFrame {
                             contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
                             modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
 
-                            modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata());
+                            if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
+                                JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
+                            }
                             logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
+
 
                         }
 

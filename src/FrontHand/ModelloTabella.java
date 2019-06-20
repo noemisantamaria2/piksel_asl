@@ -79,16 +79,18 @@ public class ModelloTabella extends AbstractTableModel {
         }
     }
 
-    public void affondata (Nave naveReturn){
+    public boolean affondata (Nave naveReturn){
         if (naveReturn!=null){
             ArrayList caselle = naveReturn.getCaselle();
             for (int i=0;i<naveReturn.getLunghezza();i++){
                 Casella casella = (Casella) caselle.get(i);
                 if (matrice[casella.getRiga()][casella.getColonna()].equalsIgnoreCase("X")){
                     this.setValueAt("Y",casella.getRiga(),casella.getColonna());
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public void setValueAt(String contenuto, int righa, int colonna){
