@@ -222,6 +222,7 @@ public class Battaglianavale extends JFrame {
 
                 gestioneUtente = new GestioneUtente();
                 gestioneComputer = new GestioneComputer();
+
                 modelloTabellaGiocatore.addNaviGiocatore(gestioneUtente.getMatrice());
 
                 tabellaComputer.setVisible(true);
@@ -363,7 +364,11 @@ public class Battaglianavale extends JFrame {
                             JOptionPane.showMessageDialog(questaFinestra,"Casella già colpita, Riprova","ERRORE",JOptionPane.WARNING_MESSAGE);
                         }
                         else{
+                            //ToDo AffondaNave
                             logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
+
+//                            contenuto = gestioneUtente.attacco(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+
                         }
 
                     }
@@ -371,9 +376,6 @@ public class Battaglianavale extends JFrame {
                     JOptionPane.showMessageDialog(questaFinestra,"La coordinata X deve essere un numero","ATTENZIONE",JOptionPane.ERROR_MESSAGE);
                 }
 
-
-                //ToDO appena implementato il package BackEnd
-//                logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
 
                 //ToDO appena implementato il package BackEnd
 //                contenuto = GestioneUtente.attaccoDalComputer(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
