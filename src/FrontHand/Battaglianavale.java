@@ -170,6 +170,29 @@ public class Battaglianavale extends JFrame {
         }
     }
 
+    public void  esciDalGioco(){
+        giocatore.setVisible(false);
+        bottoneFuoco.setVisible(false);
+        giocatoreCoordinataX.setVisible(false);
+        giocatoreCoordinataY.setVisible(false);
+        giocatoreX.setVisible(false);
+        giocatoreY.setVisible(false);
+        coordinateGiocatore.setVisible(false);
+        coordinateComputer.setVisible(false);
+        computer.setVisible(false);
+        computerX.setVisible(false);
+        computerCoordinataX.setVisible(false);
+        computerY.setVisible(false);
+        computerCoordinataY.setVisible(false);
+        pannelloGiocatore.setVisible(false);
+        pannelloComputer.setVisible(false);
+        tabellaPannelloGiocatore.setVisible(false);
+
+        componentiPannelloGiocatore.setVisible(false);
+        componentiPannelloComputer.setVisible(false);
+        tabellaPannelloComputer.setVisible(false);
+    }
+
 //    public String convertiContenutoInColori (String contenuto){
 //        if (contenuto)
 //            ret
@@ -245,26 +268,8 @@ public class Battaglianavale extends JFrame {
             @Override
             public void actionPerformed(ActionEvent esci) {
 
-                giocatore.setVisible(false);
-                bottoneFuoco.setVisible(false);
-                giocatoreCoordinataX.setVisible(false);
-                giocatoreCoordinataY.setVisible(false);
-                giocatoreX.setVisible(false);
-                giocatoreY.setVisible(false);
-                coordinateGiocatore.setVisible(false);
-                coordinateComputer.setVisible(false);
-                computer.setVisible(false);
-                computerX.setVisible(false);
-                computerCoordinataX.setVisible(false);
-                computerY.setVisible(false);
-                computerCoordinataY.setVisible(false);
-                pannelloGiocatore.setVisible(false);
-                pannelloComputer.setVisible(false);
-                tabellaPannelloGiocatore.setVisible(false);
+                esciDalGioco();
 
-                componentiPannelloGiocatore.setVisible(false);
-                componentiPannelloComputer.setVisible(false);
-                tabellaPannelloComputer.setVisible(false);
             }
         });
         menu.add(esci);
@@ -379,9 +384,11 @@ public class Battaglianavale extends JFrame {
                             giocatoreCoordinataY.setText("");
 
                             if (modelloTabellaComputer.affondata(gestioneComputer.naveTrovata())) {
-                                JOptionPane.showMessageDialog(questaFinestra, "Nave Affondata", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(questaFinestra, "Nave Affondata", "INFO", JOptionPane.INFORMATION_MESSAGE);
                             }
                             if (!logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
+
+
                                 Casella casella = gestioneUtente.attaccoDalComputer();
 //                            computerCoordinataY.setText(String.valueOf(casella.getRiga()));
                                 computerCoordinataY.setText(gestioneComputer.convertYInChar(casella.getRiga()));
@@ -390,25 +397,22 @@ public class Battaglianavale extends JFrame {
                                 contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
                                 modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
 
+                                
+
+                                JOptionPane.showMessageDialog(questaFinestra, "Colpo effettuato dal Computer in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), "ATTACCO DEL PC", JOptionPane.INFORMATION_MESSAGE);
+
                                 if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
-                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "INFO", JOptionPane.INFORMATION_MESSAGE);
                                 }
                                 if(logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
-                                    ActionEvent esci;
+                                    esciDalGioco();
                                 }
                             }
                             else{
-                                ActionEvent esci;
+                                esciDalGioco();
                             }
 
-//                            Thread attesa = new Thread();
-//                            attesa.start();
-//                            try {
-//                                Thread.sleep(5000);
-//                            }
-//                            catch(InterruptedException ie){
-//                            }
-//                            attesa.stop();
+//
 
 
 
