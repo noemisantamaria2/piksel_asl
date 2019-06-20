@@ -1,7 +1,5 @@
 package BackHand;
 
-import javafx.stage.StageStyle;
-
 import java.util.ArrayList;
 
 public class GestioneTabella {
@@ -18,7 +16,7 @@ public class GestioneTabella {
         MatriceNavi = inizializzaMatrice();
         MatriceGestione = getMatriceVuota(11);
         stampa(MatriceNavi);
-        
+
     }
 
     public void stopProcesso(){     //ok
@@ -28,59 +26,56 @@ public class GestioneTabella {
         catch(InterruptedException e){
         }
     }
-    
+
     public Nave naveTrovata(){
-        
+
         Nave naveReturn = null;
-        
-        
+
+
         for (Nave n : navi) {
 
             ArrayList<Casella> caselle = n.getCaselle();
-            
-            
+
+
             boolean naveRiempita = true;
-            
+
             for(Casella c : caselle){
-                
+
                 int riga = c.getRiga();
                 int colonna = c.getColonna();
-                
+
                 if(MatriceGestione[riga][colonna].equals(" ") || MatriceGestione[riga][colonna].equals("T")){
-                    
+
                     //System.out.println("riga /" + riga + "/ colonna: /" + colonna + "/");
-                    
+
                     naveRiempita = false;
                     break;
-                    
+
                 }
-                
+
             }
             if(naveRiempita){
-                
-                naveReturn = n;
-                
-                for (Casella c : caselle) {
-                    
-                    int riga = c.getRiga();
-                    int colonna = c.getColonna();
 
-                    System.out.println(riga + " " + colonna);
-                    
-                    MatriceGestione[riga][colonna] = "T";
-                    
-                }
-                
+                naveReturn = n;
+
+                impostaNaveMatriceGestione(n);
+
                 break;
-                
+
             }
-            
+
         }
 
         stampa(MatriceGestione);
-        
+
         return naveReturn;
-        
+
+    }
+
+    public void impostaNaveMatriceGestione(Nave n){
+
+        System.out.println("Sei in gestioneTabella!");
+
     }
 
     public boolean controllaVittoria(){ //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
@@ -192,8 +187,8 @@ public class GestioneTabella {
         String[][] tabella = getMatriceVuota(10);
 
         int[] lunghezze = {5, 4, 3, 3, 2};
-        
-        
+
+
         for (int i = 0; i < lunghezze.length; i++) {
 
             Nave nave = ricercaPosizionePerNave(tabella, lunghezze[i]);
@@ -206,12 +201,10 @@ public class GestioneTabella {
 
             nave.setCaselle(caselle);
 
-
-
             navi.add(nave);
 
         }
-        
+
         String[][] tabellaNuova = getMatriceVuota(11);
 
         for (int i = 0; i < tabella.length; i++) {
@@ -223,9 +216,9 @@ public class GestioneTabella {
             }
 
         }
-        
-        
-        
+
+
+
         return tabellaNuova;
 
     }
@@ -580,21 +573,21 @@ public class GestioneTabella {
     }
 
     public ArrayList<Casella> posizionaNave(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
-        
-        
-        
+
+
+
         ArrayList<Casella> caselle = new ArrayList<Casella>();
 
         for (int i = 0; i < lunghezza; i++) {
-            
+
             Casella casella = setCasellaSuccessiva(riga, colonna, tabella, direzione, lunghezza, i);
-            
-            
-            
+
+
+
             caselle.add(casella);
-            
+
         }
-        
+
         return caselle;
 
     }
@@ -604,28 +597,28 @@ public class GestioneTabella {
         switch (direzione) {
 
             case 0:
-                
+
                 riga -= i;
                 break;
 
             case 1:
-                
+
                 colonna += i;
                 break;
 
             case 2:
-                
+
                 riga += i;
                 break;
 
             case 3:
-                
+
                 colonna -= i;
 
             default:
 
         }
-        
+
         tabella[riga][colonna] = "X";
         return new Casella(riga + 1, colonna + 1, tabella, "X");
 

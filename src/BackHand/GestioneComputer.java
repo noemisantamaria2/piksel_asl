@@ -1,16 +1,12 @@
 package BackHand;
-import java.util.*;
-    public class GestioneComputer extends GestioneTabella{
 
-    Random rand= new Random();
-    private int CoordinataX, CoordinataY;
+import java.util.ArrayList;
 
-    private String [][]MatriceDiAttacco;
+public class GestioneComputer extends GestioneTabella{
 
     public GestioneComputer(){
 
         super();
-        MatriceDiAttacco = getMatriceVuota(11);
 
     }
 
@@ -20,79 +16,19 @@ import java.util.*;
         return YChar;
     }
 
+    public void impostaNaveMatriceGestione(Nave n){
 
-    public static void main(String[] args) {
+        ArrayList<Casella> caselle = n.getCaselle();
 
-        GestioneComputer g = new GestioneComputer();
-        
+        for (Casella c : caselle) {
+
+            int riga = c.getRiga();
+            int colonna = c.getColonna();
+
+            MatriceGestione[riga][colonna] = "T";
+
+        }
 
     }
-
-
-    public void mioAttacco(){
-
-        String X = "X";
-        String Vuoto = " ";
-        int x,y;
-
-        /*
-
-        se il valore precedente è stato una x
-
-        metodo di ricerca
-
-        altrimenti
-
-        casuale
-
-        }
-
-
-
-
-         */
-
-
-
-        String valore = MatriceDiAttacco[1][1];
-
-
-        System.out.println(getValoreStringaVuota(valore));
-
-
-
-
-
-        /*
-        do {
-
-
-
-
-            x=this.getCoordinataX();
-            y=this.getCoordinataY();
-
-            if(MatriceDiAttacco[x][y].equals(Vuoto))
-                {
-                    MatriceDiAttacco[x][y]="X";
-                }
-            else{
-                if(MatriceDiAttacco[x][y].equals(X)){
-                    MatriceDiAttacco[x][y]="O";
-                }else{
-
-                }
-            }
-        }while(MatriceDiAttacco[x][y]!="X");
-        */
-
-
-
-
-        
-        }
-
-
-
 
 }
