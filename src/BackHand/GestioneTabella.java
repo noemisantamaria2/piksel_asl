@@ -35,8 +35,7 @@ public class GestioneTabella {
         
         
         for (Nave n : navi) {
-            
-            
+
             ArrayList<Casella> caselle = n.getCaselle();
             
             
@@ -47,7 +46,7 @@ public class GestioneTabella {
                 int riga = c.getRiga();
                 int colonna = c.getColonna();
                 
-                if(MatriceGestione[riga][colonna].equals(" ")){
+                if(MatriceGestione[riga][colonna].equals(" ") || MatriceGestione[riga][colonna].equals("T")){
                     
                     //System.out.println("riga /" + riga + "/ colonna: /" + colonna + "/");
                     
@@ -57,7 +56,9 @@ public class GestioneTabella {
                 }
                 
             }
-            
+
+            System.out.println(naveRiempita);
+
             if(naveRiempita){
                 
                 naveReturn = n;
@@ -78,13 +79,15 @@ public class GestioneTabella {
             }
             
         }
+
+        stampa(MatriceGestione);
         
         return naveReturn;
         
     }
 
     public boolean controllaVittoria(){ //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
-        String SimboloX="X";
+        String SimboloX="T";
         int Tot=0;
         for(int i=1; i<11; i++){
             for(int j=1; j<11; j++){

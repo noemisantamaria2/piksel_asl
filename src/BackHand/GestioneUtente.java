@@ -1,5 +1,6 @@
 package BackHand;
 
+import javax.swing.tree.ExpandVetoException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -93,17 +94,59 @@ public class GestioneUtente extends GestioneTabella{
 
 
     public Casella attaccoDalComputer(){
-        
-        do{
 
-            setCoordinataX();
-            setCoordinataY();
+        Casella casellaAdiacente = null;
+        boolean casellaCorretta = false;
 
-            String valoreCasuale = MatriceGestione[CoordinataX][CoordinataY];
+        for (int i = 1; i < MatriceGestione.length; i++) {
 
-            if(valoreCasuale != null){
+            for (int j = 1; j < MatriceGestione[i].length; j++) {
 
-                if(valoreCasuale == " "){
+                String valore = MatriceGestione[i][j];
+
+                if(valore.equals("X")){
+
+                    int direzione = (int)(Math.random()*4);
+
+                    for (int k = 0; k < 4 && !casellaCorretta; k++) {
+
+                        casellaCorretta = false;
+
+                        try{
+
+                            casellaAdiacente = getCasellaAdiacente(MatriceGestione, i, j, k, 1);
+
+                        }catch(Exception e){
+
+                        }
+
+
+                        if(casellaAdiacente != null){
+
+                            if(casellaAdiacente.getValore().equals(" ")){
+
+                                casellaCorretta = true;
+
+                            }
+
+                        }
+
+                        if(casellaCorretta){
+
+                            break;
+
+                        } else {
+
+                            direzione = prossimaDirezione(direzione);
+
+                        }
+
+                    }
+
+
+                }
+
+                if(casellaCorretta){
 
                     break;
 
@@ -111,9 +154,53 @@ public class GestioneUtente extends GestioneTabella{
 
             }
 
-        }while(true);
+
+            if(casellaCorretta){
+
+                break;
+
+            }
+
+        }
+
+        if(casellaAdiacente == null){
+
+            do{
+
+                setCoordinataX();
+                setCoordinataY();
+
+                String valoreCasuale = MatriceGestione[CoordinataX][CoordinataY];
+
+                if(valoreCasuale != null){
+
+                    if(valoreCasuale == " "){
+
+                        break;
+
+                    }
+
+                }
+
+            }while(true);
+
+            return new Casella(CoordinataX, CoordinataY, MatriceGestione, " ");
+
+        } else {
+
+            return casellaAdiacente;
+
+
+        }
+
+
+
+
+
+
+
         
-        return new Casella(CoordinataX, CoordinataY, MatriceGestione, " ");
+
 
     }
 
