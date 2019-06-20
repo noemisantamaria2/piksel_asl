@@ -349,11 +349,13 @@ public class Battaglianavale extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String contenuto = new String();
 
+
                 //test (prova)
 //                /*sconfitta giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,true,false);
 //                /*vittoria giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,false,true);
 
-                System.out.println("'"+giocatoreCoordinataX.getText().trim()+"'");
+//                System.out.println("'"+giocatoreCoordinataX.getText().trim()+"'");
+
 
                 try{
                     if(!gestioneUtente.controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText().trim()),giocatoreCoordinataY.getText().trim())){
@@ -377,7 +379,15 @@ public class Battaglianavale extends JFrame {
                             }
                             logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
 
-//                            gestioneComputer.stopProcesso();
+//                            Thread attesa = new Thread();
+//                            attesa.start();
+//                            try {
+//                                Thread.sleep(5000);
+//                            }
+//                            catch(InterruptedException ie){
+//                            }
+//                            attesa.stop();
+
                             Casella casella = gestioneUtente.attaccoDalComputer();
 //                            computerCoordinataY.setText(String.valueOf(casella.getRiga()));
                             computerCoordinataY.setText(gestioneComputer.convertYInChar(casella.getRiga()));
