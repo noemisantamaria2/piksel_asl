@@ -1,10 +1,12 @@
 package FrontHand;
+import BackHand.Casella;
 import BackHand.Nave;
 
 import javax.swing.table.DefaultTableCellRenderer;
 //import BackHand.Nave;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class ModelloTabella extends AbstractTableModel {
 
@@ -77,9 +79,16 @@ public class ModelloTabella extends AbstractTableModel {
         }
     }
 
-    public void affondata (){
-        Nave nave = null;
-        nave.getLunghezza();
+    public void affondata (Nave naveReturn){
+        if (naveReturn!=null){
+            ArrayList caselle = naveReturn.getCaselle();
+            for (int i=0;i<naveReturn.getLunghezza();i++){
+                Casella casella = (Casella) caselle.get(i);
+                if (matrice[casella.getRiga()][casella.getColonna()].equalsIgnoreCase("X")){
+                    this.setValueAt("Y",casella.getRiga(),casella.getColonna());
+                }
+            }
+        }
     }
 
     public void setValueAt(String contenuto, int righa, int colonna){

@@ -364,7 +364,7 @@ public class Battaglianavale extends JFrame {
                             JOptionPane.showMessageDialog(questaFinestra,"Casella già colpita, Riprova","ERRORE",JOptionPane.WARNING_MESSAGE);
                         }
                         else{
-                            //ToDo AffondaNave
+                            modelloTabellaComputer.affondata(gestioneComputer.naveTrovata());
                             logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
 
 //                            contenuto = gestioneUtente.attacco(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());

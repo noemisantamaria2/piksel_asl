@@ -93,12 +93,6 @@ import java.util.*;
         }
 
 
-    public void stopProcesso(){     //ok
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-        }
-    }
+
 
 }
