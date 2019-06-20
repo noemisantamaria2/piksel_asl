@@ -5,59 +5,71 @@ import java.util.Random;
 
 public class GestioneUtente extends GestioneTabella{
 
-    Random rand= new Random();
-    private int CoordinataX, CoordinataY;
+    private Random rand= new Random();
+    private int CoordinataX;
+    private int CoordinataY;
 
-     private String ListY="ABCDEFGHIL";
-     private String listY="abcdefghil";
-     private Nave naveUtilzzata;
+    private String ListY="ABCDEFGHIL";
+    private String listY="abcdefghil";
+    private Nave naveUtilzzata;
 
      public GestioneUtente(){
 
-         super();
-         naveUtilzzata = null;
+        super();
+        naveUtilzzata = null;
+        CoordinataX = -1;
+        CoordinataY = -1;
 
      }
 
     public static void main(String[] args) {
-
-         GestioneUtente g = new GestioneUtente();
-
-         g.attaccoDalComputer();
-
+        
+        GestioneUtente g = new GestioneUtente();
+        
+        g.stampa(g.getMatrice());
+        g.stampa(g.getMatriceGestione());
+        
+        g.naveTrovata();
+        
+        g.attaccoDalComputer();
+        
+        g.attacco(g.getCoordinataX(), g.getCoordinataY());
+        
+        g.stampa(g.getMatriceGestione());
+        
 
     }
 
-            public boolean controlloX(int X){          //ok Controllo coordinata x
-                if(X<11&&X>0){
-                    return true;
-                }
-                else return false;
+    public boolean controlloX(int X){          //ok Controllo coordinata x
+        if(X<11&&X>0){
+            return true;
+        }
+        else return false;
+    }
+    public boolean controlloY(String Y){         //ok Controllo coordinata y
+          int YCorrect=ListY.indexOf(Y);
+        if(YCorrect<10&&YCorrect>-1) {
+            return true;
+        }else {
+            int ycorrect=listY.indexOf(Y);
+            if(ycorrect<10&&ycorrect>-1)
+            {
+                return true;
+            }else return false;
+        }
+    }
+    public int convertitoreY(String Y){         //ok Converte la lettera in numero
+         int YConvert=ListY.indexOf(Y);
+        if(YConvert<10&&YConvert>-1){
+            return YConvert+1;
+        }
+        else{
+            int yconvert=listY.indexOf(Y);
+            if(yconvert<10&&yconvert>-1){
+                return yconvert+1;
             }
-            public boolean controlloY(String Y){         //ok Controllo coordinata y
-                  int YCorrect=ListY.indexOf(Y);
-                if(YCorrect<10&&YCorrect>-1) {
-                    return true;
-                }else {
-                    int ycorrect=listY.indexOf(Y);
-                    if(ycorrect<10&&ycorrect>-1)
-                    {
-                        return true;
-                    }else return false;
-                }
-            }
-            public int convertitoreY(String Y){         //ok Converte la lettera in numero
-                 int YConvert=ListY.indexOf(Y);
-                if(YConvert<10&&YConvert>-1){
-                    return YConvert+1;
-                }
-                else{
-                    int yconvert=listY.indexOf(Y);
-                    if(yconvert<10&&yconvert>-1){
-                        return yconvert+1;
-                    }
-                }
-                return -1;
+        }
+        return -1;
     }
     public boolean controlloCoordinate(int x, String Y){  //ok Controllo la correttezza di entrambe le coordinate
 
@@ -71,123 +83,36 @@ public class GestioneUtente extends GestioneTabella{
         }
         else return false;
     }
+    
+    
+    
+    
+    
+    
 
 
+    public Casella attaccoDalComputer(){
+        
+        do{
 
+            setCoordinataX();
+            setCoordinataY();
 
-    public void attaccoDalComputer(){
+            String valoreCasuale = MatriceGestione[CoordinataX][CoordinataY];
 
+            if(valoreCasuale != null){
 
-         stampa(MatriceGestione);
+                if(valoreCasuale == " "){
 
-
-        boolean tabellaVuota = true;
-
-        for (int i = 0; i < 11; i++) {
-
-            for (int j = 0; j < 11; j++) {
-
-                String valore = MatriceGestione[i][j];
-
-                if(valore != null){
-
-                    if(valore.equals("X")){
-
-                        tabellaVuota = false;
-
-                    }
+                    break;
 
                 }
 
             }
 
-        }
-
-        System.out.println("La tabella è vuota? " + tabellaVuota);
-
-        if(tabellaVuota){
-
-            if(naveUtilzzata == null){
-
-                //casuale
-
-                do{
-
-                    setCoordinataX();
-                    setCoordinataY();
-
-                    String valoreCasuale = MatriceGestione[CoordinataX][CoordinataY];
-
-                    if(valoreCasuale != null){
-
-                        if(valoreCasuale == " "){
-
-                            break;
-
-                        }
-
-                    }
-
-                }while(true);
-
-                System.out.println(CoordinataX);
-                System.out.println(CoordinataY);
-
-                //finish
-
-            } else {
-
-                //controlla nave
-
-                ArrayList<Casella> caselle = naveUtilzzata.getCaselle();
-
-                boolean naveTrovata = true;
-
-                for (int i = 0; i < naveUtilzzata.getLunghezza(); i++) {
-
-                    int rigaNave = naveUtilzzata.getRiga();
-                    int colonnaNave = naveUtilzzata.getColonna();
-
-                    if(MatriceGestione[rigaNave][colonnaNave] != "X"){
-
-
-
-                    }
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-
-
-
-
-
+        }while(true);
+        
+        return new Casella(CoordinataX, CoordinataY, MatriceGestione, " ");
 
     }
 
