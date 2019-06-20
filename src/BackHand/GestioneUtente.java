@@ -111,6 +111,7 @@ public class GestioneUtente extends GestioneTabella{
                     for (int k = 0; k < 4 && !casellaCorretta; k++) {
 
                         casellaCorretta = false;
+                        casellaAdiacente = null;
 
                         try{
 

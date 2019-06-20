@@ -56,9 +56,6 @@ public class GestioneTabella {
                 }
                 
             }
-
-            System.out.println(naveRiempita);
-
             if(naveRiempita){
                 
                 naveReturn = n;
@@ -67,8 +64,8 @@ public class GestioneTabella {
                     
                     int riga = c.getRiga();
                     int colonna = c.getColonna();
-                    
-                    
+
+                    System.out.println(riga + " " + colonna);
                     
                     MatriceGestione[riga][colonna] = "T";
                     

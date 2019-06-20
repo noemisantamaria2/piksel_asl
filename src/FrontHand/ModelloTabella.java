@@ -84,11 +84,9 @@ public class ModelloTabella extends AbstractTableModel {
             ArrayList caselle = naveReturn.getCaselle();
             for (int i=0;i<naveReturn.getLunghezza();i++){
                 Casella casella = (Casella) caselle.get(i);
-                if (matrice[casella.getRiga()][casella.getColonna()].equalsIgnoreCase("X")){
-                    this.setValueAt("Y",casella.getRiga(),casella.getColonna());
-                    return true;
-                }
+                this.setValueAt("Y",casella.getRiga(),casella.getColonna());
             }
+            return true;
         }
         return false;
     }
