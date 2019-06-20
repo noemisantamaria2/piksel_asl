@@ -22,13 +22,6 @@ public class GestioneUtente extends GestioneTabella{
 
      }
 
-    public void stopProcesso(){     //ok
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-        }
-    }
 
     public static void main(String[] args) {
         

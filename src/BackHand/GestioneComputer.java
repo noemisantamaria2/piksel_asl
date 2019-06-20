@@ -13,13 +13,13 @@ import java.util.*;
         MatriceDiAttacco = getMatriceVuota(11);
 
     }
-/*
-    public String convertYInChar(){
-        String ListY="ABCDEFGHIL";
-        String YChar=ListY.substring(CoordinataY,CoordinataY+1);
+
+    public String convertYInChar(int Y){
+        String ListY=" ABCDEFGHIL";
+        String YChar=ListY.substring(Y,Y+1);
         return YChar;
     }
-*/
+
 
     public static void main(String[] args) {
 

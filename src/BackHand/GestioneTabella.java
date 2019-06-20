@@ -17,7 +17,16 @@ public class GestioneTabella {
         navi = new ArrayList<Nave>();
         MatriceNavi = inizializzaMatrice();
         MatriceGestione = getMatriceVuota(11);
+        stampa(MatriceNavi);
         
+    }
+
+    public void stopProcesso(){     //ok
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+        }
     }
     
     public Nave naveTrovata(){
@@ -77,8 +86,8 @@ public class GestioneTabella {
     public boolean controllaVittoria(){ //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
         String SimboloX="X";
         int Tot=0;
-        for(int i=0; i<11; i++){
-            for(int j=0; j<11; j++){
+        for(int i=1; i<11; i++){
+            for(int j=1; j<11; j++){
                 if(MatriceGestione[i][j].equals(SimboloX)){
                     Tot++;
                 }

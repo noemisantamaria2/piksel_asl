@@ -1,4 +1,5 @@
 package FrontHand;
+import BackHand.Casella;
 import BackHand.GestioneUtente;
 import BackHand.GestioneComputer;
 
@@ -357,17 +358,33 @@ public class Battaglianavale extends JFrame {
                 try{
                     if(!gestioneUtente.controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText().trim()),giocatoreCoordinataY.getText().trim())){
                         JOptionPane.showMessageDialog(questaFinestra,"Le Coordinate non sono corrette","ERRORE",JOptionPane.ERROR_MESSAGE);
+                        giocatoreCoordinataX.setText("");
+                        giocatoreCoordinataY.setText("");
                     }
                     else {
                         contenuto = gestioneComputer.attacco(gestioneUtente.convertitoreY(giocatoreCoordinataY.getText().trim()),Integer.parseInt(giocatoreCoordinataX.getText().trim()));
                         if (!modelloTabellaComputer.addXeO(contenuto,gestioneUtente.convertitoreY(giocatoreCoordinataY.getText().trim()),Integer.parseInt(giocatoreCoordinataX.getText().trim()))){
                             JOptionPane.showMessageDialog(questaFinestra,"Casella già colpita, Riprova","ERRORE",JOptionPane.WARNING_MESSAGE);
+                            giocatoreCoordinataX.setText("");
+                            giocatoreCoordinataY.setText("");
                         }
                         else{
+                            giocatoreCoordinataX.setText("");
+                            giocatoreCoordinataY.setText("");
                             modelloTabellaComputer.affondata(gestioneComputer.naveTrovata());
                             logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
 
-//                            contenuto = gestioneUtente.attacco(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+//                            gestioneComputer.stopProcesso();
+                            Casella casella = gestioneUtente.attaccoDalComputer();
+//                            computerCoordinataY.setText(String.valueOf(casella.getRiga()));
+                            computerCoordinataY.setText(gestioneComputer.convertYInChar(casella.getRiga()));
+                            computerCoordinataX.setText(String.valueOf(casella.getColonna()));
+
+                            contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
+                            modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
+
+                            modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata());
+                            logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
 
                         }
 
@@ -376,20 +393,6 @@ public class Battaglianavale extends JFrame {
                     JOptionPane.showMessageDialog(questaFinestra,"La coordinata X deve essere un numero","ATTENZIONE",JOptionPane.ERROR_MESSAGE);
                 }
 
-
-                //ToDO appena implementato il package BackEnd
-//                contenuto = GestioneUtente.attaccoDalComputer(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
-//                computerCoordinataX.setText(GestioneComputer.getCoordinataX());
-//                computerCoordinataY.setText(GestioneComputer.convertitoreYComputer);
-//                modelloTabellaGiocatore.addXeO(contenuto,GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
-
-
-
-                //ToDO appena implementato il package BackEnd
-//               logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore());
-
-                giocatoreCoordinataX.setText("");
-                giocatoreCoordinataY.setText("");
             }
         });
 
