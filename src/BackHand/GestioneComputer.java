@@ -1,68 +1,34 @@
 package BackHand;
-import java.util.*;
-    public class GestioneComputer extends GestioneTabella{
 
-    Random rand= new Random();
-    private int CoordinataX, CoordinataY;
+import java.util.ArrayList;
 
-    private String [][]MatriceDiAttacco = new String[10][10];
+public class GestioneComputer extends GestioneTabella{
 
     public GestioneComputer(){
 
-        MatriceDiAttacco = getMatriceVuota();
+        super();
 
     }
 
-    public String convertYInChar(){
-        String ListY="LIHGFEDCBA";
-        String YChar=ListY.substring(CoordinataY,CoordinataY+1);
+    public String convertYInChar(int Y){
+        String ListY=" ABCDEFGHIL";
+        String YChar=ListY.substring(Y,Y+1);
         return YChar;
     }
-    public void mioAttacco(){
 
-        String X="X";
-        String Vuoto=" ";
-        int x,y;
-        do {
-            setCoordinataY();
-            setCoordinataX();
-            x=this.getCoordinataX();
-            y=this.getCoordinataY();
-            if(MatriceDiAttacco[x][y].equals(Vuoto))
-                {
-                    MatriceDiAttacco[x][y]="X";
-                }
-            else{
-                    if(MatriceDiAttacco[x][y].equals(X)){
-                        MatriceDiAttacco[x][y]="O";
-                    }else{
-                        setCoordinataX();
-                        setCoordinataY();
-                }
-            }
-        }while(MatriceDiAttacco[x][y]!="X");
+    public void impostaNaveMatriceGestione(Nave n){
 
-        
+        ArrayList<Casella> caselle = n.getCaselle();
+
+        for (Casella c : caselle) {
+
+            int riga = c.getRiga();
+            int colonna = c.getColonna();
+
+            MatriceGestione[riga][colonna] = "T";
+
         }
 
-    public void setCoordinataX(){
-        CoordinataX=rand.nextInt(10);
-    }
-    public void setCoordinataY(){
-        CoordinataY=rand.nextInt(10);
-    }
-    public int getCoordinataX(){
-        return CoordinataX;
-    }
-    public int getCoordinataY(){
-        return CoordinataY;
-    }
-    public void stopProcesso(){     //ok
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-        }
     }
 
 }

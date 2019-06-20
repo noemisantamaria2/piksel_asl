@@ -1,8 +1,12 @@
 package FrontHand;
+import BackHand.Casella;
+import BackHand.Nave;
+
 import javax.swing.table.DefaultTableCellRenderer;
 //import BackHand.Nave;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class ModelloTabella extends AbstractTableModel {
 
@@ -12,7 +16,7 @@ public class ModelloTabella extends AbstractTableModel {
 
     public ModelloTabella(){
         headersColumn= new String[]{"","1","2","3","4","5","6","7","8","9","10"};
-        headersRow= new String[]{"","L","I","H","G","F","E","D","C","B","A"};
+        headersRow= new String[]{"","A","B","C","D","E","F","G","H","I","L"};
         this.getColumnName();
         this.getRowName();
     }
@@ -62,19 +66,30 @@ public class ModelloTabella extends AbstractTableModel {
     }
 
     public boolean addXeO(String contenuto, int righa, int colonna) {
-        //ToDo inserire nuove lettere
         if((contenuto.equalsIgnoreCase("X"))||(contenuto.equalsIgnoreCase("O"))){
-            this.setValueAt(contenuto,righa,colonna);
+            if (matrice[righa][colonna].equalsIgnoreCase("N") && contenuto.equalsIgnoreCase("X")){
+                this.setValueAt(contenuto,righa,colonna);
+            }
+            else{
+                this.setValueAt(contenuto,righa,colonna);
+            }
             return true;
         }else{
             return false;
         }
     }
 
-//    public void affondata (){
-//        Nave nave = new Nave();
-//        nave.get
-//    }
+    public boolean affondata (Nave naveReturn){
+        if (naveReturn!=null){
+            ArrayList caselle = naveReturn.getCaselle();
+            for (int i=0;i<naveReturn.getLunghezza();i++){
+                Casella casella = (Casella) caselle.get(i);
+                this.setValueAt("Y",casella.getRiga(),casella.getColonna());
+            }
+            return true;
+        }
+        return false;
+    }
 
     public void setValueAt(String contenuto, int righa, int colonna){
         this.matrice[righa][colonna]=contenuto;

@@ -1,18 +1,97 @@
 package BackHand;
 
-import javafx.stage.StageStyle;
+import java.util.ArrayList;
 
 public class GestioneTabella {
 
     protected String [][]MatriceNavi;      //Matrice contenente navi
     protected String [][]MatriceGestione;      //Matrice che gestisce gli attacchi
+    protected ArrayList<Nave> navi;
 
 
 
     public GestioneTabella(){
-        MatriceNavi = inzializzaMatrice();
-        MatriceGestione = getMatriceVuota();
 
+        navi = new ArrayList<Nave>();
+        MatriceNavi = inizializzaMatrice();
+        MatriceGestione = getMatriceVuota(11);
+        stampa(MatriceNavi);
+
+    }
+
+    public void stopProcesso(){     //ok
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+        }
+    }
+
+    public Nave naveTrovata(){
+
+        Nave naveReturn = null;
+
+
+        for (Nave n : navi) {
+
+            ArrayList<Casella> caselle = n.getCaselle();
+
+
+            boolean naveRiempita = true;
+
+            for(Casella c : caselle){
+
+                int riga = c.getRiga();
+                int colonna = c.getColonna();
+
+                if(MatriceGestione[riga][colonna].equals(" ") || MatriceGestione[riga][colonna].equals("T")){
+
+                    //System.out.println("riga /" + riga + "/ colonna: /" + colonna + "/");
+
+                    naveRiempita = false;
+                    break;
+
+                }
+
+            }
+            if(naveRiempita){
+
+                naveReturn = n;
+
+                impostaNaveMatriceGestione(n);
+
+                break;
+
+            }
+
+        }
+
+        stampa(MatriceGestione);
+
+        return naveReturn;
+
+    }
+
+    public void impostaNaveMatriceGestione(Nave n){
+
+        System.out.println("Sei in gestioneTabella!");
+
+    }
+
+    public boolean controllaVittoria(){ //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
+        String SimboloX="T";
+        int Tot=0;
+        for(int i=1; i<11; i++){
+            for(int j=1; j<11; j++){
+                if(MatriceGestione[i][j].equals(SimboloX)){
+                    Tot++;
+                }
+            }
+        }
+        if(Tot==17) {
+            return true;
+        }
+        else return false;
     }
 
     public String attacco(int x,int Y) { //ok riceve le coordinate e controlla le due matrici
@@ -33,34 +112,6 @@ public class GestioneTabella {
         }else return Wrong;
     }
 
-    public boolean controllaVittoria(){                //ok Controlla la matrice non visualizzata e guarda se ci sono 17 X
-        String SimboloX="X";
-        int Tot=0;
-        for(int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
-                if(MatriceGestione[i][j].equals(SimboloX)){
-                    Tot++;
-                }
-            }
-        }
-        if(Tot==17) {
-            return true;
-        }
-        else return false;
-    }
-
-    public static void main(String[] args) {//togliere
-
-
-        GestioneUtente g = new GestioneUtente();
-
-        System.out.println(g.controlloCoordinate(1, "E"));
-
-
-
-
-    }
-
 
     public String[][]getMatrice(){
 
@@ -76,15 +127,52 @@ public class GestioneTabella {
     }
 
 
-    public String[][]getMatriceVuota(){
+    public String[][]getMatriceVuota(int lunghezza){
 
-        String[][] tabella = new String[10][10];
+        String[][] tabella = new String[lunghezza][lunghezza];
 
-        for (int i = 0; i < 10; i++) {
+        if(lunghezza == 10){
 
-            for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < lunghezza; i++) {
 
-                tabella[i][j] = " ";
+                for (int j = 0; j < lunghezza; j++) {
+
+                    tabella[i][j] = " ";
+
+                }
+
+            }
+
+
+        } else if(lunghezza == 11){
+
+            for (int i = 0; i < lunghezza; i++) {
+
+                if(i == 0){
+
+                    for (int j = 0; j < 11; j++) {
+
+                        tabella[i][j] = null;
+
+                    }
+
+                } else if(i > 0){
+
+                    for (int j = 0; j < lunghezza; j++) {
+
+                        if(j == 0){
+
+                            tabella[i][j] = null;
+
+                        } else {
+
+                            tabella[i][j] = " ";
+
+                        }
+
+                    }
+
+                }
 
             }
 
@@ -94,13 +182,9 @@ public class GestioneTabella {
 
     }
 
+    public String[][] inizializzaMatrice() {
 
-
-
-
-    public String[][] inzializzaMatrice() {
-
-        String[][] tabella = getMatriceVuota();
+        String[][] tabella = getMatriceVuota(10);
 
         int[] lunghezze = {5, 4, 3, 3, 2};
 
@@ -113,11 +197,29 @@ public class GestioneTabella {
             int colonna = nave.getColonna();
             int direzione = nave.getDirezione();
 
-            posizionaNave(riga, colonna, tabella, direzione, lunghezze[i]);
+            ArrayList<Casella> caselle = posizionaNave(riga, colonna, tabella, direzione, lunghezze[i]);
+
+            nave.setCaselle(caselle);
+
+            navi.add(nave);
 
         }
 
-        return tabella;
+        String[][] tabellaNuova = getMatriceVuota(11);
+
+        for (int i = 0; i < tabella.length; i++) {
+
+            for (int j = 0; j < tabella[i].length; j++) {
+
+                tabellaNuova[i + 1][j + 1] = tabella[i][j];
+
+            }
+
+        }
+
+
+
+        return tabellaNuova;
 
     }
 
@@ -285,45 +387,59 @@ public class GestioneTabella {
 
     }
 
-    public void stampa(String[][] t) { //metodo da togliere
+    public void stampa(String[][] tabella) { //metodo da togliere
 
-        System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < tabella.length; i++) {
 
-            System.out.print(i + "|");
+            if(i == 0){
 
-            for (int j = 0; j < 10; j++) {
+                System.out.println("\\ 0 1 2 3 4 5 6 7 8 9");
 
-                String valore = t[i][j];
+            } else {
 
-                if (valore.isEmpty()) {
+                for (int j = 0; j < tabella[i].length; j++) {
 
-                    System.out.print(" ");
+                    if(j == 0){
 
-                } else {
+                        System.out.print(i - 1);
 
-                    System.out.print(valore);
+                    } else {
+
+                        System.out.print(tabella[i][j]);
+
+                    }
+
+                    System.out.print("|");
 
                 }
 
-
-                System.out.print("|");
+                System.out.println();
 
             }
 
-            System.out.println();
+
+
+
+
+
+
+
 
         }
+
+
+
+
 
 
     }
 
     public String getValoreStringaVuota(String valore) {//metodo da togliere
 
-        if (valore.isEmpty()) {
+        if (valore == " ") {
 
-            return "/";
+            return " ";
 
         } else {
 
@@ -456,42 +572,55 @@ public class GestioneTabella {
 
     }
 
-    public void posizionaNave(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+    public ArrayList<Casella> posizionaNave(int riga, int colonna, String[][] tabella, int direzione, int lunghezza) {
+
+
+
+        ArrayList<Casella> caselle = new ArrayList<Casella>();
 
         for (int i = 0; i < lunghezza; i++) {
 
-            setCasellaSuccessiva(riga, colonna, tabella, direzione, lunghezza, i);
+            Casella casella = setCasellaSuccessiva(riga, colonna, tabella, direzione, lunghezza, i);
+
+
+
+            caselle.add(casella);
 
         }
 
+        return caselle;
+
     }
 
-    public void setCasellaSuccessiva(int riga, int colonna, String[][] tabella, int direzione, int lunghezza, int i) {
+    public Casella setCasellaSuccessiva(int riga, int colonna, String[][] tabella, int direzione, int lunghezza, int i) {
 
         switch (direzione) {
 
             case 0:
 
-                tabella[riga - i][colonna] = "X";
+                riga -= i;
                 break;
 
             case 1:
 
-                tabella[riga][colonna + i] = "X";
+                colonna += i;
                 break;
 
             case 2:
 
-                tabella[riga + i][colonna] = "X";
+                riga += i;
                 break;
 
             case 3:
 
-                tabella[riga][colonna - i] = "X";
+                colonna -= i;
 
             default:
 
         }
+
+        tabella[riga][colonna] = "X";
+        return new Casella(riga + 1, colonna + 1, tabella, "X");
 
     }
 

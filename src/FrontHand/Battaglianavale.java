@@ -1,9 +1,7 @@
 package FrontHand;
-import BackHand.GestioneTabella;
+import BackHand.Casella;
 import BackHand.GestioneUtente;
 import BackHand.GestioneComputer;
-import sun.misc.JarIndex;
-import javax.swing.GroupLayout;
 
 import static javax.swing.GroupLayout.Alignment.*;
 import java.awt.*;
@@ -11,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
 
 
 public class Battaglianavale extends JFrame {
@@ -32,17 +28,12 @@ public class Battaglianavale extends JFrame {
     }
     private String nomeUtente;
     private JMenuBar menuBar;
-    private JMenu menu;
-    private JMenuItem Nuovapartita, esci;
-    private JPanel contentPane, pannelloComputer, pannelloGiocatore, componentiPannelloGiocatore, tabellaPannelloGiocatore, componentiPannelloComputer, tabellaPannelloComputer;
+    private JMenu menu, menuLegenda;
+    private JMenuItem Nuovapartita, esci, legendaX, legendaO, legendaY, legendaN;
+    private JPanel contentPane, pannelloComputer, pannelloGiocatore, componentiPannelloGiocatore, tabellaPannelloGiocatore, componentiPannelloComputer, tabellaPannelloComputer, pannelloPunti;
     private JTable tabellaComputer, tabellaGiocatore;
     private ModelloTabella modelloTabellaGiocatore,modelloTabellaComputer;
-    private JLabel giocatoreX, giocatoreY;
-    private JLabel computerX, computerY;
-    private JLabel giocatore;
-    private JLabel computer;
-    private JLabel coordinateGiocatore;
-    private JLabel coordinateComputer;
+    private JLabel giocatoreX, giocatoreY, spazio, computerX, computerY, giocatore, computer, coordinateGiocatore, coordinateComputer, trattinoPunti, puntiGiocatore, puntiComputer, scrittaPunti;
     private JButton bottoneFuoco;
     private JTextField giocatoreCoordinataX, giocatoreCoordinataY;
     private JTextArea computerCoordinataX, computerCoordinataY;
@@ -50,21 +41,30 @@ public class Battaglianavale extends JFrame {
     private String [][] matriceColoritabellaComputer = new String [11][11];
 
 //    private GestioneTabella gestioneTabella = new GestioneTabella();
+    private GestioneComputer gestioneComputer;
+    private GestioneUtente gestioneUtente;
 
     private JFrame questaFinestra = this;
     //private GroupLayout groupLayout;
     //private GridBagConstraints gbc;
 
-    public static void logicaVittoria(JFrame questaFinestra, boolean vittoriaCoputer, boolean vittoriaGiocatore) {
-        if (!vittoriaCoputer) {
+    public boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaComputer, boolean vittoriaGiocatore) {
+        if (!vittoriaComputer) {
             if (vittoriaGiocatore) {
                 Battaglianavale.finePartita(questaFinestra, true);
+                System.out.println("true");
+                puntiGiocatore.setText(String.valueOf(Integer.parseInt(puntiGiocatore.getText())+1));
+                return true;
             }
         } else {
             if (!vittoriaGiocatore) {
                 Battaglianavale.finePartita(questaFinestra, false);
+                System.out.println("false");
+                puntiComputer.setText(String.valueOf(Integer.parseInt(puntiComputer.getText())+1));
+                return false;
             }
         }
+        return false;
     }
 
 
@@ -167,6 +167,30 @@ public class Battaglianavale extends JFrame {
         }
     }
 
+    public void  esciDalGioco(){
+        giocatore.setVisible(false);
+        bottoneFuoco.setVisible(false);
+        giocatoreCoordinataX.setVisible(false);
+        giocatoreCoordinataY.setVisible(false);
+        giocatoreX.setVisible(false);
+        giocatoreY.setVisible(false);
+        coordinateGiocatore.setVisible(false);
+        coordinateComputer.setVisible(false);
+        computer.setVisible(false);
+        computerX.setVisible(false);
+        computerCoordinataX.setVisible(false);
+        computerY.setVisible(false);
+        computerCoordinataY.setVisible(false);
+        pannelloGiocatore.setVisible(false);
+        pannelloComputer.setVisible(false);
+        tabellaPannelloGiocatore.setVisible(false);
+        menuLegenda.setVisible(false);
+        componentiPannelloGiocatore.setVisible(false);
+        componentiPannelloComputer.setVisible(false);
+        tabellaPannelloComputer.setVisible(false);
+        pannelloPunti.setVisible(false);
+    }
+
 //    public String convertiContenutoInColori (String contenuto){
 //        if (contenuto)
 //            ret
@@ -179,6 +203,7 @@ public class Battaglianavale extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         contentPane.setLayout(new BorderLayout(0,0));
+        contentPane.setAutoscrolls(true);
         setContentPane(contentPane);
 
         menuBar = new JMenuBar();
@@ -186,6 +211,19 @@ public class Battaglianavale extends JFrame {
 
         menu = new JMenu("File");
         menuBar.add(menu);
+        menuLegenda = new JMenu("Legenda");
+        menuBar.add(menuLegenda);
+        menuLegenda.setVisible(false);
+
+
+        legendaX = new JMenuItem("X = Colpito");
+        legendaO = new JMenuItem("O = Acqua");
+        legendaY = new JMenuItem("Y = Affondato");
+        legendaN = new JMenuItem("N = Nave");
+        menuLegenda.add(legendaN);
+        menuLegenda.add(legendaX);
+        menuLegenda.add(legendaO);
+        menuLegenda.add(legendaY);
 
 
         Nuovapartita = new JMenuItem("Nuova Partita");
@@ -194,7 +232,6 @@ public class Battaglianavale extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 nomeUtente=JOptionPane.showInputDialog(questaFinestra,"Inserisci Nome");
                 System.out.println(nomeUtente);
-
                 pannelloGiocatore.setVisible(true);
                 tabellaPannelloGiocatore.setVisible(true);
                 pannelloComputer.setVisible(true);
@@ -219,11 +256,14 @@ public class Battaglianavale extends JFrame {
                 componentiPannelloComputer.setVisible(true);
                 tabellaPannelloComputer.setVisible(true);
                 computerCoordinataY.setText("");
-//              System.out.println("si funziona!");
                 tabellaGiocatore.setVisible(true);
                 modelloTabellaGiocatore.nuovatabella();
+                menuLegenda.setVisible(true);
+                gestioneUtente = new GestioneUtente();
+                gestioneComputer = new GestioneComputer();
+                pannelloPunti.setVisible(true);
 
-                modelloTabellaGiocatore.addNaviGiocatore(new GestioneUtente().getMatrice());
+                modelloTabellaGiocatore.addNaviGiocatore(gestioneUtente.getMatrice());
 
                 tabellaComputer.setVisible(true);
                 modelloTabellaComputer.nuovatabella();
@@ -238,36 +278,15 @@ public class Battaglianavale extends JFrame {
         esci = new JMenuItem("Esci");
         esci.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                //ToDo appena merge ticket#7
-//                pannelloComputer.setVisible(false);
-                //ToDo appena merge ticket#7
-//                pannelloGiocatore.setVisible(false);
-                giocatore.setVisible(false);
-                bottoneFuoco.setVisible(false);
-                giocatoreCoordinataX.setVisible(false);
-                giocatoreCoordinataY.setVisible(false);
-                giocatoreX.setVisible(false);
-                giocatoreY.setVisible(false);
-                coordinateGiocatore.setVisible(false);
-                coordinateComputer.setVisible(false);
-                computer.setVisible(false);
-                computerX.setVisible(false);
-                computerCoordinataX.setVisible(false);
-                computerY.setVisible(false);
-                computerCoordinataY.setVisible(false);
-                pannelloGiocatore.setVisible(false);
-                pannelloComputer.setVisible(false);
-                tabellaPannelloGiocatore.setVisible(false);
+            public void actionPerformed(ActionEvent esci) {
 
-//                ToDo controlla x in tabellaGiocatore
+                esciDalGioco();
 
-                componentiPannelloGiocatore.setVisible(false);
-                componentiPannelloComputer.setVisible(false);
-                tabellaPannelloComputer.setVisible(false);
             }
         });
         menu.add(esci);
+
+
 
         pannelloGiocatore = new JPanel();
         pannelloGiocatore.setLayout(new BorderLayout());
@@ -309,19 +328,29 @@ public class Battaglianavale extends JFrame {
                 (BorderFactory.createEmptyBorder(40,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
         tabellaPannelloComputer.setVisible(false);
 
+        pannelloPunti = new JPanel(new GridBagLayout());
+//        pannelloPunti.setBackground(Color.green);
+        contentPane.add(pannelloPunti, BorderLayout.CENTER);
+        pannelloPunti.setBorder(BorderFactory.createCompoundBorder
+                (BorderFactory.createEmptyBorder(-800,0,0,0),BorderFactory.createEmptyBorder(0,0,0,0)));
+        pannelloPunti.setVisible(false);
+
+        spazio = new JLabel("          ");
+
         giocatore = new JLabel();
         giocatore.setEnabled(false);
         giocatore.setBackground(null);
         giocatore.setText(nomeUtente);
         giocatore.setBounds(20,20, 50,20);
+        giocatore.setVisible(false);
         //componentiPannelloGiocatore.add(giocatore, BorderLayout.NORTH);
 
-        coordinateGiocatore = new JLabel("Coordinate        ");
+        coordinateGiocatore = new JLabel("Coordinate     ");
         coordinateGiocatore.setVisible(false);
         coordinateGiocatore.setBounds(10,80,10,10);
         //componentiPannelloGiocatore.add(coordinateGiocatore);
 
-        giocatoreX = new JLabel("X  ");
+        giocatoreX = new JLabel("   X   ");
         giocatoreX.setBounds(10,40,10,10);
         //componentiPannelloGiocatore.add(giocatoreX);
         giocatoreX.setVisible(false);
@@ -332,7 +361,7 @@ public class Battaglianavale extends JFrame {
         giocatoreCoordinataX.setVisible(false);
         giocatoreCoordinataX.setColumns(2);
 
-        giocatoreY = new JLabel("     Y  ");
+        giocatoreY = new JLabel("Y  ");
         giocatoreY.setBounds(10,40,10,10);
         //componentiPannelloGiocatore.add(giocatoreY);
         giocatoreY.setVisible(false);
@@ -352,43 +381,78 @@ public class Battaglianavale extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String contenuto = new String();
 
-                giocatoreCoordinataX.setText("");
-                giocatoreCoordinataY.setText("");
-                computerCoordinataX.setText("");
-                computerCoordinataY.setText("");
 
                 //test (prova)
 //                /*sconfitta giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,true,false);
 //                /*vittoria giocatore*/ Battaglianavale.logicaVittoria(questaFinestra,false,true);
 
-                //ToDO appena implementato il package BackEnd
-//                GestioneUtente.controlloCordinate((giocatoreCoordinataX.getText()-1),giocatoreCoordinataY.getText());
-
-                //ToDO appena implementato il package BackEnd
-//                contenuto = GestioneComputer.attaccoDalGiocatore(Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
-//                modelloTabellaComputer.addXeO(contenuto,Integer.parseInt(giocatoreCoordinataX.getText())-1,GestioneUtente.convertitore(giocatoreCoordinataY));
+//                System.out.println("'"+giocatoreCoordinataX.getText().trim()+"'");
 
 
+                try{
+                    if(!gestioneUtente.controlloCoordinate(Integer.parseInt(giocatoreCoordinataX.getText().trim()),giocatoreCoordinataY.getText().trim())){
+                        JOptionPane.showMessageDialog(questaFinestra,"Le Coordinate non sono corrette","ERRORE",JOptionPane.ERROR_MESSAGE);
+                        giocatoreCoordinataX.setText("");
+                        giocatoreCoordinataY.setText("");
+                    }
+                    else {
+                        contenuto = gestioneComputer.attacco(gestioneUtente.convertitoreY(giocatoreCoordinataY.getText().trim()),Integer.parseInt(giocatoreCoordinataX.getText().trim()));
+                        if (!modelloTabellaComputer.addXeO(contenuto,gestioneUtente.convertitoreY(giocatoreCoordinataY.getText().trim()),Integer.parseInt(giocatoreCoordinataX.getText().trim()))){
+                            JOptionPane.showMessageDialog(questaFinestra,"Casella già colpita, Riprova","ERRORE",JOptionPane.WARNING_MESSAGE);
+                            giocatoreCoordinataX.setText("");
+                            giocatoreCoordinataY.setText("");
+                        }
+                        else{
+                            giocatoreCoordinataX.setText("");
+                            giocatoreCoordinataY.setText("");
 
-                //ToDO appena implementato il package BackEnd
-//                logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore()))
-
-                //ToDO appena implementato il package BackEnd
-//                contenuto = GestioneUtente.attaccoDalComputer(GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
-//                computerCoordinataX.setText(GestioneComputer.getCoordinataX());
-//                computerCoordinataY.setText(GestioneComputer.convertitoreYComputer);
-//                modelloTabellaGiocatore.addXeO(contenuto,GestioneComputer.getCoordinataX(),GestioneComputer.getCoordinataY());
+                            if (modelloTabellaComputer.affondata(gestioneComputer.naveTrovata())) {
+                                JOptionPane.showMessageDialog(questaFinestra, "Nave Affondata", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            if (!logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
 
 
+                                Casella casella = gestioneUtente.attaccoDalComputer();
+//                            computerCoordinataY.setText(String.valueOf(casella.getRiga()));
+                                computerCoordinataY.setText(gestioneComputer.convertYInChar(casella.getRiga()));
+                                computerCoordinataX.setText(String.valueOf(casella.getColonna()));
 
-                //ToDO appena implementato il package BackEnd
-//               logicaVittoria(questaFinestra,GestioneUtente.controlloVittoriaCoputer(),GestioneCoputer.controlloVittoriaGiocatore());
+                                contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
+                                modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
+
+                                
+
+                                JOptionPane.showMessageDialog(questaFinestra, "Colpo effettuato dal Computer in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), "ATTACCO DEL PC", JOptionPane.INFORMATION_MESSAGE);
+
+                                if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                if(logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
+                                    esciDalGioco();
+                                }
+                            }
+                            else{
+                                esciDalGioco();
+                            }
+
+//
+
+
+
+
+                        }
+
+                    }
+                }catch (NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(questaFinestra,"La coordinata X deve essere un numero","ATTENZIONE",JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
 
 
 
-        computer = new JLabel("Computer");
+        computer = new JLabel("Computer  ");
         //pannelloComputer.add(computer);
         computer.setVisible(false);
 
@@ -397,7 +461,7 @@ public class Battaglianavale extends JFrame {
         //coordinateComputer.setBounds(10,80,10,10);
         //pannelloComputer.add(coordinateComputer);
 
-        computerX = new JLabel("X   ");
+        computerX = new JLabel("   X   ");
         //computerX.setBounds(10,40,10,10);
         //pannelloComputer.add(computerX);
         computerX.setVisible(false);
@@ -464,48 +528,39 @@ public class Battaglianavale extends JFrame {
 
         GridBagConstraints gbcGiocatore = new GridBagConstraints();
         GridBagConstraints gbcComputer = new GridBagConstraints();
+        GridBagConstraints punti = new GridBagConstraints();
 
         gbcGiocatore.gridx = 0;
         gbcGiocatore.gridy = 0;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
         componentiPannelloGiocatore.add(giocatore, gbcGiocatore);
 
 
         gbcGiocatore.gridx = 0;
         gbcGiocatore.gridy = 2;
-        //gbcGiocatore.gridwidth = 5;
-        //gbcGiocatore.fill = GridBagConstraints.BOTH;
         componentiPannelloGiocatore.add(coordinateGiocatore, gbcGiocatore);
 
         gbcGiocatore.gridx = 1;
         gbcGiocatore.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreX, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreY, gbcGiocatore);
 
         gbcGiocatore.gridx = 2;
         gbcGiocatore.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreCoordinataX, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreCoordinataY, gbcGiocatore);
 
         gbcGiocatore.gridx = 3;
         gbcGiocatore.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreY, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreX, gbcGiocatore);
 
         gbcGiocatore.gridx = 4;
         gbcGiocatore.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloGiocatore.add(giocatoreCoordinataY, gbcGiocatore);
+        componentiPannelloGiocatore.add(giocatoreCoordinataX, gbcGiocatore);
 
         gbcGiocatore.gridx = 5;
         gbcGiocatore.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
+        componentiPannelloGiocatore.add(spazio, gbcGiocatore);
+
+        gbcGiocatore.gridx = 6;
+        gbcGiocatore.gridy = 2;
         componentiPannelloGiocatore.add(bottoneFuoco, gbcGiocatore);
 
 
@@ -514,39 +569,55 @@ public class Battaglianavale extends JFrame {
 
         gbcComputer.gridx = 0;
         gbcComputer.gridy = 0;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
         componentiPannelloComputer.add(computer, gbcComputer);
 
         gbcComputer.gridx = 0;
         gbcComputer.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
         componentiPannelloComputer.add(coordinateComputer, gbcComputer);
 
         gbcComputer.gridx = 1;
         gbcComputer.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerX, gbcComputer);
+        componentiPannelloComputer.add(computerY, gbcComputer);
 
         gbcComputer.gridx = 2;
         gbcComputer.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerCoordinataX, gbcComputer);
+        componentiPannelloComputer.add(computerCoordinataY, gbcComputer);
 
         gbcComputer.gridx = 3;
         gbcComputer.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerY, gbcComputer);
+        componentiPannelloComputer.add(computerX, gbcComputer);
 
         gbcComputer.gridx = 4;
         gbcComputer.gridy = 2;
-//        gbc.gridwidth = 5;
-//        gbc.fill = GridBagConstraints.BOTH;
-        componentiPannelloComputer.add(computerCoordinataY, gbcComputer);
+        componentiPannelloComputer.add(computerCoordinataX, gbcComputer);
+
+        //////////////////////////////////////////////////////////////////
+
+        scrittaPunti = new JLabel("Punti:");
+        trattinoPunti = new JLabel(" - ");
+        puntiGiocatore = new JLabel("0");
+        puntiComputer = new JLabel("0");
+        pannelloPunti.add(puntiGiocatore);
+        pannelloPunti.add(trattinoPunti);
+        pannelloPunti.add(puntiComputer);
+
+        punti.gridx = 0;
+        punti.gridy = 1;
+        pannelloPunti.add(puntiGiocatore, punti);
+
+        punti.gridx = 1;
+        punti.gridy = 0;
+        pannelloPunti.add(scrittaPunti, punti);
+
+        punti.gridx = 1;
+        punti.gridy = 1;
+        pannelloPunti.add(trattinoPunti, punti);
+
+        punti.gridx = 2;
+        punti.gridy = 1;
+        pannelloPunti.add(puntiComputer, punti);
+
+
 
 
     }
