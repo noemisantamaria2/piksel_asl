@@ -53,18 +53,21 @@ public class Battaglianavale extends JFrame {
     //private GroupLayout groupLayout;
     //private GridBagConstraints gbc;
 
-    public void logicaVittoria(JFrame questaFinestra, boolean vittoriaComputer, boolean vittoriaGiocatore) {
+    public boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaComputer, boolean vittoriaGiocatore) {
         if (!vittoriaComputer) {
             if (vittoriaGiocatore) {
                 Battaglianavale.finePartita(questaFinestra, true);
                 System.out.println("true");
+                return true;
             }
         } else {
             if (!vittoriaGiocatore) {
                 Battaglianavale.finePartita(questaFinestra, false);
                 System.out.println("false");
+                return false;
             }
         }
+        return false;
     }
 
 
@@ -179,6 +182,7 @@ public class Battaglianavale extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         contentPane.setLayout(new BorderLayout(0,0));
+        contentPane.setAutoscrolls(true);
         setContentPane(contentPane);
 
         menuBar = new JMenuBar();
@@ -239,7 +243,7 @@ public class Battaglianavale extends JFrame {
         esci = new JMenuItem("Esci");
         esci.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent esci) {
 
                 giocatore.setVisible(false);
                 bottoneFuoco.setVisible(false);
@@ -377,7 +381,25 @@ public class Battaglianavale extends JFrame {
                             if (modelloTabellaComputer.affondata(gestioneComputer.naveTrovata())) {
                                 JOptionPane.showMessageDialog(questaFinestra, "Nave Affondata", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
                             }
-                            logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
+                            if (!logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
+                                Casella casella = gestioneUtente.attaccoDalComputer();
+//                            computerCoordinataY.setText(String.valueOf(casella.getRiga()));
+                                computerCoordinataY.setText(gestioneComputer.convertYInChar(casella.getRiga()));
+                                computerCoordinataX.setText(String.valueOf(casella.getColonna()));
+
+                                contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
+                                modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
+
+                                if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                if(logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
+                                    ActionEvent esci;
+                                }
+                            }
+                            else{
+                                ActionEvent esci;
+                            }
 
 //                            Thread attesa = new Thread();
 //                            attesa.start();
@@ -388,18 +410,7 @@ public class Battaglianavale extends JFrame {
 //                            }
 //                            attesa.stop();
 
-                            Casella casella = gestioneUtente.attaccoDalComputer();
-//                            computerCoordinataY.setText(String.valueOf(casella.getRiga()));
-                            computerCoordinataY.setText(gestioneComputer.convertYInChar(casella.getRiga()));
-                            computerCoordinataX.setText(String.valueOf(casella.getColonna()));
 
-                            contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
-                            modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
-
-                            if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
-                                JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "ERRORE", JOptionPane.INFORMATION_MESSAGE);
-                            }
-                            logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria());
 
 
                         }
