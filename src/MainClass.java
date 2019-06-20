@@ -1,6 +1,6 @@
-/*import BackHand.GestioneComputer;
-import BackHand.GestioneUtente;
-import BackHand.GestioneUtente.*;
+/*import Backend.GestioneComputer;
+import Backend.GestioneUtente;
+import Backend.GestioneUtente.*;
 import java.util.*;
 
 public class MainClass {
@@ -76,7 +76,7 @@ public class MainClass {
 }
 */
 
-import FrontHand.Battaglianavale;
+import Frontend.Battaglianavale;
 
 import java.awt.*;
 

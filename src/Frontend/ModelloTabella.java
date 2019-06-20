@@ -1,10 +1,8 @@
-package FrontHand;
-import BackHand.Casella;
-import BackHand.Nave;
+package Frontend;
+import Backend.Casella;
+import Backend.Nave;
 
-import javax.swing.table.DefaultTableCellRenderer;
-//import BackHand.Nave;
-import javax.swing.*;
+//import Backend.Nave;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 

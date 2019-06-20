@@ -1,7 +1,7 @@
-package FrontHand;
-import BackHand.Casella;
-import BackHand.GestioneUtente;
-import BackHand.GestioneComputer;
+package Frontend;
+import Backend.Casella;
+import Backend.GestioneUtente;
+import Backend.GestioneComputer;
 
 import static javax.swing.GroupLayout.Alignment.*;
 import java.awt.*;

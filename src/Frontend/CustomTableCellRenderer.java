@@ -1,4 +1,4 @@
-package FrontHand;
+package Frontend;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
