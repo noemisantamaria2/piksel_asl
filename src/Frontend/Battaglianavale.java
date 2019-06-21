@@ -29,7 +29,7 @@ public class Battaglianavale extends JFrame {
     private String nomeUtente;
     private JMenuBar menuBar;
     private JMenu menu, menuLegenda;
-    private JMenuItem Nuovapartita, esci, legendaX, legendaO, legendaY, legendaN;
+    private JMenuItem Nuovapartita, esci, azzera, legendaX, legendaO, legendaY, legendaN;
     private JPanel contentPane, pannelloComputer, pannelloGiocatore, componentiPannelloGiocatore, tabellaPannelloGiocatore, componentiPannelloComputer, tabellaPannelloComputer, pannelloPunti;
     private JTable tabellaComputer, tabellaGiocatore;
     private ModelloTabella modelloTabellaGiocatore,modelloTabellaComputer;
@@ -49,18 +49,21 @@ public class Battaglianavale extends JFrame {
     //private GridBagConstraints gbc;
 
     public boolean logicaVittoria(JFrame questaFinestra, boolean vittoriaComputer, boolean vittoriaGiocatore) {
+        String punteggi;
         if (!vittoriaComputer) {
             if (vittoriaGiocatore) {
-                Battaglianavale.finePartita(questaFinestra, true);
-                System.out.println("true");
                 puntiGiocatore.setText(String.valueOf(Integer.parseInt(puntiGiocatore.getText())+1));
+                System.out.println("true");
+                punteggi = puntiGiocatore.getText() + " - " + puntiComputer.getText();
+                Battaglianavale.finePartita(questaFinestra, true, punteggi);
                 return true;
             }
         } else {
             if (!vittoriaGiocatore) {
-                Battaglianavale.finePartita(questaFinestra, false);
-                System.out.println("false");
                 puntiComputer.setText(String.valueOf(Integer.parseInt(puntiComputer.getText())+1));
+                System.out.println("false");
+                punteggi = puntiGiocatore.getText() + " - " + puntiComputer.getText();
+                Battaglianavale.finePartita(questaFinestra, false, punteggi);
                 return false;
             }
         }
@@ -68,11 +71,11 @@ public class Battaglianavale extends JFrame {
     }
 
 
-    public static void finePartita(JFrame questaFinestra, boolean vittoria){
+    public static void finePartita(JFrame questaFinestra, boolean vittoria, String punteggi){
         if (vittoria){
-            JOptionPane.showMessageDialog(questaFinestra,"Hai Vinto!");
+            JOptionPane.showMessageDialog(questaFinestra,"Hai Vinto!   a   " + punteggi," VITTORIA",JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(questaFinestra,"Hai Perso!");
+            JOptionPane.showMessageDialog(questaFinestra,"Hai Perso!   a   " + punteggi," VITTORIA",JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -231,12 +234,19 @@ public class Battaglianavale extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nomeUtente=JOptionPane.showInputDialog(questaFinestra,"Inserisci Nome");
+                while (nomeUtente.equalsIgnoreCase("")||nomeUtente.equalsIgnoreCase(" ") ||
+                        nomeUtente.equalsIgnoreCase("  ") || nomeUtente.equalsIgnoreCase("   ") ||
+                        nomeUtente.equalsIgnoreCase("    ") || nomeUtente.equalsIgnoreCase("     ") ||
+                        nomeUtente.equalsIgnoreCase("      ") || nomeUtente.equalsIgnoreCase("       ")){
+                    JOptionPane.showMessageDialog(questaFinestra,"inmetti nome Utente","ERROR INPUT NOME UTENTE",JOptionPane.ERROR_MESSAGE);
+                    nomeUtente=JOptionPane.showInputDialog(questaFinestra,"Inserisci Nome");
+                }
                 System.out.println(nomeUtente);
                 pannelloGiocatore.setVisible(true);
                 tabellaPannelloGiocatore.setVisible(true);
                 pannelloComputer.setVisible(true);
                 coordinateComputer.setVisible(true);
-                giocatore.setText(nomeUtente);
+                giocatore.setText("Username: " + nomeUtente);
                 giocatore.setVisible(true);
                 coordinateGiocatore.setVisible(true);
                 giocatoreX.setVisible(true);
@@ -269,13 +279,13 @@ public class Battaglianavale extends JFrame {
                 modelloTabellaComputer.nuovatabella();
 //                GestioneComputer.riempimentoMatriceNonVis();
 
-
+                azzera.setVisible(true);
 
             }
         });
         menu.add(Nuovapartita);
 
-        esci = new JMenuItem("Esci");
+        esci = new JMenuItem("Esci/Fine Partita");
         esci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent esci) {
@@ -286,6 +296,18 @@ public class Battaglianavale extends JFrame {
         });
         menu.add(esci);
 
+        azzera = new JMenuItem("Azzera Punteggi");
+        azzera.setVisible(false);
+        azzera.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent esci) {
+
+                puntiGiocatore.setText("0");
+                puntiComputer.setText("0");
+
+            }
+        });
+        menu.add(azzera);
 
 
         pannelloGiocatore = new JPanel();
@@ -340,7 +362,8 @@ public class Battaglianavale extends JFrame {
         giocatore = new JLabel();
         giocatore.setEnabled(false);
         giocatore.setBackground(null);
-        giocatore.setText(nomeUtente);
+//        giocatore.setText(nomeUtente);
+        giocatore.setForeground(Color.BLACK);
         giocatore.setBounds(20,20, 50,20);
         giocatore.setVisible(false);
         //componentiPannelloGiocatore.add(giocatore, BorderLayout.NORTH);
