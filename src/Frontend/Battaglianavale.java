@@ -471,6 +471,7 @@ public class Battaglianavale extends JFrame {
                     }
                 }catch (NumberFormatException nfe) {
                     JOptionPane.showMessageDialog(questaFinestra,"La coordinata X deve essere un numero","ATTENZIONE",JOptionPane.ERROR_MESSAGE);
+                    giocatoreCoordinataX.setText("");
                 }
 
             }
