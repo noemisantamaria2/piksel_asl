@@ -447,11 +447,11 @@ public class Battaglianavale extends JFrame {
                                     JOptionPane.showMessageDialog(questaFinestra, "Computer ha colpito la nave in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), "ATTACCO DEL PC", JOptionPane.INFORMATION_MESSAGE);
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(questaFinestra, "Computer a fatto Acqua in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), " ACQUA PC", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ha trovato acqua in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), " ACQUA PC", JOptionPane.INFORMATION_MESSAGE);
                                 }
 
                                 if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
-                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha affondato una nave", "INFO", JOptionPane.INFORMATION_MESSAGE);
                                 }
                                 if(logicaVittoria(questaFinestra,gestioneUtente.controllaVittoria(),gestioneComputer.controllaVittoria())){
                                     esciDalGioco();
