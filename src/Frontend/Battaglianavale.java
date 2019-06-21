@@ -73,9 +73,9 @@ public class Battaglianavale extends JFrame {
 
     public static void finePartita(JFrame questaFinestra, boolean vittoria, String punteggi){
         if (vittoria){
-            JOptionPane.showMessageDialog(questaFinestra,"Hai Vinto!   a   " + punteggi," VITTORIA",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(questaFinestra,"Hai Vinto!    " + punteggi," VITTORIA",JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(questaFinestra,"Hai Perso!   a   " + punteggi," VITTORIA",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(questaFinestra,"Hai Perso!    " + punteggi," VITTORIA",JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -443,9 +443,12 @@ public class Battaglianavale extends JFrame {
                                 contenuto = gestioneUtente.attacco(casella.getRiga(),casella.getColonna());
                                 modelloTabellaGiocatore.addXeO(contenuto,casella.getRiga(),casella.getColonna());
 
-                                
-
-                                JOptionPane.showMessageDialog(questaFinestra, "Colpo effettuato dal Computer in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), "ATTACCO DEL PC", JOptionPane.INFORMATION_MESSAGE);
+                                if (contenuto.equalsIgnoreCase("X")){
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer ha colpito la nave in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), "ATTACCO DEL PC", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(questaFinestra, "Computer a fatto Acqua in "+gestioneComputer.convertYInChar(casella.getRiga())+" "+casella.getColonna(), " ACQUA PC", JOptionPane.INFORMATION_MESSAGE);
+                                }
 
                                 if (modelloTabellaGiocatore.affondata(gestioneUtente.naveTrovata())) {
                                     JOptionPane.showMessageDialog(questaFinestra, "Computer ti ha Affondato una Nave", "INFO", JOptionPane.INFORMATION_MESSAGE);
